@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Consulta Rápida ENF — UDP</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a3a6b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ENF UDP">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144.png">
+<meta name="description" content="Referencia clínica rápida para Enfermería — Farmacología y Fisiopatología UDP">
+<meta name="application-name" content="Consulta Rápida ENF">
+<style>
+:root {
+  --udp-blue: #1a3a6b;
+  --udp-blue-light: #2255a4;
+  --udp-red: #c0392b;
+  --green: #1a7a4a;
+  --orange: #d35400;
+  --purple: #6c3483;
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --border: #dde3ed;
+  --text: #1a202c;
+  --text-muted: #5a6a7e;
+  --sidebar-w: 280px;
+  --header-h: 58px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+a{color:var(--udp-blue-light);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* HEADER */
+#header{position:fixed;top:0;left:0;right:0;height:var(--header-h);background:var(--udp-blue);color:#fff;display:flex;align-items:center;padding:0 16px;z-index:100;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+#header .logo{font-size:18px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+#header .logo span{color:#7fb3ff}
+#header .subtitle{font-size:11px;color:#a8c4e8;border-left:1px solid #3a5a9b;padding-left:12px}
+#search-box{flex:1;max-width:440px;margin-left:auto;position:relative}
+#search-box input{width:100%;padding:7px 12px 7px 34px;border-radius:6px;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:13px;outline:none}
+#search-box input::placeholder{color:#9ab8d8}
+#search-box input:focus{background:rgba(255,255,255,.2)}
+#search-box .icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.6;font-size:15px}
+#search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.18);max-height:400px;overflow-y:auto;z-index:200;display:none}
+#search-results.active{display:block}
+.sr-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid #f0f0f0;display:flex;align-items:flex-start;gap:10px}
+.sr-item:hover{background:#f0f6ff}
+.sr-badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;white-space:nowrap;margin-top:2px}
+.sr-badge.farm{background:#dbeafe;color:#1e40af}
+.sr-badge.fisio{background:#d1fae5;color:#065f46}
+.sr-item-title{font-size:13px;font-weight:600;color:#1a3a6b}
+.sr-item-snippet{font-size:11px;color:#666;margin-top:2px}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:var(--header-h);left:0;width:var(--sidebar-w);bottom:0;background:#fff;border-right:1px solid var(--border);overflow-y:auto;z-index:50;display:flex;flex-direction:column}
+.sidebar-tabs{display:flex;border-bottom:2px solid var(--border)}
+.sidebar-tab{flex:1;padding:9px 4px;text-align:center;font-size:12px;font-weight:600;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:.2s}
+.sidebar-tab.active{color:var(--udp-blue);border-bottom-color:var(--udp-blue)}
+.sidebar-tab:hover{background:#f5f8ff}
+.sidebar-content{display:none;flex:1;overflow-y:auto}
+.sidebar-content.active{display:block}
+.unit-group{border-bottom:1px solid var(--border)}
+.unit-header{padding:9px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);background:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none}
+.unit-header:hover{background:#eef3fb}
+.unit-header .arrow{transition:.2s;font-size:10px}
+.unit-header.open .arrow{transform:rotate(90deg)}
+.unit-items{display:none}
+.unit-header.open + .unit-items{display:block}
+.nav-item{padding:8px 14px 8px 22px;font-size:12.5px;cursor:pointer;color:var(--text);border-left:3px solid transparent;line-height:1.35}
+.nav-item:hover{background:#eef3fb;border-left-color:#9ab8d8}
+.nav-item.active{background:#e8f0fb;border-left-color:var(--udp-blue);color:var(--udp-blue);font-weight:600}
+.nav-item .nav-tag{font-size:9px;color:#888;display:block}
+
+/* MAIN */
+#main{margin-left:var(--sidebar-w);margin-top:var(--header-h);padding:24px;min-height:calc(100vh - var(--header-h))}
+
+/* HOME */
+#home{display:block}
+.home-hero{text-align:center;padding:40px 20px 24px;max-width:700px;margin:0 auto}
+.home-hero h1{font-size:26px;color:var(--udp-blue);margin-bottom:8px}
+.home-hero p{color:var(--text-muted);font-size:14px;line-height:1.6}
+.subject-cards{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin:28px 0}
+.subject-card{background:#fff;border-radius:12px;border:2px solid var(--border);padding:24px 28px;flex:1;min-width:260px;max-width:340px;cursor:pointer;transition:.2s;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.subject-card:hover{border-color:var(--udp-blue-light);box-shadow:0 6px 20px rgba(34,85,164,.12);transform:translateY(-2px)}
+.subject-card .sc-icon{font-size:32px;margin-bottom:12px}
+.subject-card h2{font-size:16px;color:var(--udp-blue);margin-bottom:4px}
+.subject-card .sc-code{font-size:11px;color:#888;margin-bottom:8px}
+.subject-card p{font-size:12px;color:var(--text-muted);line-height:1.5}
+.subject-card .sc-count{font-size:11px;font-weight:600;color:var(--udp-blue-light);margin-top:10px}
+.stats-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.stat-box{background:#fff;border-radius:8px;border:1px solid var(--border);padding:12px 20px;text-align:center}
+.stat-box .sv{font-size:22px;font-weight:700;color:var(--udp-blue)}
+.stat-box .sl{font-size:11px;color:var(--text-muted)}
+
+/* CONTENT VIEW */
+#content-view{display:none}
+.cv-header{margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--border)}
+.cv-breadcrumb{font-size:11px;color:var(--text-muted);margin-bottom:6px}
+.cv-breadcrumb span{cursor:pointer}
+.cv-breadcrumb span:hover{color:var(--udp-blue)}
+.cv-title{font-size:22px;font-weight:700;color:var(--udp-blue);margin-bottom:4px}
+.cv-meta{font-size:12px;color:var(--text-muted);display:flex;gap:16px;flex-wrap:wrap}
+.cv-meta-item{display:flex;align-items:center;gap:4px}
+.content-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:20px;flex-wrap:wrap}
+.content-tab{padding:9px 18px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:.15s}
+.content-tab.active{color:var(--udp-blue);border-bottom-color:var(--udp-blue);font-weight:600}
+.content-tab:hover{color:var(--udp-blue)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CARDS */
+.card{background:#fff;border-radius:10px;border:1px solid var(--border);padding:18px 20px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.card h3{font-size:14px;font-weight:700;color:var(--udp-blue);margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.card ul{padding-left:18px;line-height:1.9;font-size:13px}
+.card ul li{margin-bottom:2px}
+.card p{font-size:13px;line-height:1.7;color:var(--text)}
+
+/* TOPIC ACCORDION */
+.topics-list{display:flex;flex-direction:column;gap:0}
+.topic-item{border-bottom:1px solid #eef2f8}
+.topic-item:last-child{border-bottom:none}
+.topic-header{padding:11px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;transition:.15s}
+.topic-header:hover{background:#f0f6ff}
+.topic-header-left{display:flex;gap:10px;align-items:flex-start;flex:1}
+.topic-num{min-width:22px;height:22px;background:#e8f0fb;color:var(--udp-blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.topic-title{font-size:13px;color:var(--text);line-height:1.5}
+.topic-toggle{color:#94a3b8;font-size:13px;flex-shrink:0;margin-top:2px;transition:transform .2s}
+.topic-item.open .topic-toggle{transform:rotate(90deg);color:var(--udp-blue)}
+.topic-item.open .topic-num{background:var(--udp-blue);color:#fff}
+.topic-item.open .topic-title{font-weight:600;color:var(--udp-blue)}
+.topic-def{display:none;padding:10px 14px 14px 46px;font-size:12.5px;color:#374151;background:linear-gradient(to right,#f0f6ff,#f8fafc);border-left:3px solid var(--udp-blue-light);line-height:1.75}
+.topic-item.open .topic-def{display:block}
+
+/* KEYWORDS — vertical */
+.kw-vertical{display:flex;flex-direction:column;gap:5px;padding:4px 0}
+.kw-vert-item{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#f8fafc;border-radius:8px;border:1px solid #dde3ed;cursor:pointer;transition:.15s}
+.kw-vert-item:hover{background:#e8f0fb;border-color:var(--udp-blue-light);transform:translateX(3px)}
+.kw-vert-num{min-width:24px;height:24px;background:var(--udp-blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.kw-vert-text{font-size:13px;font-weight:500;color:var(--udp-blue);flex:1}
+.kw-vert-icon{font-size:14px;color:#94a3b8}
+
+/* ALERTS */
+.alert-box{border-radius:8px;padding:14px 16px;margin-bottom:12px;font-size:13px;line-height:1.6;border-left:4px solid}
+.alert-box.danger{background:#fff5f5;border-left-color:var(--udp-red);color:#7b1a1a}
+.alert-box.warning{background:#fffbf0;border-left-color:var(--orange);color:#7a3800}
+.alert-box.info{background:#f0f7ff;border-left-color:var(--udp-blue-light);color:#1e3a5f}
+.alert-box.success{background:#f0faf5;border-left-color:var(--green);color:#0d4a28}
+.alert-box strong{display:block;margin-bottom:4px;font-size:13px}
+
+/* CONNECTIONS */
+.conn-item{background:#fff;border-radius:8px;border:1px solid var(--border);padding:13px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:.15s}
+.conn-item:hover{border-color:var(--green);box-shadow:0 2px 10px rgba(26,122,74,.1)}
+.conn-dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.conn-dot.farm{background:var(--udp-blue-light)}
+.conn-dot.fisio{background:var(--green)}
+.conn-title{font-size:13px;font-weight:600;color:var(--text)}
+.conn-desc{font-size:12px;color:var(--text-muted);margin-top:3px}
+.conn-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;display:inline-block;margin-top:4px}
+.conn-tag.farm{background:#dbeafe;color:#1e40af}
+.conn-tag.fisio{background:#d1fae5;color:#065f46}
+
+/* FLOWCHARTS */
+.flow-container{background:#fff;border-radius:10px;border:1px solid var(--border);padding:20px;margin-bottom:14px;overflow-x:auto}
+.flow-title{font-size:13px;font-weight:700;color:var(--udp-blue);margin-bottom:14px}
+.flow{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.flow-row{display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.flow-box{padding:8px 16px;border-radius:7px;font-size:12px;font-weight:500;border:2px solid;text-align:center;min-width:120px;position:relative}
+.flow-box.blue{background:#dbeafe;border-color:#93c5fd;color:#1e3a6e}
+.flow-box.green{background:#d1fae5;border-color:#6ee7b7;color:#064e3b}
+.flow-box.red{background:#fee2e2;border-color:#fca5a5;color:#7f1d1d}
+.flow-box.orange{background:#ffedd5;border-color:#fdba74;color:#7c2d12}
+.flow-box.purple{background:#ede9fe;border-color:#c4b5fd;color:#4c1d95}
+.flow-box.gray{background:#f3f4f6;border-color:#d1d5db;color:#374151}
+.flow-arrow{font-size:18px;color:#94a3b8;padding:0 6px}
+.flow-arrow.down{display:block;text-align:center;color:#94a3b8;font-size:18px;padding:3px 0}
+
+/* TABLES */
+.comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+.comp-table th{background:var(--udp-blue);color:#fff;padding:8px 12px;text-align:left;font-weight:600;font-size:11px}
+.comp-table td{padding:7px 12px;border-bottom:1px solid #eee;vertical-align:top;line-height:1.5}
+.comp-table tr:nth-child(even) td{background:#f9fafb}
+.comp-table tr:hover td{background:#eef3fb}
+
+/* BADGES */
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;vertical-align:middle}
+.badge.farm{background:#dbeafe;color:#1e40af}
+.badge.fisio{background:#d1fae5;color:#065f46}
+.badge.alert{background:#fee2e2;color:#991b1b}
+.badge.new{background:#fef3c7;color:#92400e}
+
+/* CROSS-REF PAGE */
+.xref-table{width:100%;border-collapse:collapse;font-size:12px}
+.xref-table th{background:#1a3a6b;color:#fff;padding:9px 12px;text-align:left;font-size:11px;font-weight:600;position:sticky;top:0}
+.xref-table td{padding:8px 12px;border-bottom:1px solid #e5e7eb;vertical-align:top;line-height:1.5}
+.xref-table tr:hover td{background:#f0f6ff}
+
+/* UNIT INDEX */
+.unit-index{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:8px}
+.unit-card{background:#fff;border-radius:10px;border:1px solid var(--border);padding:16px;cursor:pointer;transition:.2s;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.unit-card:hover{border-color:var(--udp-blue-light);box-shadow:0 4px 14px rgba(34,85,164,.1);transform:translateY(-1px)}
+.unit-card h3{font-size:14px;font-weight:700;color:var(--udp-blue);margin-bottom:8px}
+.unit-card ul{padding-left:16px;font-size:12px;color:var(--text-muted);line-height:1.8}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  #sidebar{transform:translateX(-100%);transition:.3s}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0}
+  .subject-cards{flex-direction:column;align-items:center}
+}
+.mobile-toggle{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-right:4px}
+@media(max-width:768px){.mobile-toggle{display:block}}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:#f1f1f1}
+::-webkit-scrollbar-thumb{background:#c5d0e0;border-radius:3px}
+
+/* PWA — SAFE AREA (notch, home indicator) */
+#header{padding-left:max(16px, env(safe-area-inset-left));padding-right:max(16px, env(safe-area-inset-right));padding-top:env(safe-area-inset-top);height:calc(var(--header-h) + env(safe-area-inset-top))}
+#sidebar{top:calc(var(--header-h) + env(safe-area-inset-top));padding-bottom:env(safe-area-inset-bottom)}
+#main{margin-top:calc(var(--header-h) + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+#demo-footer{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+
+/* PWA — MÓVIL OPTIMIZADO */
+@media(max-width:768px){
+  :root{--header-h:54px}
+  #main{padding:16px 12px}
+  .home-hero{padding:24px 12px 16px}
+  .home-hero h1{font-size:20px}
+  .subject-card{min-width:0;padding:18px 16px}
+  .stats-row{gap:8px}
+  .stat-box{padding:10px 14px}
+  .stat-box .sv{font-size:18px}
+  .content-tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .content-tabs::-webkit-scrollbar{display:none}
+  .content-tab{white-space:nowrap;padding:9px 13px;font-size:12px}
+  .cdss-modes{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .cdss-mode{white-space:nowrap;flex-shrink:0}
+  .comp-table{font-size:11px}
+  .comp-table th,.comp-table td{padding:6px 8px}
+  .quiz-opt{padding:10px 12px;font-size:12.5px}
+  .card{padding:14px 16px}
+  #search-box{max-width:none;flex:1}
+  .home-hero p{font-size:13px}
+  .cv-title{font-size:18px}
+  .flow-container{padding:14px}
+  .calc-form{max-width:100%}
+}
+
+/* PWA — TOUCH FEEDBACK */
+@media(hover:none){
+  .nav-item:active{background:#eef3fb;border-left-color:#9ab8d8}
+  .subject-card:active{border-color:var(--udp-blue-light);transform:scale(.98)}
+  .quiz-opt:active{border-color:var(--udp-blue-light);background:#f0f6ff}
+  .unit-card:active{border-color:var(--udp-blue-light)}
+  .kw-vert-item:active{background:#e8f0fb}
+}
+
+/* PWA — BANNER DE INSTALACIÓN */
+#pwa-install-banner{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:var(--udp-blue);color:#fff;padding:14px 16px;
+  padding-bottom:calc(14px + env(safe-area-inset-bottom));
+  z-index:500;box-shadow:0 -4px 16px rgba(0,0,0,.3);
+  align-items:center;gap:12px;
+}
+#pwa-install-banner.visible{display:flex}
+#pwa-install-banner .pwa-text{flex:1;font-size:13px;line-height:1.4}
+#pwa-install-banner .pwa-text strong{display:block;font-size:14px;margin-bottom:2px}
+#pwa-install-banner .pwa-btn{background:#fff;color:var(--udp-blue);border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+#pwa-install-banner .pwa-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
+
+/* PWA — INDICATOR OFFLINE */
+#offline-indicator{
+  display:none;position:fixed;
+  top:calc(var(--header-h) + env(safe-area-inset-top) + 4px);
+  left:50%;transform:translateX(-50%);
+  background:#d97706;color:#fff;padding:6px 16px;border-radius:20px;
+  font-size:12px;font-weight:600;z-index:400;box-shadow:0 2px 8px rgba(0,0,0,.2);
+}
+#offline-indicator.show{display:block}
+
+/* QUIZ */
+.quiz-container{display:flex;flex-direction:column;gap:14px}
+.quiz-question{background:#fff;border-radius:10px;border:1px solid var(--border);padding:18px 20px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.quiz-q-text{font-size:14px;font-weight:600;color:var(--udp-blue);margin-bottom:14px;line-height:1.6}
+.quiz-q-num{display:inline-block;background:var(--udp-blue);color:#fff;width:26px;height:26px;border-radius:50%;text-align:center;line-height:26px;font-size:12px;font-weight:700;margin-right:8px}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:11px 16px;border-radius:8px;border:2px solid var(--border);cursor:pointer;font-size:13px;transition:.2s;display:flex;align-items:center;gap:10px;line-height:1.5}
+.quiz-opt:hover{border-color:var(--udp-blue-light);background:#f0f6ff}
+.quiz-opt.selected{border-color:var(--udp-blue);background:#e8f0fb;font-weight:600}
+.quiz-opt.correct{border-color:#16a34a;background:#dcfce7;color:#15803d}
+.quiz-opt.incorrect{border-color:#dc2626;background:#fee2e2;color:#991b1b}
+.quiz-opt.reveal-correct{border-color:#16a34a;background:#dcfce7}
+.quiz-opt-letter{min-width:26px;height:26px;border-radius:50%;background:#e8f0fb;color:var(--udp-blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.quiz-explanation{display:none;margin-top:10px;padding:12px 16px;background:#f0f7ff;border-radius:8px;border-left:3px solid var(--udp-blue-light);font-size:12.5px;color:#374151;line-height:1.7}
+.quiz-explanation.show{display:block}
+.quiz-score{background:linear-gradient(135deg,#1a3a6b,#2255a4);color:#fff;border-radius:12px;padding:24px;text-align:center;margin-top:16px}
+.quiz-score h3{font-size:20px;margin-bottom:6px}
+.quiz-score p{font-size:14px;opacity:.9}
+.quiz-btn{display:inline-block;margin-top:14px;padding:10px 24px;background:#fff;color:var(--udp-blue);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+.quiz-btn:hover{background:#e8f0fb}
+
+/* VIGNETTE */
+.vignette-card{background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.vignette-header{background:linear-gradient(135deg,#1a7a4a,#22a06b);color:#fff;padding:18px 22px}
+.vignette-header h3{font-size:15px;margin-bottom:4px}
+.vignette-header p{font-size:12px;opacity:.85}
+.vignette-body{padding:20px 22px}
+.vignette-scenario{font-size:13.5px;line-height:1.8;color:var(--text);margin-bottom:16px;padding:14px 16px;background:#f8faf8;border-radius:8px;border-left:4px solid var(--green)}
+.vignette-question{font-size:14px;font-weight:600;color:var(--udp-blue);margin-bottom:12px}
+.vignette-answer{display:none;padding:14px 16px;background:#f0f7ff;border-radius:8px;border-left:3px solid var(--udp-blue-light);font-size:13px;line-height:1.7;color:#374151}
+.vignette-answer.show{display:block}
+.vignette-toggle{padding:10px 20px;background:var(--udp-blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.2s}
+.vignette-toggle:hover{background:var(--udp-blue-light)}
+
+/* CDSS MODES */
+.cdss-modes{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.cdss-mode{padding:8px 14px;border-radius:20px;border:2px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;transition:.2s;background:#fff;color:var(--text-muted)}
+.cdss-mode.active{border-color:var(--udp-blue);background:var(--udp-blue);color:#fff}
+.cdss-mode:hover{border-color:var(--udp-blue-light)}
+
+/* CDSS ALERT CARDS */
+.cdss-alert-card{border-radius:10px;padding:16px 20px;margin-bottom:12px;border-left:5px solid;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.cdss-alert-card.cdss-critical{background:#fff5f5;border-left-color:#dc2626;border:2px solid #fca5a5;border-left:5px solid #dc2626}
+.cdss-alert-card.cdss-major{background:#fffbeb;border-left-color:#d97706;border:2px solid #fcd34d;border-left:5px solid #d97706}
+.cdss-alert-card.cdss-minor{background:#fefce8;border-left-color:#ca8a04;border:2px solid #fde68a;border-left:5px solid #ca8a04}
+.cdss-alert-card.cdss-safe{background:#f0fdf4;border-left-color:#16a34a;border:2px solid #86efac;border-left:5px solid #16a34a}
+.cdss-alert-header{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;margin-bottom:10px;flex-wrap:wrap}
+.cdss-sev-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;white-space:nowrap}
+.cdss-sev-badge.cdss-critical{background:#dc2626;color:#fff}
+.cdss-sev-badge.cdss-major{background:#d97706;color:#fff}
+.cdss-sev-badge.cdss-minor{background:#ca8a04;color:#fff}
+.cdss-sev-badge.cdss-safe{background:#16a34a;color:#fff}
+.cdss-alert-body{font-size:13px;line-height:1.7;color:var(--text)}
+.cdss-alert-body div{margin-bottom:6px}
+.cdss-recommendation{padding:10px 14px;background:rgba(0,0,0,.03);border-radius:6px;border-left:3px solid var(--udp-blue-light);margin-top:8px}
+.cdss-alert-icon{font-size:28px;flex-shrink:0}
+
+/* CDSS SCORE GRID */
+.cdss-score-grid{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.cdss-score-item{display:flex;flex-direction:column;align-items:center;padding:10px 14px;border-radius:8px;border:2px solid var(--border);background:#f8fafc;min-width:70px;flex:1}
+.cdss-score-label{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;margin-bottom:4px}
+.cdss-score-val{font-size:18px;font-weight:700;color:var(--udp-blue)}
+.cdss-score-item.score-0{background:#f0fdf4;border-color:#86efac}
+.cdss-score-item.score-0 .cdss-score-val{color:#16a34a}
+.cdss-score-item.score-1{background:#fefce8;border-color:#fde68a}
+.cdss-score-item.score-1 .cdss-score-val{color:#ca8a04}
+.cdss-score-item.score-2{background:#fff7ed;border-color:#fdba74}
+.cdss-score-item.score-2 .cdss-score-val{color:#d97706}
+.cdss-score-item.score-3{background:#fef2f2;border-color:#fca5a5}
+.cdss-score-item.score-3 .cdss-score-val{color:#dc2626}
+
+/* CALCULATOR */
+.calc-card{background:#fff;border-radius:12px;border:1px solid var(--border);padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.calc-card h3{font-size:16px;color:var(--udp-blue);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.calc-form{display:flex;flex-direction:column;gap:14px;max-width:400px}
+.calc-field label{display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:4px}
+.calc-field input{width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:8px;font-size:14px;outline:none;transition:.2s}
+.calc-field input:focus{border-color:var(--udp-blue-light)}
+.calc-result{margin-top:16px;padding:16px 20px;background:linear-gradient(135deg,#f0f7ff,#e8f0fb);border-radius:10px;border:2px solid var(--udp-blue-light);font-size:16px;font-weight:700;color:var(--udp-blue);text-align:center;display:none}
+.calc-result.show{display:block}
+.calc-result small{display:block;font-size:11px;font-weight:400;color:var(--text-muted);margin-top:4px}
+.calc-warning{margin-top:10px;padding:10px 14px;background:#fff5f5;border-radius:8px;border-left:3px solid var(--udp-red);font-size:11px;color:#7b1a1a;line-height:1.6}
+
+/* PROGRESS */
+.progress-bar-container{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.progress-stat{background:#fff;border-radius:10px;border:1px solid var(--border);padding:16px 20px;flex:1;min-width:140px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.progress-stat .ps-val{font-size:28px;font-weight:700;color:var(--udp-blue)}
+.progress-stat .ps-label{font-size:11px;color:var(--text-muted);margin-top:4px}
+.progress-meter{width:100%;height:10px;background:#e8f0fb;border-radius:5px;overflow:hidden;margin-top:8px}
+.progress-meter-fill{height:100%;background:linear-gradient(90deg,var(--udp-blue),var(--udp-blue-light));border-radius:5px;transition:width .5s ease}
+.progress-sessions{display:grid;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:6px;margin-top:16px}
+.progress-dot{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;cursor:pointer;transition:.2s;border:2px solid var(--border);background:#f8fafc;color:var(--text-muted)}
+.progress-dot.visited{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.progress-dot:hover{transform:scale(1.1);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+
+/* FOOTER DEMO */
+#demo-footer{background:#1a3a6b;color:#a8c4e8;text-align:center;padding:16px 20px;font-size:11px;line-height:1.7;margin-left:var(--sidebar-w);border-top:2px solid #2255a4}
+#demo-footer strong{color:#fff;font-size:12px}
+#demo-footer .demo-badge{display:inline-block;background:#c0392b;color:#fff;padding:3px 12px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:1px;margin-bottom:6px}
+@media(max-width:768px){#demo-footer{margin-left:0}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="logo">⚕ Consulta <span>Rápida</span></div>
+  <div class="subtitle">ENF3013 · ENF3014 — UDP 2026</div>
+  <div id="search-box">
+    <span class="icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Buscar concepto, fármaco, patología..." oninput="onSearch(this.value)" onfocus="onSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
+    <div id="search-results"></div>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sidebar-tabs">
+    <div class="sidebar-tab active" onclick="switchSidebarTab('farm',this)">💊 Farmaco</div>
+    <div class="sidebar-tab" onclick="switchSidebarTab('fisio',this)">🫀 Fisiopato</div>
+    <div class="sidebar-tab" onclick="showCrossRef()">🔗 Nexos</div>
+    <div class="sidebar-tab" onclick="showCalculator()">🏥 CDSS</div>
+    <div class="sidebar-tab" onclick="showProgress()">📊</div>
+  </div>
+  <div id="sidebar-farm" class="sidebar-content active"></div>
+  <div id="sidebar-fisio" class="sidebar-content"></div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <!-- HOME -->
+  <div id="home">
+    <div class="home-hero">
+      <h1>🩺 Consulta Rápida de Enfermería</h1>
+      <p>Herramienta de referencia rápida para 2° año — Farmacología y Fisiopatología en Enfermería<br>Universidad Diego Portales · 2026</p>
+    </div>
+    <div class="subject-cards">
+      <div class="subject-card" onclick="showSubject('farm')">
+        <div class="sc-icon">💊</div>
+        <h2>Farmacología en Enfermería</h2>
+        <div class="sc-code">ENF3013 · 3° semestre</div>
+        <p>Bases farmacológicas, mecanismos de acción, alertas, interacciones y aplicación clínica por sistema.</p>
+        <div class="sc-count">6 unidades · 16 sesiones · 26 referencias cruzadas</div>
+      </div>
+      <div class="subject-card" onclick="showSubject('fisio')">
+        <div class="sc-icon">🫀</div>
+        <h2>Fisiopatología en Enfermería</h2>
+        <div class="sc-code">ENF3014 · 4° semestre</div>
+        <p>Mecanismos fisiopatológicos por sistemas, integración clínica y conexiones con terapia farmacológica.</p>
+        <div class="sc-count">7 unidades · 20 clases · integración bidireccional</div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="sv">36</div><div class="sl">Clases/Sesiones</div></div>
+      <div class="stat-box"><div class="sv">52+</div><div class="sl">Referencias cruzadas</div></div>
+      <div class="stat-box"><div class="sv">200+</div><div class="sl">Palabras clave</div></div>
+      <div class="stat-box"><div class="sv">30+</div><div class="sl">Alertas farmacológicas</div></div>
+    </div>
+  </div>
+
+  <!-- CONTENT VIEW -->
+  <div id="content-view">
+    <div class="cv-header">
+      <div class="cv-breadcrumb" id="cv-breadcrumb"></div>
+      <div class="cv-title" id="cv-title"></div>
+      <div class="cv-meta" id="cv-meta"></div>
+    </div>
+    <div class="content-tabs" id="content-tabs"></div>
+    <div id="tab-contenido" class="tab-pane active"></div>
+    <div id="tab-keywords" class="tab-pane"></div>
+    <div id="tab-alertas" class="tab-pane"></div>
+    <div id="tab-conexiones" class="tab-pane"></div>
+    <div id="tab-diagramas" class="tab-pane"></div>
+    <div id="tab-quiz" class="tab-pane"></div>
+    <div id="tab-caso" class="tab-pane"></div>
+  </div>
+
+  <!-- SUBJECT INDEX -->
+  <div id="subject-view" style="display:none"></div>
+
+  <!-- CDSS PANEL -->
+  <div id="calc-view" style="display:none">
+    <div class="cv-header">
+      <div class="cv-title">🏥 CDSS — Soporte a la Decisión Clínica</div>
+      <div class="cv-meta">Herramientas de seguridad farmacológica y scores clínicos · Basado en patrones CDSS</div>
+    </div>
+    <div class="cdss-modes">
+      <div class="cdss-mode active" onclick="switchCDSSMode('interactions',this)">⚠️ Interacciones</div>
+      <div class="cdss-mode" onclick="switchCDSSMode('dosevalidator',this)">💊 Validar Dosis</div>
+      <div class="cdss-mode" onclick="switchCDSSMode('glasgow',this)">🧠 Glasgow</div>
+      <div class="cdss-mode" onclick="switchCDSSMode('calculos',this)">🧮 Cálculos</div>
+    </div>
+    <div id="cdss-panel"></div>
+    <div class="calc-warning" style="margin-top:16px">⚠️ <strong>Advertencia:</strong> Estas herramientas son de apoyo educativo. NO reemplazan el juicio clínico ni los protocolos institucionales. Las alertas de interacciones cubren los fármacos más frecuentes en enfermería — siempre consulte fuentes adicionales.</div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div id="progress-view" style="display:none">
+    <div class="cv-header">
+      <div class="cv-title">📊 Mi Progreso de Estudio</div>
+      <div class="cv-meta">Registro de sesiones visitadas · Datos almacenados en tu dispositivo</div>
+    </div>
+    <div id="progress-content"></div>
+  </div>
+
+  <!-- CROSS REFERENCES -->
+  <div id="xref-view" style="display:none">
+    <div class="cv-header">
+      <div class="cv-title">🔗 Referencias Cruzadas — Fisiopatología ↔ Farmacología</div>
+      <div class="cv-meta">Integración entre ambas asignaturas · ENF3013 + ENF3014</div>
+    </div>
+    <div id="xref-content"></div>
+  </div>
+</div>
+
+<div id="demo-footer">
+  <span class="demo-badge">DEMO v2.0 CDSS</span><br>
+  <strong>Versión de prueba — Uso exclusivo para docentes de Enfermería Área Adulto</strong><br>
+  Creado y editado por <strong>RPG</strong> &amp; <strong>Cowork</strong> · Universidad Diego Portales · 2026
+</div>
+
+<script src="data.js"></script>
+<script src="extras.js"></script>
+<script src="cdss.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
+<!-- INDICADOR OFFLINE -->
+<div id="offline-indicator">📡 Sin conexión — modo offline</div>
+
+<!-- BANNER INSTALACIÓN PWA -->
+<div id="pwa-install-banner">
+  <div class="pwa-text">
+    <strong>⚕ Instalar Consulta Rápida ENF</strong>
+    Acceso rápido desde tu pantalla de inicio, sin internet
+  </div>
+  <button class="pwa-btn" id="pwa-install-btn">Instalar</button>
+  <button class="pwa-close" id="pwa-close-btn">✕</button>
+</div>
+
+<script>
+// PWA — Registro Service Worker + Banner Instalación
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => {
+        console.log('[PWA] Service Worker registrado:', reg.scope);
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('[PWA] Nueva versión disponible');
+            }
+          });
+        });
+      })
+      .catch(err => console.warn('[PWA] Error SW:', err));
+  });
+}
+
+function updateOnlineStatus() {
+  const el = document.getElementById('offline-indicator');
+  if (!navigator.onLine) el.classList.add('show');
+  else el.classList.remove('show');
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
+
+let deferredPrompt = null;
+const banner = document.getElementById('pwa-install-banner');
+const installBtn = document.getElementById('pwa-install-btn');
+const closeBtn = document.getElementById('pwa-close-btn');
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem('pwa-banner-dismissed')) {
+    setTimeout(() => banner.classList.add('visible'), 2000);
+  }
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  banner.classList.remove('visible');
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+});
+
+closeBtn.addEventListener('click', () => {
+  banner.classList.remove('visible');
+  localStorage.setItem('pwa-banner-dismissed', '1');
+});
+
+window.addEventListener('appinstalled', () => {
+  banner.classList.remove('visible');
+  deferredPrompt = null;
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const goto = params.get('goto');
+  if (goto === 'farm') showSubject('farm');
+  else if (goto === 'fisio') showSubject('fisio');
+  else if (goto === 'cdss') showCalculator();
+});
+</script>
