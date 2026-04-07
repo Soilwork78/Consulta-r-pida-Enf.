@@ -157,6 +157,10 @@ const INTERACTION_DB = [
    mechanism:'AINE + anticoagulante: efecto aditivo sobre hemostasia',
    clinicalEffect:'Riesgo hemorrágico significativo',
    recommendation:'Evitar combinación. Si es indispensable, máx 48h y vigilar sangrado'},
+  {drugA:'diclofenaco', drugB:'enoxaparina', severity:'major',
+   mechanism:'AINE + HBPM: doble inhibición hemostasia (COX-1 plaquetaria + anticoagulación)',
+   clinicalEffect:'Riesgo hemorrágico significativo: hemorragia digestiva, hematoma',
+   recommendation:'Evitar combinación. Si es necesario, máx 48h, monitorizar signos de sangrado y Hb'},
   {drugA:'diclofenaco', drugB:'enalapril', severity:'major',
    mechanism:'AINEs antagonizan efecto antihipertensivo y reducen flujo renal',
    clinicalEffect:'Hipertensión refractaria e insuficiencia renal aguda',
@@ -216,14 +220,6 @@ const INTERACTION_DB = [
    mechanism:'Betabloqueante enmascara síntomas hipoglicemia',
    clinicalEffect:'Hipoglicemia inadvertida (oculta taquicardia)',
    recommendation:'Educar sobre síntomas neuroglucopénicos. Automonitoreo frecuente'},
-  {drugA:'espironolactona', drugB:'enalapril', severity:'major',
-   mechanism:'Ambos retienen potasio',
-   clinicalEffect:'Hiperkalemia severa → arritmias cardíacas',
-   recommendation:'Monitorizar K+ sérico frecuentemente. Evitar si K+ >5.0'},
-  {drugA:'espironolactona', drugB:'losartan', severity:'major',
-   mechanism:'ARA-II + ahorrador de K+',
-   clinicalEffect:'Hiperkalemia',
-   recommendation:'Control estricto de K+ sérico y función renal'},
   {drugA:'espironolactona', drugB:'potasio cloruro', severity:'critical',
    mechanism:'Ahorrador de K+ + suplemento K+',
    clinicalEffect:'Hiperkalemia letal → arritmia, paro cardíaco',
@@ -263,10 +259,6 @@ const INTERACTION_DB = [
    mechanism:'Sinergia terapéutica en encefalopatía hepática',
    clinicalEffect:'Efecto aditivo beneficioso en reducción de amonio',
    recommendation:'Combinación recomendada en profilaxis secundaria encefalopatía hepática (GES)'},
-  {drugA:'propranolol', drugB:'insulina', severity:'major',
-   mechanism:'Betabloqueante no selectivo enmascara hipoglicemia',
-   clinicalEffect:'Hipoglicemia inadvertida, prolongada',
-   recommendation:'Preferir carvedilol en DHC con DM. Educar signos neuroglucopénicos'},
   {drugA:'espironolactona', drugB:'furosemida', severity:'minor',
    mechanism:'Efecto complementario: ahorrador + perdedor de K+',
    clinicalEffect:'Balance de potasio más fisiológico',
@@ -289,10 +281,6 @@ const INTERACTION_DB = [
    mechanism:'Doble efecto hipoglicemiante + riesgo cetoacidosis euglicémica',
    clinicalEffect:'Hipoglicemia y/o cetoacidosis con glicemia normal',
    recommendation:'Reducir insulina 10-20% al iniciar. Educar signos cetoacidosis'},
-  {drugA:'glibenclamida', drugB:'fluconazol', severity:'major',
-   mechanism:'Fluconazol inhibe CYP2C9',
-   clinicalEffect:'Hipoglicemia severa por acumulación de sulfonilurea',
-   recommendation:'Monitorizar glicemia. Considerar reducir dosis de glibenclamida'},
   // Sepsis
   {drugA:'meropenem', drugB:'ácido valproico', severity:'critical',
    mechanism:'Carbapenems reducen niveles de ácido valproico hasta 60-90%',
@@ -311,6 +299,18 @@ const INTERACTION_DB = [
    mechanism:'Fenitoína induce metabolismo de haloperidol',
    clinicalEffect:'Reducción del efecto antipsicótico',
    recommendation:'Puede requerir ajuste de dosis de haloperidol'},
+  {drugA:'diclofenaco', drugB:'warfarina', severity:'critical',
+   mechanism:'AINEs inhiben COX-1 plaquetaria + irritación gástrica + desplazamiento de proteínas',
+   clinicalEffect:'Riesgo muy alto de hemorragia digestiva y sistémica',
+   recommendation:'Combinación contraindicada. Usar paracetamol como analgésico. Si inevitables, IBP + control INR estricto'},
+  {drugA:'amiodarona', drugB:'levotiroxina', severity:'major',
+   mechanism:'Amiodarona contiene 37% de yodo y bloquea conversión T4→T3 (inhibe deiodinasa)',
+   clinicalEffect:'Hipo o hipertiroidismo inducido por fármaco. Altera niveles tiroideos significativamente',
+   recommendation:'Monitorizar TSH, T3 y T4 libre cada 6 meses. Requiere ajuste de dosis de levotiroxina'},
+  {drugA:'levotiroxina', drugB:'calcio carbonato', severity:'minor',
+   mechanism:'Calcio forma quelatos con levotiroxina en tracto GI',
+   clinicalEffect:'Reducción de absorción de levotiroxina hasta 25-40%',
+   recommendation:'Separar administración al menos 4 horas. Tomar levotiroxina en ayunas'},
   {drugA:'metilprednisolona', drugB:'insulina', severity:'major',
    mechanism:'Pulsos de corticoides causan hiperglicemia severa',
    clinicalEffect:'Descompensación glicémica aguda',
@@ -513,7 +513,7 @@ const DOSE_RULES = {
   // ─── ANTIBIÓTICOS ───
   'ceftriaxona': {
     _category: 'antibioticos',
-    iv: {weightBased:true, minPerKg:20, maxPerKg:50, absoluteMax:4000, typicalMin:1000, typicalMax:2000, unit:'mg',
+    iv: {weightBased:false, absoluteMax:4000, typicalMin:1000, typicalMax:2000, unit:'mg',
          renalAdjusted:false, ageAdjusted:false,
          notes:'Dosis habitual 1-2 g/día. En meningitis: 2 g c/12h. No mezclar con Ca++ en misma vía'},
     im: {weightBased:false, absoluteMax:2000, typicalMin:250, typicalMax:1000, unit:'mg',
@@ -613,7 +613,7 @@ const DOSE_RULES = {
   },
   'ondansetron': {
     _category: 'gastrointestinal',
-    iv: {weightBased:true, minPerKg:0.1, maxPerKg:0.15, absoluteMax:16, typicalMin:4, typicalMax:8, unit:'mg',
+    iv: {weightBased:false, absoluteMax:16, typicalMin:4, typicalMax:8, unit:'mg',
          renalAdjusted:false, ageAdjusted:false,
          notes:'Antiemético de elección. Administrar lento. Riesgo de prolongar QTc'},
     oral: {weightBased:false, absoluteMax:24, typicalMin:4, typicalMax:8, unit:'mg',
@@ -722,13 +722,13 @@ const DOSE_RULES = {
   },
   'atropina': {
     _category: 'antidotos_emergencia',
-    iv: {weightBased:true, minPerKg:0.01, maxPerKg:0.04, absoluteMax:3, typicalMin:0.5, typicalMax:1, unit:'mg',
+    iv: {weightBased:false, absoluteMax:3, typicalMin:0.5, typicalMax:1, unit:'mg',
          renalAdjusted:false, ageAdjusted:false,
          notes:'Bradicardia: 0.5-1 mg c/3-5 min (máx 3 mg). Dosis <0.5 mg puede causar bradicardia paradójica'}
   },
   'adrenalina': {
     _category: 'antidotos_emergencia',
-    iv: {weightBased:true, minPerKg:0.01, maxPerKg:0.03, absoluteMax:1, typicalMin:0.1, typicalMax:1, unit:'mg',
+    iv: {weightBased:false, absoluteMax:1, typicalMin:0.1, typicalMax:1, unit:'mg',
          renalAdjusted:false, ageAdjusted:false,
          notes:'PCR: 1 mg c/3-5 min. Anafilaxia: 0.3-0.5 mg IM muslo. Infusión: 0.01-0.1 mcg/kg/min'},
     im: {weightBased:true, minPerKg:0.005, maxPerKg:0.01, absoluteMax:0.5, typicalMin:0.3, typicalMax:0.5, unit:'mg',
@@ -1212,7 +1212,7 @@ function checkInteractions(newDrug, currentMeds, allergies) {
 
   // Ordenar por severidad: critical > major > minor
   const order = {critical: 0, major: 1, minor: 2};
-  return alerts.sort((a, b) => (order[a.severity] || 9) - (order[b.severity] || 9));
+  return alerts.sort((a, b) => (order[a.severity] ?? 9) - (order[b.severity] ?? 9));
 }
 
 function validateDose(drug, dose, route, patientWeight, patientAge, renalFunction) {

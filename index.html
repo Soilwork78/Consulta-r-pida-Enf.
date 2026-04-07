@@ -3,20 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Consulta Rápida ENF — UDP</title>
-
-<!-- PWA -->
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1a3a6b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="ENF UDP">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
-<link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144.png">
-<meta name="description" content="Referencia clínica rápida para Enfermería — Farmacología y Fisiopatología UDP">
-<meta name="application-name" content="Consulta Rápida ENF">
+<meta name="apple-mobile-web-app-title" content="ConsultaENF">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Consulta Rápida ENF — UDP</title>
 <style>
 :root {
   --udp-blue: #1a3a6b;
@@ -208,85 +202,129 @@ a:hover{text-decoration:underline}
 .unit-card h3{font-size:14px;font-weight:700;color:var(--udp-blue);margin-bottom:8px}
 .unit-card ul{padding-left:16px;font-size:12px;color:var(--text-muted);line-height:1.8}
 
-/* RESPONSIVE */
+/* RESPONSIVE — MOBILE */
+.mobile-toggle{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-right:4px;padding:4px 6px;line-height:1}
+#sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:150;backdrop-filter:blur(1px)}
+
 @media(max-width:768px){
-  #sidebar{transform:translateX(-100%);transition:.3s}
+  :root{--header-h:50px}
+
+  /* Header */
+  .mobile-toggle{display:block}
+  #header{padding:0 10px;gap:8px}
+  #header .subtitle{display:none}
+  #search-box{max-width:none;margin-left:0;flex:1}
+
+  /* Sidebar: slide-over panel */
+  #sidebar{transform:translateX(-100%);transition:.28s cubic-bezier(.4,0,.2,1);z-index:200;box-shadow:4px 0 20px rgba(0,0,0,.22)}
   #sidebar.open{transform:translateX(0)}
-  #main{margin-left:0}
-  .subject-cards{flex-direction:column;align-items:center}
+  #sidebar-overlay.open{display:block}
+
+  /* Main */
+  #main{margin-left:0;padding:12px 10px}
+  #demo-footer{margin-left:0}
+
+  /* Home */
+  .home-hero{padding:20px 8px 14px}
+  .home-hero h1{font-size:19px}
+  .subject-cards{flex-direction:column;align-items:stretch;gap:12px;margin:16px 0}
+  .subject-card{min-width:unset;max-width:unset;padding:16px 14px}
+  .stats-row{gap:8px}
+  .stat-box{flex:1;min-width:72px;padding:10px 10px}
+  .stat-box .sv{font-size:18px}
+
+  /* Content view */
+  .cv-title{font-size:17px}
+  .cv-meta{gap:8px}
+  /* Tabs scrollan horizontal sin envolver */
+  .content-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:1px}
+  .content-tabs::-webkit-scrollbar{display:none}
+  .content-tab{white-space:nowrap;padding:8px 12px;font-size:12px}
+
+  /* Cards */
+  .card{padding:13px 12px}
+
+  /* Tables — scroll horizontal */
+  .comp-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .xref-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .flow-container{padding:12px 10px}
+
+  /* Unit index — una columna */
+  .unit-index{grid-template-columns:1fr}
+
+  /* Nav items — tap target cómodo */
+  .nav-item{padding:11px 12px 11px 20px;font-size:13px}
+
+  /* CDSS Calc */
+  .calc-card{padding:16px 12px}
+  .calc-form{max-width:100%;gap:10px}
+  .calc-field input,.calc-field select{font-size:16px} /* evita zoom iOS */
+
+  /* Botón validar */
+  .vignette-toggle{width:100%;text-align:center}
+
+  /* AI Assistant */
+  .chat-area{height:clamp(260px,42vh,380px)}
+  .preset-questions{gap:5px}
+  .preset-q{font-size:11px;padding:5px 10px}
+  .ai-config-row{flex-direction:column;align-items:stretch}
+  .ai-config-row input{font-size:16px}
+  .ai-action-btn{flex:1;text-align:center}
+
+  /* Progress dots más compactos */
+  .progress-sessions{grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:5px}
+  .progress-dot{width:30px;height:30px;font-size:9px;border-radius:6px}
 }
-.mobile-toggle{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-right:4px}
-@media(max-width:768px){.mobile-toggle{display:block}}
+
+@media(max-width:400px){
+  .home-hero h1{font-size:16px}
+  .content-tab{padding:7px 9px;font-size:11px}
+  .preset-q{font-size:10px;padding:4px 8px}
+}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:#f1f1f1}
 ::-webkit-scrollbar-thumb{background:#c5d0e0;border-radius:3px}
 
-/* PWA — SAFE AREA (notch, home indicator) */
-#header{padding-left:max(16px, env(safe-area-inset-left));padding-right:max(16px, env(safe-area-inset-right));padding-top:env(safe-area-inset-top);height:calc(var(--header-h) + env(safe-area-inset-top))}
-#sidebar{top:calc(var(--header-h) + env(safe-area-inset-top));padding-bottom:env(safe-area-inset-bottom)}
-#main{margin-top:calc(var(--header-h) + env(safe-area-inset-top));padding-bottom:calc(24px + env(safe-area-inset-bottom))}
-#demo-footer{padding-bottom:calc(16px + env(safe-area-inset-bottom))}
-
-/* PWA — MÓVIL OPTIMIZADO */
-@media(max-width:768px){
-  :root{--header-h:54px}
-  #main{padding:16px 12px}
-  .home-hero{padding:24px 12px 16px}
-  .home-hero h1{font-size:20px}
-  .subject-card{min-width:0;padding:18px 16px}
-  .stats-row{gap:8px}
-  .stat-box{padding:10px 14px}
-  .stat-box .sv{font-size:18px}
-  .content-tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .content-tabs::-webkit-scrollbar{display:none}
-  .content-tab{white-space:nowrap;padding:9px 13px;font-size:12px}
-  .cdss-modes{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;padding-bottom:4px}
-  .cdss-mode{white-space:nowrap;flex-shrink:0}
-  .comp-table{font-size:11px}
-  .comp-table th,.comp-table td{padding:6px 8px}
-  .quiz-opt{padding:10px 12px;font-size:12.5px}
-  .card{padding:14px 16px}
-  #search-box{max-width:none;flex:1}
-  .home-hero p{font-size:13px}
-  .cv-title{font-size:18px}
-  .flow-container{padding:14px}
-  .calc-form{max-width:100%}
-}
-
-/* PWA — TOUCH FEEDBACK */
-@media(hover:none){
-  .nav-item:active{background:#eef3fb;border-left-color:#9ab8d8}
-  .subject-card:active{border-color:var(--udp-blue-light);transform:scale(.98)}
-  .quiz-opt:active{border-color:var(--udp-blue-light);background:#f0f6ff}
-  .unit-card:active{border-color:var(--udp-blue-light)}
-  .kw-vert-item:active{background:#e8f0fb}
-}
-
-/* PWA — BANNER DE INSTALACIÓN */
-#pwa-install-banner{
-  display:none;position:fixed;bottom:0;left:0;right:0;
-  background:var(--udp-blue);color:#fff;padding:14px 16px;
-  padding-bottom:calc(14px + env(safe-area-inset-bottom));
-  z-index:500;box-shadow:0 -4px 16px rgba(0,0,0,.3);
-  align-items:center;gap:12px;
-}
-#pwa-install-banner.visible{display:flex}
-#pwa-install-banner .pwa-text{flex:1;font-size:13px;line-height:1.4}
-#pwa-install-banner .pwa-text strong{display:block;font-size:14px;margin-bottom:2px}
-#pwa-install-banner .pwa-btn{background:#fff;color:var(--udp-blue);border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
-#pwa-install-banner .pwa-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;cursor:pointer;padding:0 4px;line-height:1;flex-shrink:0}
-
-/* PWA — INDICATOR OFFLINE */
-#offline-indicator{
-  display:none;position:fixed;
-  top:calc(var(--header-h) + env(safe-area-inset-top) + 4px);
-  left:50%;transform:translateX(-50%);
-  background:#d97706;color:#fff;padding:6px 16px;border-radius:20px;
-  font-size:12px;font-weight:600;z-index:400;box-shadow:0 2px 8px rgba(0,0,0,.2);
-}
-#offline-indicator.show{display:block}
+/* AI ASSISTANT */
+#ai-view{display:none}
+.ai-header-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.ai-config{background:#fff;border-radius:10px;border:1px solid var(--border);padding:14px 18px;margin-bottom:14px}
+.ai-config-label{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.ai-config-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ai-key-input{flex:1;min-width:220px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:monospace;color:var(--text)}
+.ai-key-input:focus{outline:none;border-color:var(--udp-blue-light);box-shadow:0 0 0 2px rgba(34,85,164,.1)}
+.ai-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;white-space:nowrap}
+.ai-status.ok{background:#d1fae5;color:#065f46}
+.ai-status.idle{background:#f3f4f6;color:#6b7280}
+.ai-status.warn{background:#fef3c7;color:#92400e}
+.ai-note{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.5}
+.preset-questions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+.preset-q{font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid #93c5fd;color:#1e40af;background:#eff6ff;cursor:pointer;transition:.15s;font-weight:500}
+.preset-q:hover{background:var(--udp-blue);color:#fff;border-color:var(--udp-blue)}
+.chat-area{background:#fff;border-radius:10px;border:1px solid var(--border);display:flex;flex-direction:column;height:clamp(320px,50vh,560px)}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.chat-empty{text-align:center;color:var(--text-muted);font-size:13px;padding:30px 16px}
+.chat-msg{display:flex;flex-direction:column;gap:3px;max-width:88%}
+.chat-msg.user{align-self:flex-end}
+.chat-msg.assistant{align-self:flex-start}
+.chat-role{font-size:10px;color:var(--text-muted);font-weight:600;padding:0 4px}
+.chat-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.65}
+.chat-msg.user .chat-bubble{background:var(--udp-blue);color:#fff;border-bottom-right-radius:3px}
+.chat-msg.assistant .chat-bubble{background:#f0f4f8;color:var(--text);border-bottom-left-radius:3px;border:1px solid var(--border)}
+.chat-msg.thinking .chat-bubble{color:var(--text-muted);font-style:italic;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+.chat-msg.error .chat-bubble{background:#fff5f5;border-color:#fca5a5;color:#991b1b}
+.chat-input-row{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:#fafbfc;border-radius:0 0 10px 10px}
+.chat-input{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;resize:none;height:38px;max-height:96px;overflow-y:auto;line-height:1.5}
+.chat-input:focus{outline:none;border-color:var(--udp-blue-light)}
+.chat-send-btn{padding:8px 18px;background:var(--udp-blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap;align-self:flex-end}
+.chat-send-btn:hover{background:var(--udp-blue-light)}
+.chat-send-btn:disabled{background:#94a3b8;cursor:not-allowed}
+.ai-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.ai-action-btn{font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;transition:.15s}
+.ai-action-btn:hover{border-color:var(--udp-blue-light);color:var(--udp-blue)}
 
 /* QUIZ */
 .quiz-container{display:flex;flex-direction:column;gap:14px}
@@ -404,6 +442,9 @@ a:hover{text-decoration:underline}
   </div>
 </div>
 
+<!-- SIDEBAR OVERLAY (mobile tap-to-close) -->
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
 <!-- SIDEBAR -->
 <div id="sidebar">
   <div class="sidebar-tabs">
@@ -411,6 +452,7 @@ a:hover{text-decoration:underline}
     <div class="sidebar-tab" onclick="switchSidebarTab('fisio',this)">🫀 Fisiopato</div>
     <div class="sidebar-tab" onclick="showCrossRef()">🔗 Nexos</div>
     <div class="sidebar-tab" onclick="showCalculator()">🏥 CDSS</div>
+    <div class="sidebar-tab" onclick="showAIAssistant()">🤖 IA</div>
     <div class="sidebar-tab" onclick="showProgress()">📊</div>
   </div>
   <div id="sidebar-farm" class="sidebar-content active"></div>
@@ -485,6 +527,65 @@ a:hover{text-decoration:underline}
     <div class="calc-warning" style="margin-top:16px">⚠️ <strong>Advertencia:</strong> Estas herramientas son de apoyo educativo. NO reemplazan el juicio clínico ni los protocolos institucionales. Las alertas de interacciones cubren los fármacos más frecuentes en enfermería — siempre consulte fuentes adicionales.</div>
   </div>
 
+  <!-- AI ASSISTANT -->
+  <div id="ai-view" style="display:none">
+    <div class="cv-header">
+      <div class="cv-title">🤖 Asistente IA — Profe IA</div>
+      <div class="cv-meta">Asistente clínico-académico · Farmacología y Fisiopatología ENF · UDP 2026</div>
+    </div>
+
+    <!-- Configuración API Key -->
+    <div class="ai-config">
+      <div class="ai-config-label">Configuración API</div>
+      <div class="ai-config-row">
+        <input type="password" class="ai-key-input" id="ai-key-input"
+          placeholder="sk-ant-api03-..."
+          oninput="setAIKey(this.value)"
+          autocomplete="off">
+        <span class="ai-status idle" id="ai-key-status">Sin clave</span>
+      </div>
+      <div class="ai-note">
+        🔑 Obtén tu clave en <strong>console.anthropic.com</strong> · Solo se usa en esta sesión, no se guarda · Para uso demo/docente
+      </div>
+    </div>
+
+    <!-- Preguntas rápidas -->
+    <div class="preset-questions" id="preset-questions">
+      <button class="preset-q" onclick="aiPresetQuestion('¿Cuál es la diferencia entre un antibiótico bactericida y bacteriostático? Dame ejemplos clínicos.')">Bactericida vs bacteriostático</button>
+      <button class="preset-q" onclick="aiPresetQuestion('Explica el mecanismo de la insuficiencia cardíaca y cómo actúan los diuréticos en su tratamiento.')">IC y diuréticos</button>
+      <button class="preset-q" onclick="aiPresetQuestion('¿Qué debo vigilar en un paciente que recibe vancomicina? ¿Por qué es nefrotóxica?')">Vancomicina: monitoreo</button>
+      <button class="preset-q" onclick="aiPresetQuestion('¿Cómo reconozco una reacción alérgica a un antibiótico y qué hago como enfermero/a?')">Alergia a antibióticos</button>
+      <button class="preset-q" onclick="aiPresetQuestion('Explica la fisiopatología del shock séptico y el rol de la noradrenalina.')">Shock séptico</button>
+      <button class="preset-q" onclick="aiPresetQuestion('¿Cuál es la diferencia entre heparina no fraccionada y enoxaparina en términos clínicos y de enfermería?')">Heparina vs enoxaparina</button>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-area" id="chat-area">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-empty">
+          <div style="font-size:32px;margin-bottom:8px;">🤖</div>
+          <strong>Profe IA listo</strong><br>
+          Ingresa tu API Key y haz una pregunta clínica o usa las sugerencias de arriba.
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea class="chat-input" id="ai-input"
+          placeholder="Pregunta sobre farmacología, fisiopatología, mecanismos de acción... (Enter para enviar)"
+          rows="1"></textarea>
+        <button class="chat-send-btn" id="ai-send-btn" onclick="sendAIMessage()">Enviar ↑</button>
+      </div>
+    </div>
+
+    <div class="ai-actions">
+      <button class="ai-action-btn" onclick="clearAIChat()">🗑 Limpiar chat</button>
+      <button class="ai-action-btn" onclick="exportAIChat()">📋 Copiar conversación</button>
+    </div>
+
+    <div class="calc-warning" style="margin-top:12px">
+      ⚠️ <strong>Advertencia:</strong> El Asistente IA es una herramienta de apoyo educativo. Las respuestas son orientativas y NO reemplazan el juicio clínico, los protocolos institucionales ni la bibliografía oficial de la asignatura.
+    </div>
+  </div>
+
   <!-- PROGRESS -->
   <div id="progress-view" style="display:none">
     <div class="cv-header">
@@ -514,87 +615,14 @@ a:hover{text-decoration:underline}
 <script src="extras.js"></script>
 <script src="cdss.js"></script>
 <script src="app.js"></script>
+<script>
+  // Registro del Service Worker (PWA offline)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .catch(err => console.warn('SW no registrado:', err));
+    });
+  }
+</script>
 </body>
 </html>
-
-<!-- INDICADOR OFFLINE -->
-<div id="offline-indicator">📡 Sin conexión — modo offline</div>
-
-<!-- BANNER INSTALACIÓN PWA -->
-<div id="pwa-install-banner">
-  <div class="pwa-text">
-    <strong>⚕ Instalar Consulta Rápida ENF</strong>
-    Acceso rápido desde tu pantalla de inicio, sin internet
-  </div>
-  <button class="pwa-btn" id="pwa-install-btn">Instalar</button>
-  <button class="pwa-close" id="pwa-close-btn">✕</button>
-</div>
-
-<script>
-// PWA — Registro Service Worker + Banner Instalación
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => {
-        console.log('[PWA] Service Worker registrado:', reg.scope);
-        reg.addEventListener('updatefound', () => {
-          const newWorker = reg.installing;
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('[PWA] Nueva versión disponible');
-            }
-          });
-        });
-      })
-      .catch(err => console.warn('[PWA] Error SW:', err));
-  });
-}
-
-function updateOnlineStatus() {
-  const el = document.getElementById('offline-indicator');
-  if (!navigator.onLine) el.classList.add('show');
-  else el.classList.remove('show');
-}
-window.addEventListener('online', updateOnlineStatus);
-window.addEventListener('offline', updateOnlineStatus);
-updateOnlineStatus();
-
-let deferredPrompt = null;
-const banner = document.getElementById('pwa-install-banner');
-const installBtn = document.getElementById('pwa-install-btn');
-const closeBtn = document.getElementById('pwa-close-btn');
-
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (!localStorage.getItem('pwa-banner-dismissed')) {
-    setTimeout(() => banner.classList.add('visible'), 2000);
-  }
-});
-
-installBtn.addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  banner.classList.remove('visible');
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  deferredPrompt = null;
-});
-
-closeBtn.addEventListener('click', () => {
-  banner.classList.remove('visible');
-  localStorage.setItem('pwa-banner-dismissed', '1');
-});
-
-window.addEventListener('appinstalled', () => {
-  banner.classList.remove('visible');
-  deferredPrompt = null;
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-  const params = new URLSearchParams(window.location.search);
-  const goto = params.get('goto');
-  if (goto === 'farm') showSubject('farm');
-  else if (goto === 'fisio') showSubject('fisio');
-  else if (goto === 'cdss') showCalculator();
-});
-</script>

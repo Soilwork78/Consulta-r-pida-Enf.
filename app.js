@@ -52,7 +52,7 @@ function switchSidebarTab(subject, el) {
 
 // ─── Utilidad de vistas ─────────────────────────────────────
 function hideAllViews() {
-  ['home','content-view','subject-view','xref-view','calc-view','progress-view'].forEach(id => {
+  ['home','content-view','subject-view','xref-view','calc-view','progress-view','ai-view'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
 }
@@ -126,6 +126,9 @@ function loadSession(id, subject) {
   const { session, unitTitle } = found;
   subject = found.subject;
   currentSessionId = id;
+
+  // Cerrar sidebar en móvil
+  closeSidebarOnNavItem();
 
   // Ocultar otras vistas
   hideAllViews();
@@ -208,7 +211,26 @@ function switchContentTab(tabId, el) {
 // ─── Render: Contenido (accordion con definiciones) ─────────
 function renderContenido(session) {
   const pane = document.getElementById('tab-contenido');
-  let html = `<div class="card"><h3>📌 Temas principales — haz clic para ver definición rápida</h3>
+  // Banner de recursos multimedia para la sesión de antibióticos
+  const resourceBanner = session.id === 'farm-s3'
+    ? `<div class="card" style="background:linear-gradient(135deg,#0d3b2e 60%,#1a5c42);border:none;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <div style="font-size:2rem">🎞️</div>
+          <div style="flex:1;min-width:180px">
+            <div style="color:#7fffd4;font-weight:700;font-size:14px;margin-bottom:2px">Presentación de clases disponible</div>
+            <div style="color:#b2f0e0;font-size:12px">12 diapositivas sobre Farmacología: Antibióticos — mecanismos, clasificación, resistencia, PK/PD y protocolo sepsis.</div>
+          </div>
+          <a href="antibioticos-slides.html" target="_blank"
+             style="display:inline-flex;align-items:center;gap:6px;background:#1a7a4a;color:#fff;text-decoration:none;
+                    padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;
+                    box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:background 0.2s"
+             onmouseover="this.style.background='#25a066'" onmouseout="this.style.background='#1a7a4a'">
+            📊 Ver presentación
+          </a>
+        </div>
+      </div>`
+    : '';
+  let html = resourceBanner + `<div class="card"><h3>📌 Temas principales — haz clic para ver definición rápida</h3>
     <div class="topics-list">`;
   session.topics.forEach((topic, i) => {
     const t = typeof topic === 'string' ? topic : topic.t;
@@ -440,7 +462,20 @@ function searchFromKeyword(kw) {
 
 // ─── Mobile sidebar ──────────────────────────────────────────
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const isOpen = sidebar.classList.toggle('open');
+  if (overlay) overlay.classList.toggle('open', isOpen);
+  // Bloquear scroll del body cuando el sidebar está abierto en móvil
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeSidebarOnNavItem() {
+  // Cerrar sidebar automáticamente en móvil al navegar
+  if (window.innerWidth <= 768) {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar.classList.contains('open')) toggleSidebar();
+  }
 }
 
 // ============================================================
@@ -669,7 +704,7 @@ function renderDoseValidator(area) {
         <div class="calc-field"><label>Dosis indicada</label><input type="number" id="dv-dose" step="any" placeholder="Ej: 1000"></div>
         <div class="calc-field"><label>Peso paciente (kg) — requerido para fármacos mg/kg</label><input type="number" id="dv-weight" step="any" placeholder="Ej: 70"></div>
         <div class="calc-field"><label>Edad (años)</label><input type="number" id="dv-age" step="1" placeholder="Ej: 72"></div>
-        <div class="calc-field"><label>eGFR (mL/min) — función renal</label><input type="number" id="dv-egfr" step="any" placeholder="Ej: 45"></div>
+        <div class="calc-field" id="dv-egfr-field" style="display:none"><label>eGFR (mL/min) — función renal <span style="color:#1a7a4a;font-size:11px">(ajuste renal para antibióticos)</span></label><input type="number" id="dv-egfr" step="any" placeholder="Ej: 45"></div>
         <button class="vignette-toggle" onclick="runDoseValidation()" style="margin-top:8px">🔍 Validar dosis</button>
       </div>
       <div id="cdss-dose-results" style="margin-top:16px"></div>
@@ -684,6 +719,13 @@ function updateDoseRoutes() {
   routeSel.innerHTML = routes.length
     ? routes.map(r => `<option value="${r}">${routeLabels[r] || r}</option>`).join('')
     : '<option value="">Sin vías disponibles</option>';
+  // Mostrar eGFR solo si el fármaco es antibiótico (ajuste renal relevante)
+  const egfrField = document.getElementById('dv-egfr-field');
+  if (egfrField) {
+    const isAntibiotic = drug && DOSE_RULES[drug] && DOSE_RULES[drug]._category === 'antibioticos';
+    egfrField.style.display = isAntibiotic ? '' : 'none';
+    if (!isAntibiotic) document.getElementById('dv-egfr').value = '';
+  }
 }
 
 function runDoseValidation() {
@@ -1177,4 +1219,209 @@ function showProgress() {
   }
 
   document.getElementById('progress-content').innerHTML = html;
+}
+
+// ============================================================
+// ASISTENTE IA — Integración Claude API (claude-haiku-4-5)
+// Patrón: direct browser access con anthropic-dangerous-direct-browser-access
+// ============================================================
+
+let _aiMessages = [];   // historial de mensajes {role, content}
+let _aiApiKey   = '';   // API key en memoria (no persiste)
+let _aiTyping   = false;
+
+// Mostrar sección IA
+function showAIAssistant() {
+  hideAllViews();
+  document.getElementById('ai-view').style.display = 'block';
+  currentSessionId = null;
+  clearNavActive();
+  document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+  // Inicializar chat si está vacío
+  if (_aiMessages.length === 0) _renderAIWelcome();
+  // Setup listeners una sola vez
+  _setupAIInputListeners();
+}
+
+// Actualizar API key y estado visual
+function setAIKey(val) {
+  _aiApiKey = val.trim();
+  const status = document.getElementById('ai-key-status');
+  if (_aiApiKey.startsWith('sk-ant-')) {
+    status.textContent = '✓ Lista';
+    status.className = 'ai-status ok';
+  } else if (_aiApiKey.length > 5) {
+    status.textContent = '⚠ Formato';
+    status.className = 'ai-status warn';
+  } else {
+    status.textContent = 'Sin clave';
+    status.className = 'ai-status idle';
+  }
+}
+
+// Preset questions → rellenar input y enviar
+function aiPresetQuestion(q) {
+  const input = document.getElementById('ai-input');
+  if (!input) return;
+  input.value = q;
+  input.style.height = 'auto';
+  input.style.height = Math.min(input.scrollHeight, 96) + 'px';
+  sendAIMessage();
+}
+
+// Enviar mensaje al API
+async function sendAIMessage() {
+  if (_aiTyping) return;
+  const input   = document.getElementById('ai-input');
+  const sendBtn = document.getElementById('ai-send-btn');
+  const text    = (input.value || '').trim();
+  if (!text) return;
+  if (!_aiApiKey) {
+    _appendAIError('Ingresa tu API Key de Anthropic para usar el asistente.');
+    return;
+  }
+
+  // Limpiar pantalla de bienvenida si existe
+  const emptyEl = document.querySelector('#chat-messages .chat-empty');
+  if (emptyEl) emptyEl.remove();
+
+  input.value = '';
+  input.style.height = '38px';
+  _aiMessages.push({ role: 'user', content: text });
+  _appendAIBubble('user', 'Tú', text);
+
+  _aiTyping = true;
+  sendBtn.disabled = true;
+  const thinkId = 'think-' + Date.now();
+  _appendAIBubble('assistant thinking', '🤖 Profe IA', 'Escribiendo...', thinkId);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': _aiApiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        system: `Eres Profe IA, asistente clínico-académico de Enfermería para estudiantes de 2° año de la Universidad Diego Portales (UDP), Chile.
+
+Especialidad: Farmacología ENF3013 y Fisiopatología ENF3014.
+
+Guías:
+- Respuestas claras, precisas, adaptadas a estudiantes de 2° año de Enfermería.
+- Usa terminología correcta pero explica el porqué de cada concepto.
+- Relaciona siempre farmacología con fisiopatología y cuidados de enfermería.
+- Cita el contexto clínico chileno cuando sea relevante (GES, AUGE, patologías prevalentes).
+- Sé conciso: máximo 5-6 puntos o 3-4 párrafos breves. Usa bullet points cuando ayude.
+- Termina con un punto clave para el rol del enfermero/a si aplica.
+- No reemplazas al docente ni al criterio clínico — invita a verificar con bibliografía oficial.
+
+Patologías prioritarias: IAM, ACV, sepsis, DM2, EPOC, ERC, DHC, HTA, IC, TEP.`,
+        messages: _aiMessages
+      })
+    });
+
+    const data = await res.json();
+    const el = document.getElementById(thinkId);
+    if (el) el.remove();
+
+    if (data.content && data.content[0] && data.content[0].text) {
+      const reply = data.content[0].text;
+      _aiMessages.push({ role: 'assistant', content: reply });
+      _appendAIBubble('assistant', '🤖 Profe IA', reply);
+    } else {
+      const errMsg = data.error ? data.error.message : 'Respuesta inesperada del servidor.';
+      _appendAIError(errMsg);
+    }
+  } catch (err) {
+    const el = document.getElementById(thinkId);
+    if (el) el.remove();
+    _appendAIError('Error de conexión: ' + err.message);
+  } finally {
+    _aiTyping = false;
+    sendBtn.disabled = false;
+    input.focus();
+  }
+}
+
+// ── helpers privados ─────────────────────────────────────────
+
+function _appendAIBubble(classes, roleLabel, text, id) {
+  const container = document.getElementById('chat-messages');
+  if (!container) return;
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + classes;
+  if (id) div.id = id;
+  // Formatear texto: saltos de línea y negritas simples
+  const formatted = _aiFormatText(text);
+  div.innerHTML = `<div class="chat-role">${roleLabel}</div>
+    <div class="chat-bubble">${formatted}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function _appendAIError(msg) {
+  _appendAIBubble('assistant error', '⚠️ Error', msg);
+}
+
+function _aiFormatText(text) {
+  // Escape HTML básico, luego formatear markdown simple
+  let s = text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+  return s;
+}
+
+function _renderAIWelcome() {
+  const container = document.getElementById('chat-messages');
+  if (!container) return;
+  container.innerHTML = '';
+  _appendAIBubble('assistant', '🤖 Profe IA',
+    '¡Hola! Soy tu **Asistente IA de Enfermería UDP**.\n\nPuedo ayudarte con dudas de **Farmacología (ENF3013)** y **Fisiopatología (ENF3014)**.\n\nIngresa tu API Key arriba y usa las preguntas sugeridas o escribe tu propia consulta clínica. 🩺');
+}
+
+let _aiInputSetup = false;
+function _setupAIInputListeners() {
+  if (_aiInputSetup) return;
+  const input = document.getElementById('ai-input');
+  if (!input) return;
+  // Auto-resize
+  input.addEventListener('input', function() {
+    this.style.height = '38px';
+    this.style.height = Math.min(this.scrollHeight, 96) + 'px';
+  });
+  // Enter para enviar (Shift+Enter = nueva línea)
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendAIMessage();
+    }
+  });
+  _aiInputSetup = true;
+}
+
+// Limpiar chat
+function clearAIChat() {
+  _aiMessages = [];
+  const container = document.getElementById('chat-messages');
+  if (container) container.innerHTML = '';
+  _renderAIWelcome();
+}
+
+// Exportar conversación al portapapeles
+function exportAIChat() {
+  if (_aiMessages.length === 0) { alert('El chat está vacío.'); return; }
+  const lines = _aiMessages.map(m => {
+    const who = m.role === 'user' ? 'Estudiante' : 'Profe IA';
+    return `[${who}]\n${m.content}`;
+  });
+  const text = '=== Conversación Profe IA — Consulta Rápida ENF UDP ===\n\n' + lines.join('\n\n---\n\n');
+  navigator.clipboard.writeText(text)
+    .then(() => alert('✓ Conversación copiada al portapapeles'))
+    .catch(() => alert('No se pudo copiar. Intenta manualmente.'));
 }

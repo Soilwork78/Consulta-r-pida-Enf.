@@ -1,95 +1,22 @@
 {
   "name": "Consulta Rápida ENF — UDP",
-  "short_name": "ENF UDP",
-  "description": "Herramienta de referencia clínica para Enfermería — Farmacología y Fisiopatología · Universidad Diego Portales",
+  "short_name": "ConsultaENF",
+  "description": "Herramienta de referencia rápida para Farmacología y Fisiopatología — Enfermería UDP 2026",
   "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#1a3a6b",
+  "background_color": "#f0f4f8",
   "theme_color": "#1a3a6b",
+  "orientation": "portrait-primary",
   "lang": "es",
-  "scope": "./",
   "categories": ["education", "medical"],
   "icons": [
-    {
-      "src": "icons/icon-72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "icons/screenshot-home.png",
-      "sizes": "390x844",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Pantalla de inicio"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Farmacología",
-      "short_name": "Farmaco",
-      "description": "Ir a Farmacología ENF3013",
-      "url": "./index.html?goto=farm",
-      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "Fisiopatología",
-      "short_name": "Fisiopato",
-      "description": "Ir a Fisiopatología ENF3014",
-      "url": "./index.html?goto=fisio",
-      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
-    },
-    {
-      "name": "CDSS",
-      "short_name": "CDSS",
-      "description": "Soporte a la Decisión Clínica",
-      "url": "./index.html?goto=cdss",
-      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
-    }
+    { "src": "icon-72.png",  "sizes": "72x72",   "type": "image/png" },
+    { "src": "icon-96.png",  "sizes": "96x96",   "type": "image/png" },
+    { "src": "icon-128.png", "sizes": "128x128", "type": "image/png" },
+    { "src": "icon-144.png", "sizes": "144x144", "type": "image/png" },
+    { "src": "icon-152.png", "sizes": "152x152", "type": "image/png" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-384.png", "sizes": "384x384", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
