@@ -211,16 +211,37 @@ function switchContentTab(tabId, el) {
 // ─── Render: Contenido (accordion con definiciones) ─────────
 function renderContenido(session) {
   const pane = document.getElementById('tab-contenido');
-  // Banner de recursos multimedia para la sesión de antibióticos
-  const resourceBanner = session.id === 'farm-s3'
+  // Mapa sesión → presentación HTML (todas las unidades de Farmacología)
+  const SLIDES_MAP = {
+    'farm-s1':     { file: 'unidad1-bases-slides.html',        label: 'Bases de la Farmacología',               desc: '12 diapositivas: rol enfermería, ADME, PK/PD, RAM, interacciones y farmacovigilancia.' },
+    'farm-s2':     { file: 'unidad1-bases-slides.html',        label: 'Bases de la Farmacología',               desc: '12 diapositivas: rol enfermería, ADME, PK/PD, RAM, interacciones y farmacovigilancia.' },
+    'farm-s3':     { file: 'antibioticos-slides.html',         label: 'Farmacología: Antibióticos',             desc: '12 diapositivas: mecanismos, clasificación, resistencia, PK/PD y protocolo sepsis.' },
+    'farm-s4':     { file: 'unidad2-antiinfecciosos-slides.html', label: 'Antiinfecciosos, Alergias y Vía Aérea', desc: '12 diapositivas: antifúngicos, antivirales, alergia, anafilaxia y broncodilatadores.' },
+    'farm-s5':     { file: 'unidad2-antiinfecciosos-slides.html', label: 'Antiinfecciosos, Alergias y Vía Aérea', desc: '12 diapositivas: antifúngicos, antivirales, alergia, anafilaxia y broncodilatadores.' },
+    'farm-s6':     { file: 'unidad3-cardiovascular-slides.html', label: 'Farmacología Cardiovascular',           desc: '12 diapositivas: IECA/ARA-II, BCC, diuréticos, antiarrítmicos, anticoagulantes y estatinas.' },
+    'farm-s8':     { file: 'unidad3-cardiovascular-slides.html', label: 'Farmacología Cardiovascular',           desc: '12 diapositivas: IECA/ARA-II, BCC, diuréticos, antiarrítmicos, anticoagulantes y estatinas.' },
+    'farm-s9':     { file: 'unidad3-cardiovascular-slides.html', label: 'Farmacología Cardiovascular',           desc: '12 diapositivas: IECA/ARA-II, BCC, diuréticos, antiarrítmicos, anticoagulantes y estatinas.' },
+    'slipid':      { file: 'unidad3-cardiovascular-slides.html', label: 'Farmacología Cardiovascular',           desc: '12 diapositivas: IECA/ARA-II, BCC, diuréticos, antiarrítmicos, anticoagulantes y estatinas.' },
+    'farm-s11':    { file: 'unidad4-endocrina-slides.html',    label: 'Farmacología Endocrina',                 desc: '12 diapositivas: tiroides, levotiroxina, insulinas, ADO, hipoglucemia y síndrome metabólico.' },
+    'sdiab':       { file: 'unidad4-endocrina-slides.html',    label: 'Farmacología Endocrina',                 desc: '12 diapositivas: tiroides, levotiroxina, insulinas, ADO, hipoglucemia y síndrome metabólico.' },
+    'farm-s12':    { file: 'unidad5-snc-slides.html',          label: 'Farmacología del SNC',                   desc: '12 diapositivas: SNV, benzodiacepinas, antidepresivos, antipsicóticos y anticonvulsivantes.' },
+    'sansio':      { file: 'unidad5-snc-slides.html',          label: 'Farmacología del SNC',                   desc: '12 diapositivas: SNV, benzodiacepinas, antidepresivos, antipsicóticos y anticonvulsivantes.' },
+    'spsiq':       { file: 'unidad5-snc-slides.html',          label: 'Farmacología del SNC',                   desc: '12 diapositivas: SNV, benzodiacepinas, antidepresivos, antipsicóticos y anticonvulsivantes.' },
+    'saline':      { file: 'unidad5-snc-slides.html',          label: 'Farmacología del SNC',                   desc: '12 diapositivas: SNV, benzodiacepinas, antidepresivos, antipsicóticos y anticonvulsivantes.' },
+    'farm-sgastro':{ file: 'unidad6-digestivo-slides.html',    label: 'Digestivo, AINEs y Vacunas',             desc: '12 diapositivas: IBP, H. pylori, AINEs/COX, corticoides, anestésicos locales y vacunas.' },
+    'farm-saines': { file: 'unidad6-digestivo-slides.html',    label: 'Digestivo, AINEs y Vacunas',             desc: '12 diapositivas: IBP, H. pylori, AINEs/COX, corticoides, anestésicos locales y vacunas.' },
+    'farm-svacunas':{ file: 'unidad6-digestivo-slides.html',   label: 'Digestivo, AINEs y Vacunas',             desc: '12 diapositivas: IBP, H. pylori, AINEs/COX, corticoides, anestésicos locales y vacunas.' },
+  };
+  const slideInfo = SLIDES_MAP[session.id];
+  const resourceBanner = slideInfo
     ? `<div class="card" style="background:linear-gradient(135deg,#0d3b2e 60%,#1a5c42);border:none;margin-bottom:12px">
         <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
           <div style="font-size:2rem">🎞️</div>
           <div style="flex:1;min-width:180px">
-            <div style="color:#7fffd4;font-weight:700;font-size:14px;margin-bottom:2px">Presentación de clases disponible</div>
-            <div style="color:#b2f0e0;font-size:12px">12 diapositivas sobre Farmacología: Antibióticos — mecanismos, clasificación, resistencia, PK/PD y protocolo sepsis.</div>
+            <div style="color:#7fffd4;font-weight:700;font-size:14px;margin-bottom:2px">Presentación disponible — ${slideInfo.label}</div>
+            <div style="color:#b2f0e0;font-size:12px">${slideInfo.desc}</div>
           </div>
-          <a href="antibioticos-slides.html" target="_blank"
+          <a href="${slideInfo.file}" target="_blank"
              style="display:inline-flex;align-items:center;gap:6px;background:#1a7a4a;color:#fff;text-decoration:none;
                     padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;
                     box-shadow:0 2px 8px rgba(0,0,0,0.3);transition:background 0.2s"
