@@ -52,7 +52,7 @@ function switchSidebarTab(subject, el) {
 
 // ─── Utilidad de vistas ─────────────────────────────────────
 function hideAllViews() {
-  ['home','content-view','subject-view','xref-view','calc-view','progress-view','ai-view'].forEach(id => {
+  ['home','content-view','subject-view','xref-view','calc-view','progress-view','biblio-view'].forEach(id => {
     document.getElementById(id).style.display = 'none';
   });
 }
@@ -231,6 +231,36 @@ function renderContenido(session) {
     'farm-sgastro':{ file: 'unidad6-digestivo-slides.html',    label: 'Digestivo, AINEs y Vacunas',             desc: '12 diapositivas: IBP, H. pylori, AINEs/COX, corticoides, anestésicos locales y vacunas.' },
     'farm-saines': { file: 'unidad6-digestivo-slides.html',    label: 'Digestivo, AINEs y Vacunas',             desc: '12 diapositivas: IBP, H. pylori, AINEs/COX, corticoides, anestésicos locales y vacunas.' },
     'farm-svacunas':{ file: 'unidad6-digestivo-slides.html',   label: 'Digestivo, AINEs y Vacunas',             desc: '12 diapositivas: IBP, H. pylori, AINEs/COX, corticoides, anestésicos locales y vacunas.' },
+    // ── Fisiopatología ──────────────────────────────────────────────────────
+    // U1 — Biología Celular y Tisular (4 sesiones)
+    'fisio-c01pptx': { file: 'fisio-u1-celular-slides.html',       label: 'Fisiopatología Celular y Tisular',        desc: '12 diapositivas: adaptaciones, lesión/muerte, ERO, inflamación y cicatrización.' },
+    'fisio-c02pptx': { file: 'fisio-u1-celular-slides.html',       label: 'Fisiopatología Celular y Tisular',        desc: '12 diapositivas: adaptaciones, lesión/muerte, ERO, inflamación y cicatrización.' },
+    'fisio-c01pdf':  { file: 'fisio-u1-celular-slides.html',       label: 'Fisiopatología Celular y Tisular',        desc: '12 diapositivas: adaptaciones, lesión/muerte, ERO, inflamación y cicatrización.' },
+    'fisio-cicatr':  { file: 'fisio-u1-celular-slides.html',       label: 'Fisiopatología Celular y Tisular',        desc: '12 diapositivas: adaptaciones, lesión/muerte, ERO, inflamación y cicatrización.' },
+    // U2 — Respiratoria (5 sesiones)
+    'fisio-c02pdf':  { file: 'fisio-u2-respiratoria-slides.html',  label: 'Fisiopatología Respiratoria',             desc: '12 diapositivas: espirometría, asma GINA, EPOC GOLD, SDRA y IR tipo I/II.' },
+    'fisio-c03':     { file: 'fisio-u2-respiratoria-slides.html',  label: 'Fisiopatología Respiratoria',             desc: '12 diapositivas: espirometría, asma GINA, EPOC GOLD, SDRA y IR tipo I/II.' },
+    'fisio-c04':     { file: 'fisio-u2-respiratoria-slides.html',  label: 'Fisiopatología Respiratoria',             desc: '12 diapositivas: espirometría, asma GINA, EPOC GOLD, SDRA y IR tipo I/II.' },
+    'fisio-c05':     { file: 'fisio-u2-respiratoria-slides.html',  label: 'Fisiopatología Respiratoria',             desc: '12 diapositivas: espirometría, asma GINA, EPOC GOLD, SDRA y IR tipo I/II.' },
+    'fisio-c06':     { file: 'fisio-u2-respiratoria-slides.html',  label: 'Fisiopatología Respiratoria',             desc: '12 diapositivas: espirometría, asma GINA, EPOC GOLD, SDRA y IR tipo I/II.' },
+    // U3 — Cardiovascular (5 sesiones)
+    'fisio-c07':     { file: 'fisio-u3-cardiovascular-slides.html','label': 'Fisiopatología Cardiovascular',         desc: '12 diapositivas: IC, shock, ateromatosis, HTA y IAM.' },
+    'fisio-s8':      { file: 'fisio-u3-cardiovascular-slides.html','label': 'Fisiopatología Cardiovascular',         desc: '12 diapositivas: IC, shock, ateromatosis, HTA y IAM.' },
+    'fisio-saterom': { file: 'fisio-u3-cardiovascular-slides.html','label': 'Fisiopatología Cardiovascular',         desc: '12 diapositivas: IC, shock, ateromatosis, HTA y IAM.' },
+    'fisio-c09pptx': { file: 'fisio-u3-cardiovascular-slides.html','label': 'Fisiopatología Cardiovascular',         desc: '12 diapositivas: IC, shock, ateromatosis, HTA y IAM.' },
+    'fisio-c10pptx': { file: 'fisio-u3-cardiovascular-slides.html','label': 'Fisiopatología Cardiovascular',         desc: '12 diapositivas: IC, shock, ateromatosis, HTA y IAM.' },
+    // U4 — Endocrina (2 sesiones)
+    'fisio-c09pdf':  { file: 'fisio-u4-endocrina-slides.html',     label: 'Fisiopatología Endocrina y Metabólica',  desc: '12 diapositivas: obesidad visceral, síndrome metabólico, DM1/DM2 y tiroides.' },
+    'fisio-c10pdf':  { file: 'fisio-u4-endocrina-slides.html',     label: 'Fisiopatología Endocrina y Metabólica',  desc: '12 diapositivas: obesidad visceral, síndrome metabólico, DM1/DM2 y tiroides.' },
+    // U5 — Renal (4 sesiones)
+    'fisio-shidro':  { file: 'fisio-u5-renal-slides.html',         label: 'Fisiopatología Renal e Hidrosalina',     desc: '12 diapositivas: electrolitos, ácido-base, ERC KDIGO y AKI.' },
+    'fisio-c11':     { file: 'fisio-u5-renal-slides.html',         label: 'Fisiopatología Renal e Hidrosalina',     desc: '12 diapositivas: electrolitos, ácido-base, ERC KDIGO y AKI.' },
+    'fisio-serc':    { file: 'fisio-u5-renal-slides.html',         label: 'Fisiopatología Renal e Hidrosalina',     desc: '12 diapositivas: electrolitos, ácido-base, ERC KDIGO y AKI.' },
+    'fisio-s17':     { file: 'fisio-u5-renal-slides.html',         label: 'Fisiopatología Renal e Hidrosalina',     desc: '12 diapositivas: electrolitos, ácido-base, ERC KDIGO y AKI.' },
+    // U6 — Neurológica (1 sesión)
+    'fisio-c13':     { file: 'fisio-u6-neuro-slides.html',         label: 'Fisiopatología Neurológica',             desc: '12 diapositivas: AVE isquémico/hemorrágico, Alzheimer, Parkinson y epilepsia.' },
+    // U7 — Hematología (1 sesión)
+    'fisio-s14':     { file: 'fisio-u7-hematologia-slides.html',   label: 'Hematología y Hemostasia',               desc: '12 diapositivas: eritropoyesis, anemias, hemostasia, coagulación y hematooncología.' },
   };
   const slideInfo = SLIDES_MAP[session.id];
   const resourceBanner = slideInfo
@@ -350,6 +380,148 @@ function renderDiagramas(session) {
     html += `</div></div>`;
   });
   pane.innerHTML = html;
+}
+
+// ─── Bibliografía View ───────────────────────────────────────
+function showBibliography() {
+  hideAllViews();
+  document.getElementById('biblio-view').style.display = 'block';
+  clearNavActive();
+  renderBibliography();
+}
+
+function renderBibliography() {
+  const container = document.getElementById('biblio-content');
+  if (container.dataset.rendered === '1') return; // solo renderizar una vez
+  container.dataset.rendered = '1';
+
+  const BIBLIO = [
+    {
+      grupo: '🦠 Antiinfecciosos',
+      color: '#1a5c42',
+      refs: [
+        { titulo: 'Surviving Sepsis Campaign Guidelines 2026', tipo: 'Guía clínica', autores: 'ESICM/SCCM', año: '2026', url: 'https://link.springer.com/article/10.1007/s00134-026-08361-1', resumen: 'Actualización de timing antibiótico, programas ASP y metas de reanimación en sepsis.' },
+        { titulo: 'ACG Clinical Guideline: Treatment of H. pylori Infection', tipo: 'Guía clínica', autores: 'American College of Gastroenterology', año: '2024', url: 'https://pubmed.ncbi.nlm.nih.gov/39626064/', resumen: 'Terapia cuádruple como primera línea; 14 días; vonoprazan en resistencia múltiple.' },
+        { titulo: 'IDSA Antimicrobial Resistance Guidance — Gram-Negatives', tipo: 'Guía clínica', autores: 'IDSA', año: '2024', url: 'https://www.idsociety.org/practice-guideline/amr-guidance/', resumen: 'Manejo de Enterobacterales, P. aeruginosa y A. baumannii resistentes a múltiples fármacos.' },
+        { titulo: 'Global Guideline for the Diagnosis and Management of Candida Diseases', tipo: 'Guía clínica', autores: 'ECMM/ISHAM/ASM', año: '2025', url: 'https://www.ecmm.info/news/global-guideline-for-the-diagnosis-and-management-of-candida-diseases/', resumen: 'Echinocandinas como primera línea en candidemia; C. auris: aislamiento estricto.' },
+        { titulo: 'ATS Guidelines: Invasive Pulmonary Aspergillosis', tipo: 'Guía clínica', autores: 'American Thoracic Society', año: '2024', url: 'https://www.atsjournals.org/doi/full/10.1164/rccm.202410-2045ST', resumen: 'Voriconazol ± isavuconazol; diagnóstico con PCR y antígeno galactomanano.' },
+        { titulo: 'IDSA Guidelines: Antiviral Treatment COVID-19 Adults', tipo: 'Guía clínica', autores: 'IDSA', año: '2025', url: 'https://www.idsociety.org/globalassets/idsa/practice-guidelines/covid-19/treatment/antiviral-treatment-for-mild-to-moderate-covid-19-in-adults.pdf', resumen: 'Nirmatrelvir-ritonavir primera línea leve-moderado; remdesivir IV en hospitalizados graves.' },
+        { titulo: 'Antimicrobial Resistance in Gram-Negative Pathogens', tipo: 'Revisión sistemática', autores: 'Nature Reviews Microbiology', año: '2024', url: 'https://www.nature.com/articles/s41579-024-01054-w.pdf', resumen: 'Epidemiología global NDM, VIM, KPC; opciones terapéuticas actuales.' },
+      ]
+    },
+    {
+      grupo: '❤️ Cardiovascular',
+      color: '#1a3a6b',
+      refs: [
+        { titulo: '2025 AHA/ACC/AANP et al. Hypertension Guideline', tipo: 'Guía clínica', autores: 'AHA/ACC y 10 sociedades', año: '2025', url: 'https://pubmed.ncbi.nlm.nih.gov/40815242/', resumen: 'Nuevos objetivos de PA, intervención más temprana en adultos jóvenes, énfasis en monitoreo domiciliario.' },
+        { titulo: '2024 ESC Guidelines for Arterial Hypertension', tipo: 'Guía clínica', autores: 'European Society of Cardiology', año: '2024', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11857694/', resumen: 'Enfoque de riesgo CV global para umbral de tratamiento; IECA/ARA-II como primera línea.' },
+        { titulo: '2024 ESC Guidelines for Atrial Fibrillation', tipo: 'Guía clínica', autores: 'European Society of Cardiology', año: '2024', url: 'https://pubmed.ncbi.nlm.nih.gov/39210723/', resumen: 'Ablación temprana en FA sintomática; DOACs sobre warfarina; monitoreo amiodarona (TSH, LFT).' },
+        { titulo: 'Practical DOAC Guidelines 2025', tipo: 'Guía práctica', autores: 'ISTH International', año: '2025', url: 'https://pubmed.ncbi.nlm.nih.gov/40448969/', resumen: 'Prescripción, monitoreo perioperatorio, manejo de sangrado y reversores (idarucizumab, andexanet alfa).' },
+        { titulo: 'SGLT2 Inhibitors for HF Prevention and Treatment', tipo: 'Declaración científica', autores: 'HFA/HFAI', año: '2024', url: 'https://onlinelibrary.wiley.com/doi/10.1002/ehf2.14857', resumen: 'SGLT2i como pilar terapéutico en HFrEF y HFpEF incluso en no diabéticos.' },
+        { titulo: 'ACC 2024 Decision Pathway — HFrEF', tipo: 'Vía de decisión clínica', autores: 'American College of Cardiology', año: '2024', url: 'https://www.jacc.org/doi/10.1016/j.jacc.2023.12.024', resumen: 'SGLT2i como cuarto pilar del tratamiento junto a IECA/ARNI, betabloqueador y ARM.' },
+        { titulo: '2026 ACC/AHA Dyslipidemia Guideline — Summary', tipo: 'Guía clínica', autores: 'ACC/AHA', año: '2026', url: 'https://www.tctmd.com/news/lower-ldl-levels-starting-earlier-life-new-accaha-dyslipidemia-guidelines', resumen: 'Objetivos específicos de LDL-C; inicio más temprano de terapia; Lp(a) como nuevo marcador de riesgo.' },
+        { titulo: '2025 ESC/EAS Dyslipidemia Focused Update', tipo: 'Actualización de guía', autores: 'ESC/EAS', año: '2025', url: 'https://www.atherosclerosis-journal.com/article/S0021-9150(25)01377-2/fulltext', resumen: 'Ajuste de objetivos LDL-C; inclisiran como nueva opción semestral; PCSK9i expandidos.' },
+      ]
+    },
+    {
+      grupo: '🩺 Endocrina',
+      color: '#5a3e00',
+      refs: [
+        { titulo: 'ADA Standards of Medical Care in Diabetes 2025', tipo: 'Guía clínica', autores: 'American Diabetes Association', año: '2025', url: 'https://diabetesjournals.org/care/article/48/Supplement_1/S181/157569/9-Pharmacologic-Approaches-to-Glycemic-Treatment', resumen: 'Fin de metformina universal; GLP-1 y SGLT2i como primera línea según comorbilidades; MCG en DM2 intensiva.' },
+        { titulo: 'ETA Guidelines for Hypothyroidism 2025', tipo: 'Guía clínica', autores: 'European Thyroid Association', año: '2025', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12323320/', resumen: 'Levotiroxina: 1.6–1.8 mcg/kg/día; no tratar hipotiroidismo subclínico leve en mayores de 65 años.' },
+        { titulo: 'SCCM Glycemic Control in Critically Ill Adults 2024', tipo: 'Guía clínica', autores: 'Society of Critical Care Medicine', año: '2024', url: 'https://pubmed.ncbi.nlm.nih.gov/38240484/', resumen: 'Objetivo glucémico UCI: 140–180 mg/dL; hipoglucemia <70 mg/dL asociada a mayor mortalidad.' },
+        { titulo: 'WHO Global Guideline on GLP-1 Medicines for Obesity', tipo: 'Guía OMS', autores: 'World Health Organization', año: '2025', url: 'https://www.who.int/news/item/01-12-2025-who-issues-global-guideline-on-the-use-of-glp-1-medicines-in-treating-obesity', resumen: 'Semaglutida y tirzepatida como primera línea en obesidad (IMC ≥30); tratamiento crónico.' },
+        { titulo: 'Pharmacologic Approaches to Glycemic Treatment 2025', tipo: 'Artículo de revisión', autores: 'Exploration of Medicine', año: '2025', url: 'https://www.explorationpub.com/uploads/Article/A101428/101428.pdf', resumen: 'Algoritmo de terapia individualizada DM2; GLP-1/SGLT2i en primer escalón en ECV/IC/ERC.' },
+      ]
+    },
+    {
+      grupo: '🧠 SNC',
+      color: '#3b1f6b',
+      refs: [
+        { titulo: 'CANMAT 2023 Clinical Guidelines — Major Depressive Disorder', tipo: 'Guía clínica', autores: 'Canadian Network for Mood and Anxiety Treatments', año: '2023-2024', url: 'https://journals.sagepub.com/doi/full/10.1177/07067437241245384', resumen: 'SSRI/SNRI primera línea; estrategias de augmentación en depresión resistente; rol de ketamina.' },
+        { titulo: 'Treatment-Resistant Depression — AAFP 2024', tipo: 'Revisión clínica', autores: 'American Academy of Family Physicians', año: '2024', url: 'https://www.aafp.org/pubs/afp/issues/2024/0500/treatment-resistant-depression.html', resumen: 'Definición y manejo de depresión refractaria; opciones de segunda y tercera línea.' },
+        { titulo: 'AES Summary of Antiseizure Medications 4th Edition', tipo: 'Compendio', autores: 'American Epilepsy Society', año: '2024', url: 'https://aesnet.org/docs/default-source/pdfs-clinical/42981132_aes_summary_of_antiseizure_medications_available_in_the_united_states_4th_edition_april_2024.pdf', resumen: 'Compendio actualizado de FAE disponibles; algoritmos por tipo de convulsión; monitoreo.' },
+        { titulo: 'Antipsychotic-Induced Metabolic Syndrome Monitoring 2024', tipo: 'Revisión sistemática', autores: 'PMC / NCBI', año: '2024', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11903528/', resumen: 'Monitoreo metabólico integral en antipsicóticos de segunda generación; parámetros basales y seguimiento.' },
+        { titulo: 'Joint CPG on Benzodiazepine Tapering 2025', tipo: 'Guía de práctica clínica', autores: 'Journal of General Internal Medicine', año: '2025', url: 'https://link.springer.com/article/10.1007/s11606-025-09499-2', resumen: 'Reducción 10–25% cada 2–4 semanas; vigilar abstinencia y riesgo convulsivo.' },
+        { titulo: 'Benzodiazepine Deprescribing — International Scoping Review', tipo: 'Revisión', autores: 'Lancet eClinicalMedicine', año: '2024', url: 'https://www.thelancet.com/journals/eclinm/article/PIIS2589-5370(24)00086-5/fulltext', resumen: 'Evidencia internacional sobre estrategias de deprescripción segura en ansiedad, insomnio y depresión.' },
+        { titulo: 'FDA New Parkinson\'s Medications Under Review 2024', tipo: 'Comunicado FDA', autores: 'Michael J. Fox Foundation', año: '2024', url: 'https://www.michaeljfox.org/news/fda-reviewing-four-new-parkinsons-medications-2024', resumen: 'Cuatro nuevos fármacos en revisión; terapias de infusión SC de levodopa en desarrollo.' },
+      ]
+    },
+    {
+      grupo: '🫀 Fisiopatología ENF3014',
+      color: '#1a4d5c',
+      refs: [
+        { titulo: 'Harrison\'s Principles of Internal Medicine, 21ª ed.', tipo: 'Libro de texto', autores: 'Loscalzo J. et al.', año: '2022', url: 'https://accessmedicine.mhmedical.com/book.aspx?bookID=3095', resumen: 'Texto de referencia mundial en medicina interna. Fisiopatología detallada de todas las patologías GES con enfoque mecanístico.' },
+        { titulo: 'Robbins & Cotran — Patología Estructural y Funcional, 10ª ed.', tipo: 'Libro de texto', autores: 'Kumar V., Abbas A., Aster J.', año: '2021', url: 'https://www.elsevier.com/books/robbins-and-cotran-pathologic-basis-of-disease/kumar/978-0-323-53113-9', resumen: 'Referencia esencial de fisiopatología celular y tisular: lesión celular, ERO, inflamación, neoplasia, cicatrización.' },
+        { titulo: 'Fisiopatología de la Enfermedad, 8ª ed. (Lange)', tipo: 'Libro de texto', autores: 'Hammer G., McPhee S.', año: '2019', url: 'https://accessmedicine.mhmedical.com/book.aspx?bookID=2744', resumen: 'Texto orientado a clínica: explica mecanismos de enfermedad órgano por órgano. Ideal para estudiantes de Enfermería.' },
+        { titulo: 'Guías GES MINSAL Chile — Decreto 44/2022', tipo: 'Política sanitaria', autores: 'MINSAL Chile', año: '2022', url: 'https://www.minsal.cl/garantias-explicitas-en-salud-ges/', resumen: 'Decreto actualizado GES con 87 patologías garantizadas: acceso, oportunidad, calidad y protección financiera en Chile.' },
+        { titulo: 'AHA/ASA 2021 Stroke Prevention Guideline', tipo: 'Guía clínica', autores: 'American Heart Association/American Stroke Association', año: '2021', url: 'https://www.ahajournals.org/doi/10.1161/STR.0000000000000375', resumen: 'Prevención primaria y secundaria de AVE; manejo de FA, HTA, DM2 y dislipidemia como factores de riesgo.' },
+        { titulo: 'KDIGO 2024 CKD Clinical Practice Guideline', tipo: 'Guía clínica', autores: 'Kidney Disease: Improving Global Outcomes', año: '2024', url: 'https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf', resumen: 'Clasificación ERC por TFG y albuminuria; metas terapéuticas; nefroprotección con IECA, SGLT2i.' },
+        { titulo: 'GOLD 2024 — Global Strategy for COPD', tipo: 'Guía clínica', autores: 'Global Initiative for Chronic Obstructive Lung Disease', año: '2024', url: 'https://goldcopd.org/2024-gold-report/', resumen: 'Clasificación GOLD I-IV; broncodilatación doble como base; grupos ABCD; manejo de exacerbaciones.' },
+        { titulo: 'GINA 2024 — Global Strategy for Asthma', tipo: 'Guía clínica', autores: 'Global Initiative for Asthma', año: '2024', url: 'https://ginasthma.org/2024-gina-report/', resumen: 'Escalera terapéutica actualizada; ICS/formoterol como rescate; biológicos en asma severo.' },
+        { titulo: 'WHO Cardiovascular Disease Key Facts 2024', tipo: 'Informe OMS', autores: 'World Health Organization', año: '2024', url: 'https://www.who.int/news-room/fact-sheets/detail/cardiovascular-diseases-(cvds)', resumen: 'ECV: primera causa de muerte mundial (17.9 millones/año). Factores de riesgo modificables y contexto Chile.' },
+        { titulo: 'Programa Nacional de Diabetes y ECV — Chile 2023', tipo: 'Guía nacional', autores: 'MINSAL Chile', año: '2023', url: 'https://www.minsal.cl/programa-de-salud-cardiovascular/', resumen: 'Protocolo nacional para DM2, HTA e IC en APS chilena. Metas, seguimiento y derivación.' },
+        { titulo: 'ADA 2025 Standards of Diabetes Care', tipo: 'Guía clínica', autores: 'American Diabetes Association', año: '2025', url: 'https://diabetesjournals.org/care/issue/48/Supplement_1', resumen: 'Estándar de cuidado en DM1 y DM2; fisiopatología, farmacología y manejo de complicaciones.' },
+        { titulo: 'European Stroke Journal — Thrombolysis Update 2024', tipo: 'Revisión', autores: 'ESO / European Stroke Organisation', año: '2024', url: 'https://journals.sagepub.com/doi/10.1177/23969873241271096', resumen: 'Ventana extendida para tPA; candidatos a trombectomía mecánica 6-24h; score NIHSS y penumbra.' },
+        { titulo: 'Hematología Clínica — Pérez Ruiz et al. 6ª ed.', tipo: 'Libro de texto', autores: 'Pérez Ruiz E., Lemes Castellano A.', año: '2020', url: 'https://www.elsevier.com/books/hematologia-clinica/978-84-9113-399-2', resumen: 'Eritropoyesis, anemias, hemostasia, coagulopatías y hematooncología. Referencia en español para Enfermería.' },
+        { titulo: 'ISTH 2021 Guidelines — DIC Diagnosis and Management', tipo: 'Guía clínica', autores: 'International Society on Thrombosis and Haemostasis', año: '2021', url: 'https://pubmed.ncbi.nlm.nih.gov/34216193/', resumen: 'Score diagnóstico CID; anticoagulación, PFC, crioprecipitados; manejo en UCI.' },
+      ]
+    },
+    {
+      grupo: '🫁 Digestivo · AINEs · Vacunas',
+      color: '#0d3b2e',
+      refs: [
+        { titulo: 'ACG Clinical Guideline: H. pylori Treatment 2024', tipo: 'Guía clínica', autores: 'American College of Gastroenterology', año: '2024', url: 'https://journals.lww.com/ajg/fulltext/2024/09000/acg_clinical_guideline__treatment_of_helicobacter.13.aspx', resumen: 'Cuádruple terapia primera línea con >15–25% resistencia a claritromicina; 14 días; vonoprazan en rescate.' },
+        { titulo: 'PPI Deprescribing — Systematic Review 2024', tipo: 'Revisión sistemática', autores: 'PMC / NCBI', año: '2024', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11508458/', resumen: 'Estrategias de discontinuación gradual de IBP; RAM a largo plazo (B12, Mg²⁺, fracturas).' },
+        { titulo: 'BNSSG NHS PPI Deprescribing Algorithm 2024', tipo: 'Algoritmo clínico', autores: 'NHS BNSSG ICB', año: '2024', url: 'https://remedy.bnssg.icb.nhs.uk/media/w0glm3vl/bnssg-proton-pump-inhibitor-ppi-de-prescribing-algorithm-update-2024.pdf', resumen: 'Algoritmo paso a paso para suspensión segura de IBP en atención primaria.' },
+        { titulo: 'KDIGO 2024 CKD Guideline — NSAID Use', tipo: 'Guía clínica', autores: 'Kidney Disease: Improving Global Outcomes', año: '2024', url: 'https://kdigo.org/wp-content/uploads/2024/03/KDIGO-2024-CKD-Guideline.pdf', resumen: 'Evitar AINEs con eGFR <30 mL/min; riesgo de progresión de ERC y nefrotoxicidad.' },
+        { titulo: 'APAGE/APLAR Consensus on NSAID Safety 2025', tipo: 'Consenso', autores: 'APAGE / APLAR', año: '2025', url: 'https://www.proquest.com/openview/db65d2056665c45a806573a82e5a404c/', resumen: 'Dosis mínima por tiempo mínimo; riesgo CV incluso con COX-2 selectivos; gastroprotección si factores de riesgo.' },
+        { titulo: 'Glucocorticoid Tapering — Primer for Clinicians 2024', tipo: 'Revisión clínica', autores: 'Indian Journal of Emergency Medicine', año: '2024', url: 'https://journals.lww.com/indjem/fulltext/2024/07000/the_glucocorticoid_taper__a_primer_for_the.4.aspx', resumen: 'Insuficiencia adrenal con prednisona >2.5 mg/día × >3 semanas; tapering 20–30%/semana.' },
+        { titulo: 'Corticosteroid Tapering in IBD (Crohn\'s & Colitis Canada 2024)', tipo: 'Guía clínica', autores: 'Crohn\'s and Colitis Canada', año: '2024', url: 'https://crohnsandcolitis.ca/Crohns_and_Colitis/documents/Support/Clinical_Care_Pathways/2024-04_Initiation-and-tapering-of-corticosteroids_vA.pdf', resumen: 'Preferir budesonida sobre prednisona sistémica; reducción 5 mg/semana cuando <20 mg/día.' },
+        { titulo: 'Calendario Nacional de Inmunizaciones Chile 2025', tipo: 'Política nacional', autores: 'MINSAL Chile', año: '2025', url: 'https://saludresponde.minsal.cl/wp-content/uploads/2025/03/CALENDARIO-INMUNIZACIONES-2025.pdf', resumen: 'Calendario oficial 2025: énfasis en vacunación adulta, gestacional (TdaP + influenza) y mayores de 65 años.' },
+        { titulo: 'Immunization in the Americas — Summary 2024', tipo: 'Informe regional', autores: 'PAHO/OPS', año: '2024', url: 'https://www.paho.org/en/documents/immunization-americas-2024-summary', resumen: 'Cobertura 84.8% en Américas; 1.4 millones de niños sin vacunar; prioridad en comunidades vulnerables.' },
+        { titulo: 'WHO Recommendations for Routine Immunization 2025', tipo: 'Recomendación OMS', autores: 'World Health Organization', año: '2025', url: 'https://who.int/teams/immunization-vaccines-and-biologicals/policies/who-recommendations-for-routine-immunization---summary-tables', resumen: '16 vacunas de rutina recomendadas; VPH ampliado a varones; énfasis en equidad (>95% cobertura).' },
+      ]
+    }
+  ];
+
+  let html = `
+    <div style="margin-bottom:20px;padding:14px 18px;background:#f0f6ff;border-radius:10px;border-left:4px solid var(--udp-blue);">
+      <p style="font-size:13px;color:#1a3a6b;margin:0;">
+        <strong>📋 ${BIBLIO.reduce((acc,g)=>acc+g.refs.length,0)} referencias</strong> verificadas de organismos internacionales (IDSA, ADA, ESC, ACC/AHA, WHO, PAHO, MINSAL, ACG, ETA, ECMM, SCCM, AES, CANMAT).
+        Búsqueda ejecutada en <strong>Abril 2026</strong> via Exa Web Search. Todas las fuentes son de acceso abierto o institucional.
+      </p>
+    </div>`;
+
+  BIBLIO.forEach(grupo => {
+    html += `
+      <div style="margin-bottom:24px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;padding:10px 14px;background:${grupo.color};border-radius:8px;">
+          <span style="font-size:15px;font-weight:700;color:#fff;">${grupo.grupo}</span>
+          <span style="font-size:11px;color:rgba(255,255,255,.7);margin-left:auto;">${grupo.refs.length} referencias</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">`;
+
+    grupo.refs.forEach((ref, i) => {
+      html += `
+          <div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px 14px;">
+            <div style="display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;margin-bottom:4px;">
+              <span style="font-size:10px;background:#e8f0fb;color:var(--udp-blue);padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap;">${ref.tipo}</span>
+              <span style="font-size:10px;color:#888;">${ref.autores} · ${ref.año}</span>
+            </div>
+            <div style="font-weight:600;font-size:13px;color:#1a2540;margin-bottom:4px;">${ref.titulo}</div>
+            <div style="font-size:12px;color:#555;margin-bottom:8px;line-height:1.5;">${ref.resumen}</div>
+            <a href="${ref.url}" target="_blank" rel="noopener"
+               style="display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--udp-blue);text-decoration:none;font-weight:600;padding:4px 10px;border:1px solid #c5d5f0;border-radius:6px;">
+              🔗 Acceder a la fuente
+            </a>
+          </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  container.innerHTML = html;
 }
 
 // ─── Cross-References View ───────────────────────────────────
@@ -619,6 +791,7 @@ function switchCDSSMode(mode, el) {
   else if (mode === 'dosevalidator') renderDoseValidator(area);
   else if (mode === 'glasgow') renderGlasgow(area);
   else if (mode === 'calculos') renderCalculosSection(area);
+  else if (mode === 'ges') renderGESAnexo(area);
 }
 
 // ── CHECKER DE INTERACCIONES ──
@@ -852,13 +1025,15 @@ function renderCalculosSection(area) {
   area.innerHTML = `
     <div class="calc-card">
       <h3>🧮 Calculadoras Clínicas</h3>
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Herramientas de cálculo para dosificación, goteo, dilución, miliequivalentes y unidades internacionales.</p>
-      <div class="cdss-modes" id="calc-sub-tabs" style="margin-bottom:16px">
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px">Herramientas de cálculo para dosificación, goteo, dilución, miliequivalentes, unidades internacionales, Escala Cincinnati y Gasometría.</p>
+      <div class="cdss-modes" id="calc-sub-tabs" style="margin-bottom:16px;flex-wrap:wrap">
         <div class="cdss-mode active" onclick="switchCalcTab('mgkg',this)">🧮 mg/kg</div>
         <div class="cdss-mode" onclick="switchCalcTab('mlh',this)">💧 Goteo</div>
         <div class="cdss-mode" onclick="switchCalcTab('dilution',this)">💉 Dilución</div>
         <div class="cdss-mode" onclick="switchCalcTab('meq',this)">⚗️ mEq</div>
         <div class="cdss-mode" onclick="switchCalcTab('ui',this)">🔬 UI</div>
+        <div class="cdss-mode" onclick="switchCalcTab('cincinnati',this)">🧠 Cincinnati</div>
+        <div class="cdss-mode" onclick="switchCalcTab('gsa',this)">🫁 GSA</div>
       </div>
       <div id="calc-sub-panel"></div>
     </div>`;
@@ -975,6 +1150,78 @@ function renderBasicCalc(area, mode) {
         • Vitamina D: 400 UI = 10 mcg. Déficit: 50.000 UI/sem<br>
         • Eritropoyetina: ampollas 2.000 / 4.000 / 10.000 UI<br>
         • Penicilina G: 1 millón UI = 600 mg
+      </div>`,
+
+    // ── ESCALA DE CINCINNATI ─────────────────────────────────
+    cincinnati: `<h4 style="margin:0 0 8px">🧠 Escala Pre-Hospitalaria de Cincinnati (EPOHC)</h4>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Herramienta de detección rápida de AVE. <strong>1 hallazgo anormal</strong> = alta probabilidad de AVE → activar código. Sensibilidad 59%, especificidad 89% para AVE isquémico.</p>
+      <div class="calc-form" style="max-width:560px">
+
+        <div class="calc-field">
+          <label>1️⃣ Asimetría facial — "Muestre los dientes o sonría"</label>
+          <select id="cin-facial" onchange="runCincinnati()">
+            <option value="">— Seleccionar —</option>
+            <option value="0">Normal — ambos lados se mueven igual</option>
+            <option value="1">Anormal — un lado no se mueve como el otro</option>
+          </select>
+        </div>
+
+        <div class="calc-field">
+          <label>2️⃣ Caída del brazo — "Extienda ambos brazos palmas arriba, cierre ojos, 10 segundos"</label>
+          <select id="cin-arm" onchange="runCincinnati()">
+            <option value="">— Seleccionar —</option>
+            <option value="0">Normal — ambos brazos se mantienen o caen igual</option>
+            <option value="1">Anormal — un brazo no se mueve o cae más rápido</option>
+          </select>
+        </div>
+
+        <div class="calc-field">
+          <label>3️⃣ Lenguaje / Habla — "Repita: El cielo es azul en Cincinnati"</label>
+          <select id="cin-speech" onchange="runCincinnati()">
+            <option value="">— Seleccionar —</option>
+            <option value="0">Normal — palabras correctas, sin arrastre</option>
+            <option value="1">Anormal — arrastre, palabras incorrectas, no habla</option>
+          </select>
+        </div>
+      </div>
+      <div id="calc-cincinnati-result" style="margin-top:16px"></div>
+      <div style="margin-top:12px;padding:10px;background:var(--bg-secondary);border-radius:8px;font-size:11px;color:var(--text-muted)">
+        <strong>🏥 Protocolo ante positivo:</strong> Activar código AVE · Hora de inicio síntomas (o última vez visto bien) · Contraindicaciones tPA · Traslado centro con ICP/trombectomía<br><br>
+        <strong>Sensibilidad por hallazgo:</strong> Asimetría facial 74% · Caída brazo 70% · Lenguaje 80%<br>
+        <strong>1 positivo:</strong> PPV 72% AVE. <strong>3 positivos:</strong> PPV &gt;85%<br><br>
+        <em>Limitación: no detecta AVE posterior (cerebelo/tronco). Complementar con NIHSS en urgencias.</em>
+      </div>`,
+
+    // ── GASOMETRÍA ARTERIAL ──────────────────────────────────
+    gsa: `<h4 style="margin:0 0 8px">🫁 Intérprete de Gasometría Arterial (GSA)</h4>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Ingresa los valores del análisis de gases en sangre arterial para obtener interpretación clínica paso a paso.</p>
+      <div class="calc-form" style="max-width:560px">
+        <div class="calc-field"><label>pH arterial</label><input type="number" id="gsa-ph" step="0.01" min="6.5" max="8.0" placeholder="Ej: 7.38" oninput="runGSA()"></div>
+        <div class="calc-field"><label>pCO₂ (mmHg)</label><input type="number" id="gsa-pco2" step="0.1" min="10" max="120" placeholder="Ej: 40" oninput="runGSA()"></div>
+        <div class="calc-field"><label>HCO₃ (mEq/L)</label><input type="number" id="gsa-hco3" step="0.1" min="5" max="60" placeholder="Ej: 24" oninput="runGSA()"></div>
+        <div class="calc-field"><label>pO₂ (mmHg)</label><input type="number" id="gsa-po2" step="1" min="20" max="700" placeholder="Ej: 90" oninput="runGSA()"></div>
+        <div class="calc-field"><label>FiO₂ (fracción O₂ inspirado)</label>
+          <select id="gsa-fio2" onchange="runGSA()">
+            <option value="0.21">0.21 — Aire ambiente (sin O₂ suplementario)</option>
+            <option value="0.24">0.24 — Cánula nasal 1 L/min</option>
+            <option value="0.28">0.28 — Cánula nasal 2 L/min</option>
+            <option value="0.32">0.32 — Cánula nasal 3 L/min</option>
+            <option value="0.36">0.36 — Cánula nasal 4 L/min</option>
+            <option value="0.40">0.40 — Cánula nasal 5 L/min / Mascarilla simple</option>
+            <option value="0.44">0.44 — Cánula nasal 6 L/min</option>
+            <option value="0.50">0.50 — Mascarilla Venturi 50%</option>
+            <option value="0.60">0.60 — Mascarilla Venturi 60%</option>
+            <option value="1.00">1.00 — Mascarilla reservorio / VM 100%</option>
+          </select>
+        </div>
+        <div class="calc-field"><label>Sodio sérico Na⁺ (mEq/L) — para anion gap</label><input type="number" id="gsa-na" step="1" min="100" max="180" placeholder="Ej: 140" oninput="runGSA()"></div>
+        <div class="calc-field"><label>Cloro sérico Cl⁻ (mEq/L) — para anion gap</label><input type="number" id="gsa-cl" step="1" min="60" max="130" placeholder="Ej: 102" oninput="runGSA()"></div>
+      </div>
+      <div id="calc-gsa-result" style="margin-top:16px"></div>
+      <div style="margin-top:12px;padding:10px;background:var(--bg-secondary);border-radius:8px;font-size:11px;color:var(--text-muted)">
+        <strong>📋 Valores normales:</strong> pH 7.35-7.45 · pCO₂ 35-45 mmHg · HCO₃ 22-26 mEq/L · pO₂ 80-100 mmHg · SaO₂ &gt;95%<br>
+        <strong>Anion Gap:</strong> Na⁺ − (Cl⁻ + HCO₃) = 8-12 mEq/L normal<br>
+        <strong>MUDPILES (AG↑):</strong> Metanol · Uremia · DKA · Propilénglicol · Isoniazida · Láctico · Etanol · Salicilatos
       </div>`
   };
   area.innerHTML = forms[mode] || '';
@@ -1122,6 +1369,207 @@ function calcUI() {
 }
 
 // ============================================================
+// CALCULADORA: ESCALA DE CINCINNATI
+// ============================================================
+function runCincinnati() {
+  const facial = document.getElementById('cin-facial').value;
+  const arm    = document.getElementById('cin-arm').value;
+  const speech = document.getElementById('cin-speech').value;
+  const r = document.getElementById('calc-cincinnati-result');
+  if (facial === '' || arm === '' || speech === '') { r.innerHTML = ''; return; }
+
+  const score = parseInt(facial) + parseInt(arm) + parseInt(speech);
+  const items = [
+    { label: 'Asimetría facial', val: parseInt(facial) },
+    { label: 'Caída del brazo',  val: parseInt(arm)    },
+    { label: 'Lenguaje/habla',   val: parseInt(speech) }
+  ];
+
+  const rows = items.map(i => {
+    const color = i.val === 0 ? '#4ade80' : '#f87171';
+    const icon  = i.val === 0 ? '✅' : '🚨';
+    const txt   = i.val === 0 ? 'Normal' : 'ANORMAL';
+    return `<tr><td style="padding:6px 10px">${icon} <strong>${i.label}</strong></td>
+            <td style="padding:6px 10px;color:${color};font-weight:700">${txt}</td></tr>`;
+  }).join('');
+
+  let interpretation, colorBg, borderColor, actionHtml;
+
+  if (score === 0) {
+    interpretation = 'NEGATIVO — Baja probabilidad de AVE';
+    colorBg = 'rgba(74,222,128,.08)';
+    borderColor = '#4ade80';
+    actionHtml = `<p style="font-size:13px;color:#b2f0d4">✅ Ningún hallazgo anormal. La escala de Cincinnati no sugiere AVE activo.
+      Sin embargo, si la clínica es sugestiva (cefalea súbita, vértigo, diplopía), considerar evaluación neurológica.
+      La escala tiene <strong>sensibilidad limitada para AVE posterior</strong> (cerebelo/tronco).</p>`;
+  } else {
+    interpretation = score === 1
+      ? '⚠️ POSITIVO LEVE — 1 hallazgo anormal (PPV ≈72% AVE)'
+      : score === 2
+        ? '🚨 POSITIVO MODERADO — 2 hallazgos anormales (PPV ~80%)'
+        : '🔴 POSITIVO ALTO — 3 hallazgos anormales (PPV >85%)';
+    colorBg = 'rgba(248,113,113,.1)';
+    borderColor = '#f87171';
+    actionHtml = `
+      <p style="font-size:13px;color:#fca5a5;margin-bottom:8px"><strong>ACTIVAR CÓDIGO AVE INMEDIATAMENTE</strong></p>
+      <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#e8f1fb">
+        <li>▸ Registrar <strong>hora exacta de inicio</strong> de síntomas (o última vez visto bien)</li>
+        <li>▸ Evaluación neurológica urgente con <strong>NIHSS</strong></li>
+        <li>▸ <strong>TAC cerebral sin contraste</strong> — descartar hemorragia antes de tPA</li>
+        <li>▸ Si &lt;4.5 h y sin contraindicaciones → valorar <strong>tPA IV</strong> (alteplase 0.9 mg/kg)</li>
+        <li>▸ Si NIHSS ≥6 → angiografía TAC → <strong>trombectomía mecánica</strong> (hasta 24 h con imagen)</li>
+        <li>▸ Control PA: tolerar hasta <strong>220/120 mmHg</strong> sin tPA · &lt;185/110 mmHg si se administra tPA</li>
+        <li>▸ NO dar aspirina hasta confirmar origen isquémico</li>
+      </ul>`;
+  }
+
+  r.innerHTML = `
+    <div style="border:2px solid ${borderColor};border-radius:12px;padding:16px;background:${colorBg}">
+      <div style="font-size:18px;font-weight:700;color:${borderColor};margin-bottom:12px">${interpretation}</div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:12px;font-size:13px">
+        <thead><tr style="border-bottom:1px solid rgba(255,255,255,.15)">
+          <th style="text-align:left;padding:6px 10px;color:var(--text-muted)">Ítem evaluado</th>
+          <th style="text-align:left;padding:6px 10px;color:var(--text-muted)">Resultado</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div style="padding:10px;background:rgba(0,0,0,.2);border-radius:8px">${actionHtml}</div>
+      <div style="margin-top:10px;font-size:11px;color:var(--text-muted)">
+        Puntuación: <strong>${score}/3 hallazgos anormales</strong> · Fecha/Hora evaluación: ${new Date().toLocaleString('es-CL')}
+      </div>
+    </div>`;
+}
+
+// ============================================================
+// CALCULADORA: GASOMETRÍA ARTERIAL (GSA)
+// ============================================================
+function runGSA() {
+  const ph   = parseFloat(document.getElementById('gsa-ph').value);
+  const pco2 = parseFloat(document.getElementById('gsa-pco2').value);
+  const hco3 = parseFloat(document.getElementById('gsa-hco3').value);
+  const po2  = parseFloat(document.getElementById('gsa-po2').value);
+  const fio2 = parseFloat(document.getElementById('gsa-fio2').value);
+  const na   = parseFloat(document.getElementById('gsa-na').value);
+  const cl   = parseFloat(document.getElementById('gsa-cl').value);
+  const r    = document.getElementById('calc-gsa-result');
+
+  if (isNaN(ph) || isNaN(pco2) || isNaN(hco3)) { r.innerHTML = ''; return; }
+
+  // ── PASO 1: pH ───────────────────────────────────────────
+  let phStatus, phColor;
+  if      (ph < 7.35) { phStatus = 'ACIDEMIA (pH &lt; 7.35)';  phColor = '#f87171'; }
+  else if (ph > 7.45) { phStatus = 'ALCALEMIA (pH &gt; 7.45)'; phColor = '#fbbf24'; }
+  else                { phStatus = 'pH NORMAL (7.35-7.45)';    phColor = '#4ade80'; }
+
+  // ── PASO 2: Trastorno primario ───────────────────────────
+  let primary, primaryColor;
+  const co2High = pco2 > 45, co2Low = pco2 < 35;
+  const hco3High = hco3 > 26, hco3Low = hco3 < 22;
+
+  if (ph < 7.35) {
+    if (co2High && !hco3Low) primary = '🫁 Acidosis RESPIRATORIA (pCO₂↑)';
+    else if (hco3Low && !co2High) primary = '🧪 Acidosis METABÓLICA (HCO₃↓)';
+    else if (co2High && hco3Low) primary = '🔀 Trastorno MIXTO: Acidosis resp + metabólica';
+    else primary = '🔀 Acidosis de origen indeterminado';
+  } else if (ph > 7.45) {
+    if (co2Low && !hco3High) primary = '🫁 Alcalosis RESPIRATORIA (pCO₂↓)';
+    else if (hco3High && !co2Low) primary = '🧪 Alcalosis METABÓLICA (HCO₃↑)';
+    else if (co2Low && hco3High) primary = '🔀 Trastorno MIXTO: Alcalosis resp + metabólica';
+    else primary = '🔀 Alcalosis de origen indeterminado';
+  } else {
+    primary = '✅ Valores primarios en rango normal';
+  }
+  primaryColor = (primary.includes('MIXTO') || primary.includes('indeter')) ? '#fbbf24'
+               : (primary.includes('Acido')) ? '#f87171'
+               : (primary.includes('Alcalo')) ? '#fbbf24' : '#4ade80';
+
+  // ── PASO 3: Compensación ────────────────────────────────
+  let compensation = '';
+  if      (hco3 < 22 && pco2 < 35) { // Acidosis met con compensación resp
+    const expectedPco2 = 1.5 * hco3 + 8;
+    const diff = Math.abs(pco2 - expectedPco2);
+    compensation = `<li>▸ Acidosis metabólica: pCO₂ esperado (Winters) = <strong>${expectedPco2.toFixed(1)} ± 2 mmHg</strong>. Medido: ${pco2}. ${diff <= 2 ? '✅ Compensación adecuada' : '⚠️ Compensación inadecuada → posible trastorno mixto'}</li>`;
+  } else if (hco3 > 26 && pco2 > 45) { // Alcalosis met con compensación resp
+    const expectedPco2 = 0.7 * hco3 + 21;
+    const diff = Math.abs(pco2 - expectedPco2);
+    compensation = `<li>▸ Alcalosis metabólica: pCO₂ esperado = <strong>${expectedPco2.toFixed(1)} ± 2 mmHg</strong>. Medido: ${pco2}. ${diff <= 2 ? '✅ Compensación adecuada' : '⚠️ Compensación inadecuada → posible trastorno mixto'}</li>`;
+  } else if (pco2 > 45 && hco3 > 26) { // Acidosis resp
+    const expectedHco3acute = 24 + (pco2 - 40) / 10;
+    const expectedHco3chronic = 24 + 3.5 * (pco2 - 40) / 10;
+    compensation = `<li>▸ Acidosis respiratoria: HCO₃ esperado = <strong>${expectedHco3acute.toFixed(1)} mEq/L</strong> (aguda) / <strong>${expectedHco3chronic.toFixed(1)} mEq/L</strong> (crónica). Medido: ${hco3}.</li>`;
+  } else if (pco2 < 35 && hco3 < 22) { // Alcalosis resp
+    const expectedHco3acute = 24 - 2 * (40 - pco2) / 10;
+    const expectedHco3chronic = 24 - 5 * (40 - pco2) / 10;
+    compensation = `<li>▸ Alcalosis respiratoria: HCO₃ esperado = <strong>${expectedHco3acute.toFixed(1)} mEq/L</strong> (aguda) / <strong>${expectedHco3chronic.toFixed(1)} mEq/L</strong> (crónica). Medido: ${hco3}.</li>`;
+  } else {
+    compensation = `<li>▸ Sin compensación evidente o trastorno leve.</li>`;
+  }
+
+  // ── PASO 4: Anion Gap ───────────────────────────────────
+  let agHtml = '';
+  if (!isNaN(na) && !isNaN(cl)) {
+    const ag = na - (cl + hco3);
+    const agNorm = ag >= 8 && ag <= 12;
+    agHtml = `<li>▸ <strong>Anion Gap (AG) = ${na} − (${cl} + ${hco3}) = <span style="color:${agNorm ? '#4ade80' : '#f87171'}">${ag.toFixed(1)} mEq/L</span></strong>
+      ${agNorm ? '(Normal 8-12 mEq/L)' : ag > 12 ? '⚠️ AG ELEVADO — Causas MUDPILES: Metanol · Uremia · DKA · Propilénglicol · Isoniazida · Láctico · Etanol · Salicilatos'
+                                                   : 'AG bajo (&lt;8) → hipoalbuminemia, mieloma, halogenosis'}</li>`;
+  }
+
+  // ── PASO 5: Oxigenación ──────────────────────────────────
+  let oxHtml = '';
+  if (!isNaN(po2) && !isNaN(fio2)) {
+    const pafi = po2 / fio2;
+    const gradAa = (fio2 * (760 - 47) - pco2 / 0.8) - po2;
+    let pafiLabel, pafiColor;
+    if      (pafi >= 300) { pafiLabel = 'Sin insuficiencia respiratoria';   pafiColor = '#4ade80'; }
+    else if (pafi >= 200) { pafiLabel = 'IR leve / SDRA leve';              pafiColor = '#fbbf24'; }
+    else if (pafi >= 100) { pafiLabel = '⚠️ IR moderada / SDRA moderado';  pafiColor = '#fb923c'; }
+    else                  { pafiLabel = '🔴 IR grave / SDRA grave';         pafiColor = '#f87171'; }
+    oxHtml = `
+      <li>▸ <strong>pO₂/FiO₂ (PaFi) = ${pafi.toFixed(0)}</strong> — <span style="color:${pafiColor}">${pafiLabel}</span></li>
+      <li>▸ <strong>Gradiente A-a = ${gradAa.toFixed(1)} mmHg</strong> ${gradAa <= 15 ? '(Normal ≤15 mmHg — hipoventilación pura)' : gradAa <= 35 ? '(Levemente ↑ — normal en adultos mayores)' : '(↑ Elevado — shunt, V/Q anómalo, difusión alterada)'}</li>`;
+  }
+
+  // ── Causas sugeridas ─────────────────────────────────────
+  let causeHtml = '';
+  if (hco3 < 22 && ph < 7.35) {
+    causeHtml = `<div style="margin-top:8px;font-size:12px;color:#fca5a5">
+      <strong>Causas frecuentes acidosis metabólica:</strong><br>
+      AG↑: cetoacidosis diabética (DKA), acidosis láctica (sepsis/shock), IR grave, intoxicaciones.<br>
+      AG normal (hiperclorémica): diarrea (pérdida HCO₃), acidosis tubular renal, NaCl en exceso.</div>`;
+  } else if (hco3 > 26 && ph > 7.45) {
+    causeHtml = `<div style="margin-top:8px;font-size:12px;color:#fde68a">
+      <strong>Causas frecuentes alcalosis metabólica:</strong><br>
+      Vómitos (pérdida HCl), diuréticos tiazídicos/asa (pérdida K⁺+H⁺), hiperaldosteronismo, alcalosis por contracción.</div>`;
+  } else if (pco2 > 45 && ph < 7.35) {
+    causeHtml = `<div style="margin-top:8px;font-size:12px;color:#fca5a5">
+      <strong>Causas frecuentes acidosis respiratoria:</strong><br>
+      EPOC exacerbado, sobredosis opiáceos/BZD, síndrome hipoventilación-obesidad, miastenia/Guillain-Barré, neumotórax.</div>`;
+  } else if (pco2 < 35 && ph > 7.45) {
+    causeHtml = `<div style="margin-top:8px;font-size:12px;color:#fde68a">
+      <strong>Causas frecuentes alcalosis respiratoria:</strong><br>
+      Hiperventilación ansiedad/dolor, hipoxemia compensatoria, sepsis temprana, ventilación mecánica excesiva, TEP.</div>`;
+  }
+
+  r.innerHTML = `
+    <div style="border:2px solid #00c9a7;border-radius:12px;padding:16px;background:rgba(0,201,167,.06)">
+      <div style="font-size:15px;font-weight:700;margin-bottom:12px">📋 Interpretación GSA — Paso a Paso</div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:13px">
+        <li>▸ <strong>Paso 1 — pH:</strong> <span style="color:${phColor}">${phStatus}</span></li>
+        <li>▸ <strong>Paso 2 — Trastorno primario:</strong> <span style="color:${primaryColor}">${primary}</span></li>
+        <li>▸ <strong>Paso 3 — Compensación:</strong></li>
+        ${compensation}
+        ${agHtml ? '<li>▸ <strong>Paso 4 — Anión Gap:</strong></li>' + agHtml : ''}
+        ${oxHtml ? '<li>▸ <strong>Paso 5 — Oxigenación:</strong></li>' + oxHtml : ''}
+      </ul>
+      ${causeHtml}
+      <div style="margin-top:12px;font-size:11px;color:var(--text-muted)">
+        Valores ingresados → pH: ${ph} · pCO₂: ${pco2} · HCO₃: ${hco3}${!isNaN(po2) ? ' · pO₂: '+po2 : ''}${!isNaN(fio2) ? ' · FiO₂: '+fio2 : ''}
+      </div>
+    </div>`;
+}
+
+// ============================================================
 // PROGRESO DE ESTUDIO (localStorage)
 // ============================================================
 function getProgress() {
@@ -1243,206 +1691,433 @@ function showProgress() {
 }
 
 // ============================================================
-// ASISTENTE IA — Integración Claude API (claude-haiku-4-5)
-// Patrón: direct browser access con anthropic-dangerous-direct-browser-access
+// ANEXO GES — Garantías Explícitas de Salud (Chile)
+// Fuente: Decreto GES vigente MINSAL. Contexto académico ENF UDP.
 // ============================================================
 
-let _aiMessages = [];   // historial de mensajes {role, content}
-let _aiApiKey   = '';   // API key en memoria (no persiste)
-let _aiTyping   = false;
-
-// Mostrar sección IA
-function showAIAssistant() {
-  hideAllViews();
-  document.getElementById('ai-view').style.display = 'block';
-  currentSessionId = null;
-  clearNavActive();
-  document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
-  // Inicializar chat si está vacío
-  if (_aiMessages.length === 0) _renderAIWelcome();
-  // Setup listeners una sola vez
-  _setupAIInputListeners();
-}
-
-// Actualizar API key y estado visual
-function setAIKey(val) {
-  _aiApiKey = val.trim();
-  const status = document.getElementById('ai-key-status');
-  if (_aiApiKey.startsWith('sk-ant-')) {
-    status.textContent = '✓ Lista';
-    status.className = 'ai-status ok';
-  } else if (_aiApiKey.length > 5) {
-    status.textContent = '⚠ Formato';
-    status.className = 'ai-status warn';
-  } else {
-    status.textContent = 'Sin clave';
-    status.className = 'ai-status idle';
+const GES_DATA = [
+  // ── CARDIOVASCULAR ──────────────────────────────────────────
+  {
+    id:'ges-hta', sistema:'❤️ Cardiovascular', nombre:'Hipertensión Arterial',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'PA sistólica ≥140 mmHg o diastólica ≥90 mmHg en adultos. GES garantiza diagnóstico, tratamiento farmacológico y control periódico.',
+    fisio:'Disfunción endotelial, ↑resistencia vascular periférica, activación SRAA/SNS. Complicaciones: IC, ERC, ACV, retinopatía.',
+    farmaco:'IECA/ARA II (primera línea), tiazidas, amlodipino, atenolol. Metas: <130/80 en DM/ERC.',
+    enfermeria:'Control adherencia, AMPA, educación DASH, restricción sodio <2 g/día, derivación oportuna.'
+  },
+  {
+    id:'ges-iam', sistema:'❤️ Cardiovascular', nombre:'Infarto Agudo al Miocardio (IAM)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Urgencia / UCI',
+    descripcion:'Necrosis miocárdica por oclusión coronaria (trombo sobre placa ateromatosa). GES garantiza reperfusión (trombólisis o PCI) dentro de plazos definidos.',
+    fisio:'Ruptura placa → trombosis → isquemia → necrosis. Zona de penumbra isquémica: isquemia reversible en primeras horas. Enzimas: CK-MB y Troponina I/T.',
+    farmaco:'AAS + clopidogrel, heparina, βbloqueadores, IECA, estatinas. Alteplase en STEMI si no hay PCI <2h.',
+    enfermeria:'Monitoreo ECG continuo, acceso venoso, O₂ si SatO₂<90%, administrar AAS 300 mg si no contraindicado, preparar para cateterismo.'
+  },
+  {
+    id:'ges-ic', sistema:'❤️ Cardiovascular', nombre:'Insuficiencia Cardíaca (IC)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario / Terciario',
+    descripcion:'Incapacidad del corazón de mantener el gasto cardíaco. GES cubre IC sistólica (FE<40%). Más prevalente en >65 años.',
+    fisio:'↓GC → activación SRAA+SNS → retención Na⁺/H₂O → congestión venosa. IC-FER vs IC-FEP. Clasificación NYHA I-IV.',
+    farmaco:'IECA o sacubitrilo-valsartán, βbloqueadores, espironolactona, diuréticos de asa (furosemida), SGLT2 inhibidores.',
+    enfermeria:'Control diario de peso (alerta >1 kg/día), balance hídrico, posición semisentada, monitoreo SpO₂ y disnea.'
+  },
+  {
+    id:'ges-fa', sistema:'❤️ Cardiovascular', nombre:'Fibrilación Auricular (FA)',
+    ges:'Desde 2022 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Arritmia supraventricular más frecuente. GES garantiza diagnóstico, manejo agudo y anticoagulación crónica.',
+    fisio:'Actividad eléctrica auricular caótica → pérdida de contracción auricular → estasis sanguínea → riesgo de embolismo. CHADS₂-VASc para estratificación.',
+    farmaco:'Anticoagulación: warfarina (INR 2-3) o DOAC (apixabán, rivaroxabán). Control FC: βbloqueadores, diltiazem. Cardioversión: amiodarona.',
+    enfermeria:'Monitoreo pulso y ECG, control INR si warfarina, educar sobre signos de sangrado, toma diaria de anticoagulante.'
+  },
+  {
+    id:'ges-tep', sistema:'❤️ Cardiovascular', nombre:'Tromboembolismo Pulmonar (TEP)',
+    ges:'No GES específico · Alta urgencia', nivel:'Urgencia / UCI',
+    descripcion:'Obstrucción arterial pulmonar por trombo (generalmente proveniente de TVP). Alta mortalidad si no se trata a tiempo.',
+    fisio:'Obstrucción → ↑presión arteria pulmonar → IC derecha aguda → ↓GC → hipoxemia. Score de Wells y D-dímero para diagnóstico.',
+    farmaco:'Heparina no fraccionada EV inmediata, LMWH, anticoagulantes orales a largo plazo. Trombólisis en TEP masivo (rtPA).',
+    enfermeria:'Posición semisentada, O₂ alto flujo, acceso venoso, monitoreo continuo, preparar heparina, evaluar signos de IC derecha.'
+  },
+  // ── RESPIRATORIO ────────────────────────────────────────────
+  {
+    id:'ges-asma', sistema:'🫁 Respiratorio', nombre:'Asma Bronquial',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Inflamación crónica de la vía aérea con hiperreactividad bronquial. GES cubre desde los 3 años. Tratamiento paso a paso según GINA.',
+    fisio:'Inflamación eosinofílica (IgE-mediada) → broncoespasmo, edema, hipersecreción mucosa → obstrucción reversible. Espirometría: patrón obstructivo reversible.',
+    farmaco:'SABA (salbutamol) de rescate. ICS (budesonida, fluticasona) como controlador. ICS/LABA en moderado-severo. Montelukast. Anti-IgE (omalizumab) en severo.',
+    enfermeria:'Técnica inhaladora, Peak-Flow, identifica triggers, plan de acción escrito, evitar AAS en sensibles.'
+  },
+  {
+    id:'ges-epoc', sistema:'🫁 Respiratorio', nombre:'EPOC',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Obstrucción crónica del flujo aéreo no totalmente reversible. GES garantiza espirometría diagnóstica y tratamiento. Principal causa: tabaquismo.',
+    fisio:'Inflamación neutrofílica → destrucción alveolar (enfisema) + hipersecreción mucosa (bronquitis crónica) → atrapamiento aéreo, IR tipo I/II. GOLD I-IV.',
+    farmaco:'SABA/SAMA de rescate. LABA + LAMA (doble broncodilatación). ICS en exacerbaciones frecuentes. O₂ crónico si PaO₂<55 mmHg.',
+    enfermeria:'Cese tabáquico urgente, rehabilitación pulmonar, vacunas (influenza anual, neumocócica), técnica inhaladora, oxímetro domiciliario.'
+  },
+  {
+    id:'ges-neumonia', sistema:'🫁 Respiratorio', nombre:'Neumonía del Adulto',
+    ges:'Desde 2007 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Infección aguda del parénquima pulmonar. GES garantiza diagnóstico (Rx tórax) y tratamiento ATB dentro de 4 horas en hospitalizados.',
+    fisio:'Invasión alveolar → respuesta inflamatoria → exudado alveolar → consolidación → ↓V/Q → hipoxemia. Score PSI/CURB-65 para hospitalización.',
+    farmaco:'NAC: amoxicilina o amoxicilina-clavulánico VO. Neumonía grave: cefalosporina 3ª + macrólido. SARM: vancomicina. Hospitalización: vía EV.',
+    enfermeria:'Posición Fowler, O₂ si SpO₂<92%, hidratación EV, control de temperatura, administrar ATB dentro del plazo GES, fisioterapia respiratoria.'
+  },
+  // ── ENDOCRINO / METABÓLICO ──────────────────────────────────
+  {
+    id:'ges-dm2', sistema:'🔬 Endocrino / Metabólico', nombre:'Diabetes Mellitus Tipo 2 (DM2)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Trastorno metabólico por resistencia a la insulina y disfunción de célula β. GES cubre >15 años. Meta HbA1c <7%. Más de 1 millón de pacientes en Chile.',
+    fisio:'RI en músculo/hígado/tejido adiposo → hiperglucemia crónica → glicosilación proteica → daño micro/macrovascular (nefropatía, retinopatía, neuropatía, ACV, IAM).',
+    farmaco:'Metformina (primera línea). iSGLT2 (empagliflozina) y arGLP-1 (semaglutida) con beneficio CV. Insulina en falla oral. Objetivo HbA1c personalizado.',
+    enfermeria:'Educación automanejo, pie diabético, automonitoreo de glicemia, inyección insulina, hipoglicemia: 15 g CHO, DAFO.'
+  },
+  {
+    id:'ges-dm1', sistema:'🔬 Endocrino / Metabólico', nombre:'Diabetes Mellitus Tipo 1 (DM1)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario / Terciario',
+    descripcion:'Destrucción autoinmune de célula β → déficit absoluto de insulina. GES cubre todos los grupos etarios. Requiere insulinoterapia de por vida.',
+    fisio:'Ataque autoinmune mediado por LT CD8 → apoptosis célula β → insulinopenia → CAD si no insulinoterapia. Péptido C indetectable en DM1.',
+    farmaco:'Insulinas basales (glargina, detemir) + bolo (lispro, aspártica). Ratio basal:bolo 50:50. Bomba insulina en casos seleccionados.',
+    enfermeria:'Cetoacidosis diabética: sospecha con vómitos + glucosa alta. ABC, hidratación EV, insulina EV, corregir K⁺ antes de insulina.'
+  },
+  {
+    id:'ges-hipotir', sistema:'🔬 Endocrino / Metabólico', nombre:'Hipotiroidismo',
+    ges:'Desde 2005 (hipotiroides congénito y embarazo) · Decreto 44/2022', nivel:'Primario',
+    descripcion:'Déficit de hormonas tiroideas. GES cubre hipotiroidismo congénito (tamizaje neonatal) e hipotiroidismo en embarazo. Causa más común: Hashimoto.',
+    fisio:'↓T3/T4 → ↑TSH → ↑TRH. Manifestaciones: bradicardia, intolerancia al frío, constipación, mixedema, bradipsiquia. Coma mixedematoso: emergencia.',
+    farmaco:'Levotiroxina (LT4) VO en ayunas. Meta TSH 0.5-2.5 mIU/L en embarazo. Interacción con calcio, hierro, IBP (↓absorción).',
+    enfermeria:'Administrar LT4 en ayunas, control TSH semestral, reconocer mixedema (hipotermia, bradipnea, alteración consciencia).'
+  },
+  // ── RENAL ───────────────────────────────────────────────────
+  {
+    id:'ges-erc', sistema:'🫘 Renal / Urológico', nombre:'Enfermedad Renal Crónica (ERC)',
+    ges:'Desde 2010 · Decreto 44/2022', nivel:'Primario / Secundario / Terciario',
+    descripcion:'TFG <60 mL/min/1.73m² o daño renal >3 meses. GES cubre estadios 3b-5 y diálisis. Causas principales en Chile: DM2 e HTA.',
+    fisio:'Reducción nefronal → hiperfiltración compensadora → esclerosis progresiva → ↓TFG. Consecuencias: anemia (↓EPO), hiperK⁺, acidosis metabólica, HTP secundaria, osteodistrofia.',
+    farmaco:'IECA/ARA II (nefroprotección), eritropoyetina recombinante, vitamina D activa, resinas de intercambio iónico (kayexalato), quelantes de fósforo.',
+    enfermeria:'Diálisis: cuidado fístula AV, control de peso interdialítico, restricción K⁺/P, balance hídrico, acceso venoso en brazo opuesto a fístula.'
+  },
+  {
+    id:'ges-itu', sistema:'🫘 Renal / Urológico', nombre:'Infección del Tracto Urinario (ITU)',
+    ges:'GES parcial (ITU en embarazo) · Decreto 44/2022', nivel:'Primario',
+    descripcion:'Infección bacteriana del tracto urinario bajo (cistitis) o alto (pielonefritis). Alta prevalencia en mujeres. En embarazo: riesgo de parto prematuro.',
+    fisio:'Ascenso bacteriano (E. coli 80%) → inflamación urotélio → disuria, polaquiuria, urgencia. Pielonefritis: fiebre, puñopercusión, bacteriemia posible.',
+    farmaco:'Cistitis no complicada: nitrofurantoína o fosfomicina 3 días. Pielonefritis: ciprofloxacino 7 días. Embarazo: amoxicilina-clavulánico o cefalosporinas.',
+    enfermeria:'Hidratación abundante, higiene perineal, urocultivo antes del ATB, completar tratamiento, seguimiento postratamiento en embarazadas.'
+  },
+  // ── NEUROLÓGICO ─────────────────────────────────────────────
+  {
+    id:'ges-avei', sistema:'🧠 Neurológico', nombre:'ACV Isquémico (AVE)',
+    ges:'Desde 2013 · Decreto 44/2022', nivel:'Urgencia / Unidad AVC',
+    descripcion:'Déficit neurológico focal por oclusión arterial cerebral. GES garantiza reperfusión con tPA EV <4.5h e ingreso a unidad AVC. Tiempo es cerebro.',
+    fisio:'Trombo/émbolo → isquemia → zona de penumbra (recuperable en horas) → necrosis si no reperfusión. Excitotoxicidad por glutamato. Score NIHSS.',
+    farmaco:'Alteplase 0.9 mg/kg EV dentro de 4.5h (criterios estrictos). Trombectomía mecánica <6-24h en grandes vasos. AAS post-tPA a las 24h.',
+    enfermeria:'Escala Cincinnati (PFH), activar código AVC, NO baje PA si no >185/110, monitoreo neurovascular cada 15min, glicemia, temperatura.'
+  },
+  {
+    id:'ges-epilepsia', sistema:'🧠 Neurológico', nombre:'Epilepsia',
+    ges:'Desde 2015 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Trastorno caracterizado por ≥2 crisis epilépticas no provocadas. GES garantiza acceso a antiepilépticos y especialista. Afecta ~1% población.',
+    fisio:'Hiperactividad neuronal sincrónica → crisis. Tipos: focal (consciencia preservada o alterada), generalizada (ausencia, tónico-clónica, mioclónica). EEG diagnóstico.',
+    farmaco:'Fármacos de primera línea: valproato (generalizada), lamotrigina, carbamazepina (focal). Status epilepticus: diacepam/lorazepam EV + fenitoína/levetiracetam.',
+    enfermeria:'Crisis: posición lateral de seguridad, NO introducir nada en boca, proteger de golpes, cronometrar, O₂, vía venosa post-crisis, registro detallado.'
+  },
+  {
+    id:'ges-alzheimer', sistema:'🧠 Neurológico', nombre:'Demencia / Alzheimer',
+    ges:'Desde 2016 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Síndrome de deterioro cognitivo progresivo. Alzheimer representa 60-70%. GES garantiza diagnóstico, tratamiento y apoyo al cuidador en >65 años.',
+    fisio:'Depósitos de Aβ (placas seniles) y proteína Tau hiperfosforilada (ovillos neurofibrilares) → muerte neuronal colinérgica → atrofia hipocampo y corteza.',
+    farmaco:'Inhibidores AChE: donepezilo, rivastigmina (moderada eficacia). Memantina en estadios moderado-grave. Sin tratamiento modificador de enfermedad aprobado actualmente.',
+    enfermeria:'Seguridad del entorno, rutinas estables, comunicación adaptada, prevención caídas, apoyo familia/cuidador, evaluación MMSE periódica.'
+  },
+  {
+    id:'ges-parkinson', sistema:'🧠 Neurológico', nombre:'Parkinson',
+    ges:'Desde 2016 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Trastorno neurodegenerativo con pérdida de neuronas dopaminérgicas en sustancia nigra. GES garantiza tratamiento farmacológico y kinesiología.',
+    fisio:'↓Dopamina → desequilibrio DA/Ach en ganglios basales → temblor en reposo (4-6 Hz), rigidez en rueda dentada, bradicinesia, inestabilidad postural. Cuerpos de Lewy (α-sinucleína).',
+    farmaco:'Levodopa + carbidopa (más eficaz). Agonistas DA: pramipexol, ropinirol. IMAO-B: selegilina, rasagilina. MAO-B para fases iniciales.',
+    enfermeria:'Administrar levodopa 30-45 min antes de comidas, reconocer síndrome hipercinético (discinesias), prevención caídas, rehabilitación motora y del habla.'
+  },
+  // ── HEMATOLÓGICO / ONCOLÓGICO ───────────────────────────────
+  {
+    id:'ges-ca-mama', sistema:'🎗️ Oncológico', nombre:'Cáncer de Mama',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Neoplasia maligna más frecuente en mujeres chilenas. GES garantiza diagnóstico dentro de 15 días y tratamiento dentro de 30 días. Cribado: mamografía 50-69 años.',
+    fisio:'Proliferación descontrolada epitelio ductal/lobulillar. Subtipos moleculares: Luminal A/B (RE+), HER2+, Triple negativo. Metástasis óseas, pulmonares, hepáticas.',
+    farmaco:'Según subtipo: cirugía + radioterapia + quimioterapia (AC→T) + hormonoterapia (tamoxifeno, letrozol) + trastuzumab si HER2+. CDK4/6 inhibidores en metastásico.',
+    enfermeria:'Manejo PICC/catéter venoso central, cuidado náuseas/mucositis, linfedema post-mastectomía, apoyo emocional, enseñar autoexamen.'
+  },
+  {
+    id:'ges-ca-cervix', sistema:'🎗️ Oncológico', nombre:'Cáncer Cervicouterino',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Neoplasia maligna del cuello uterino, 99% asociada a VPH. GES garantiza tratamiento dentro de 30 días. Cribado: Papanicolaou cada 3 años (25-64 años).',
+    fisio:'VPH oncogénico (16, 18) → integración viral → inhibición p53/Rb → transformación maligna epitelio escamoso. Progresión NIC I→II→III→carcinoma invasor (años).',
+    farmaco:'Estadios tempranos: cirugía (histerectomía radical). Estadios avanzados: cisplatino + radioterapia concomitante. Vacuna VPH preventiva (Gardasil/Cervarix).',
+    enfermeria:'Educación sexual, promover vacunación VPH adolescentes, apoyo psicoemocional, cuidado post-histerectomía, signos de fístula vesicovaginal.'
+  },
+  {
+    id:'ges-ca-colon', sistema:'🎗️ Oncológico', nombre:'Cáncer Colorrectal',
+    ges:'Desde 2010 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Segunda causa de muerte por cáncer en Chile. GES garantiza diagnóstico y tratamiento. Factores de riesgo: dieta occidental, obesidad, tabaco, antecedentes familiares.',
+    fisio:'Secuencia adenoma → carcinoma (10-15 años). Mutaciones: APC, KRAS, p53. Metástasis hepáticas y pulmonares frecuentes. Marcador: CEA (seguimiento).',
+    farmaco:'Cirugía resectiva (colectomía). QT adyuvante: FOLFOX (5-FU + leucovorín + oxaliplatino). Bevacizumab (anti-VEGF) en metastásico. Cetuximab si KRAS wild-type.',
+    enfermeria:'Cuidado ostomía (colostomía/ileostomía), prevención ileo paralítico, control herida, nutricional post-cirugía, educación al paciente ostomizado.'
+  },
+  {
+    id:'ges-ca-prostata', sistema:'🎗️ Oncológico', nombre:'Cáncer de Próstata',
+    ges:'Desde 2015 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Neoplasia maligna más frecuente en hombres chilenos. GES garantiza tratamiento dentro de 30 días. Cribado: PSA + tacto rectal >50 años (o >40 en riesgo).',
+    fisio:'Adenocarcinoma glándula prostática (zona periférica 70%). Score Gleason para gradificación. Metástasis óseas líticas/blásticas. Dependiente de andrógenos.',
+    farmaco:'Localizado bajo riesgo: vigilancia activa o prostatectomía radical. Hormono-sensible: LHRH agonistas (leuprolida) + antiandrógenos. Quimio: docetaxel en RCR.',
+    enfermeria:'Cuidado post-prostatectomía: incontinencia urinaria (Kegel), disfunción eréctil, complicaciones DVT, manejo catéter vesical, PSA periódico.'
+  },
+  {
+    id:'ges-linfoma', sistema:'🎗️ Oncológico', nombre:'Linfoma (Hodgkin / No Hodgkin)',
+    ges:'Desde 2015 · Decreto 44/2022', nivel:'Terciario',
+    descripcion:'Neoplasia del tejido linfoide. LH: más frecuente en jóvenes, alta curabilidad. LNH: grupo heterogéneo, distinto pronóstico. GES garantiza tratamiento.',
+    fisio:'LH: células de Reed-Sternberg (CD15+/CD30+). LNH: B (DLBCL, folicular) o T. Estadificación Ann Arbor I-IV. B síntomas: fiebre, sudoración nocturna, baja de peso >10%.',
+    farmaco:'LH: ABVD (doxorrubicina, bleomicina, vinblastina, dacarbazina). DLBCL: R-CHOP (rituximab + CHOP). Trasplante autólogo en recaída.',
+    enfermeria:'Profilaxis infecciones (neutropenia febril), mucositis, manejo PICC, fatiga oncológica, reconocer síndrome de lisis tumoral (hiperK⁺, hiperúrico, ↑Cr).'
+  },
+  // ── DIGESTIVO / HEPÁTICO ─────────────────────────────────────
+  {
+    id:'ges-cirr', sistema:'🫁 Digestivo / Hepático', nombre:'Cirrosis Hepática y DHC',
+    ges:'No GES específico · Alto impacto', nivel:'Secundario / Terciario',
+    descripcion:'Fibrosis hepática difusa con nódulos regenerativos. En Chile: causa principal es alcohol. Complicaciones: ascitis, encefalopatía, HTP, HDA variceal.',
+    fisio:'Necrosis hepatocitaria → fibrosis → ↑resistencia portal → HTP (>12 mmHg) → várices esofágicas + circulación hiperdinámica. Child-Pugh y MELD para pronóstico.',
+    farmaco:'Propranolol (profilaxis variceal), furosemida + espironolactona (ascitis), rifaximina + lactulosa (EH), norfloxacino (PBE). Trasplante hepático en estadios terminales.',
+    enfermeria:'Balance hídrico estricto, pesaje diario, restricción sodio, evaluación encefalopatía (asterixis, orientación), evitar AINEs/sedantes, cuidado piel.'
+  },
+  {
+    id:'ges-hepatitisb', sistema:'🫁 Digestivo / Hepático', nombre:'Hepatitis B Crónica',
+    ges:'Desde 2015 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Infección crónica por VHB (>6 meses). GES garantiza diagnóstico y tratamiento antiviral. Riesgo de cirrosis y CHC. Vacuna VHB en Programa Nacional.',
+    fisio:'VHB (ADN) → hepatocito → respuesta inmune → inflamación crónica → fibrosis. Marcadores: HBsAg, Anti-HBc, HBeAg, carga viral. Reactivación en inmunosuprimidos.',
+    farmaco:'Tenofovir o entecavir (análogos nucleosídicos/nucleotídicos). INF pegilado en casos seleccionados. Meta: carga viral indetectable.',
+    enfermeria:'Precauciones estándar + contacto (sangre), vacunación de contactos, abstinencia alcohólica, control AST/ALT/carga viral periódico, reporte obligatorio.'
+  },
+  {
+    id:'ges-hepatitisc', sistema:'🫁 Digestivo / Hepático', nombre:'Hepatitis C Crónica',
+    ges:'Desde 2019 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Infección crónica por VHC (ARN). 80% cronifica. GES garantiza tratamiento con antivirales de acción directa (DAA). Riesgo de cirrosis y CHC.',
+    fisio:'VHC → inflamación crónica portal y lobulillar → fibrosis progresiva (Metavir F0-F4). Sin vacuna disponible. Genotipo 1a/1b más frecuente en Chile.',
+    farmaco:'DAA: sofosbuvir/ledipasvir o glecaprevir/pibrentasvir. Tasa de curación >95%. Sin interferón en nuevos esquemas. Duración 8-12 semanas.',
+    enfermeria:'Adherencia al tratamiento (crítica para curación), precauciones con sangre, abstinencia alcohólica, vigilar interacciones farmacológicas.'
+  },
+  // ── MUSCULOESQUELÉTICO ──────────────────────────────────────
+  {
+    id:'ges-ar', sistema:'🦴 Musculoesquelético', nombre:'Artritis Reumatoide (AR)',
+    ges:'Desde 2007 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Enfermedad autoinmune sistémica con artritis simétrica periférica. GES garantiza diagnóstico temprano y tratamiento con DMARDs dentro de 45 días.',
+    fisio:'Autoimmunidad (anti-CCP, FR) → sinovitis → pannus → destrucción cartílago/hueso. Criterios ACR/EULAR 2010. DAS28 para actividad. Manifestaciones extrarticulares: nódulos, vasculitis.',
+    farmaco:'Metotrexato (primera línea), cloroquina, leflunomida. Biológicos (anti-TNF: etanercept, adalimumab; anti-IL6: tocilizumab) en falla DMARD. JAK inhibidores: baricitinib.',
+    enfermeria:'Administrar metotrexato 1 vez/semana (no diario → toxicidad fatal), suplementar ácido fólico, protección solar (cloroquina), signos de infección en biológicos.'
+  },
+  {
+    id:'ges-osteoporosis', sistema:'🦴 Musculoesquelético', nombre:'Osteoporosis y Fractura de Cadera',
+    ges:'Desde 2007 (fractura cadera) · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Reducción de masa ósea y deterioro de microarquitectura → fragilidad. GES cubre fractura cadera >65 años. DMO: T-score ≤-2.5. Fractura de cadera: alta mortalidad a 1 año.',
+    fisio:'Desequilibrio osteoblastos/osteoclastos → pérdida ósea. Posmenopausia: ↓estrógenos → ↑RANKL → ↑resorción. FRAX para riesgo de fractura a 10 años.',
+    farmaco:'Bisfosfonatos: alendronato (semanal), zolendronato (anual EV). Denosumab (anti-RANKL). Teriparatida (anabólico). Calcio 1000-1200 mg + Vitamina D 800-1000 UI/día.',
+    enfermeria:'Prevención caídas (ambiente, calzado, visión), administrar bisfosfonatos con vaso lleno de agua en ayunas, permanecer 30 min en pie, reconocer osteonecrosis mandibular.'
+  },
+  {
+    id:'ges-artrosis', sistema:'🦴 Musculoesquelético', nombre:'Artrosis de Cadera y Rodilla',
+    ges:'Desde 2009 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Degeneración articular por pérdida de cartílago. GES garantiza cirugía de reemplazo articular en casos indicados. Segunda causa de discapacidad en adultos mayores.',
+    fisio:'Desequilibrio síntesis/degradación cartílago (metaloproteasas) → exposición hueso subcondral → osteofitos → inflamación sinovial reactiva. Kellgren-Lawrence I-IV.',
+    farmaco:'Paracetamol (primera línea). AINEs tópicos/sistémicos (GI corto plazo). Infiltración intraarticular: corticoides o ácido hialurónico. Duloxetina en dolor crónico.',
+    enfermeria:'Ejercicio aeróbico en agua, reducción de peso (↓carga articular), calor local, bastón si asimetría, cuidado post-artroplastia (TVP, luxación protésica).'
+  },
+  // ── INFECCIOSAS ──────────────────────────────────────────────
+  {
+    id:'ges-vih', sistema:'🦠 Infecciosas', nombre:'VIH / SIDA',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Infección por VIH con destrucción progresiva de LT CD4. GES garantiza TARV gratuito para todos los diagnósticos confirmados y manejo de infecciones oportunistas.',
+    fisio:'VIH (retrovirus) → tropismo CD4 → replicación → ↓CD4 → SIDA (<200 cel/μL) → infecciones oportunistas (PCP, toxoplasma, CMV, MAC) y neoplasias (sarcoma Kaposi, LNH).',
+    farmaco:'TARV: 2 INTI + 1 InInt (bictegravir/FTC/TAF preferido). Meta: carga viral indetectable <50 cop/mL. PrEP: emtricitabina/tenofovir en alto riesgo.',
+    enfermeria:'Adherencia TARV (clave para indetectabilidad), precauciones estándar, manejo accidente corto-punzante (protocolo PEP), confidencialidad, apoyo psicosocial.'
+  },
+  {
+    id:'ges-tbc', sistema:'🦠 Infecciosas', nombre:'Tuberculosis (TBC)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Infección por Mycobacterium tuberculosis. Notificación obligatoria. GES garantiza diagnóstico bacteriológico (BK + cultivo) y tratamiento DOTS/TAES gratuito.',
+    fisio:'M. tuberculosis → fagocitado pero sobrevive en macrófago → granuloma caseoso → reactivación en inmunosupresión. PPD/IGRA detecta infección latente (no enfermedad activa).',
+    farmaco:'Primera fase (2 meses): HRZE (isoniacida, rifampicina, pirazinamida, etambutol). Continuación (4 meses): HR. Resistente: amikacina, linezolid, bedaquilina.',
+    enfermeria:'Aislamiento respiratorio + mascarilla N95, DOTS (tratamiento supervisado), control de contactos, pesquisar hepatotoxicidad (isoniacida+rifampicina), PPD de contactos.'
+  },
+  // ── SALUD MENTAL ─────────────────────────────────────────────
+  {
+    id:'ges-depresion', sistema:'🧩 Salud Mental', nombre:'Depresión',
+    ges:'Desde 2006 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'Trastorno del estado de ánimo con tristeza persistente ≥2 semanas + síntomas neurovegetativos. GES garantiza tratamiento en APS. Causa líder de discapacidad en Chile.',
+    fisio:'↓monoaminas (serotonina, noradrenalina, dopamina) en sistema límbico. Hiperactividad eje HHA → hipercortisolemia. Reducción volumen hipocampal en crónico. HAMD-17 o PHQ-9.',
+    farmaco:'ISRS (sertralina 50-200 mg, escitalopram) como primera línea. IRSN: venlafaxina (ansiedad comórbida). TCA: amitriptilina (dolor crónico). Litio en bipolar.',
+    enfermeria:'Escala PHQ-9, psicoeducación, adherencia ATD (4-6 sem efecto pleno), evaluar riesgo suicidio con escala Columbia, no dejar medicación al alcance en riesgo.'
+  },
+  {
+    id:'ges-esquizo', sistema:'🧩 Salud Mental', nombre:'Esquizofrenia',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Secundario / Terciario',
+    descripcion:'Trastorno psicótico crónico con síntomas positivos (alucinaciones, delirios) y negativos (abulia, alogia). GES garantiza tratamiento farmacológico y psicosocial.',
+    fisio:'Hiperdopaminergia en vía mesolímbica (síntomas positivos) + hipodopaminergia en vía mesocortical (síntomas negativos). Reducción volumen hipocampo/prefrontal.',
+    farmaco:'Antipsicóticos típicos: haloperidol, clorpromazina. Atípicos (preferidos): clozapina (refractario), risperidona, olanzapina, quetiapina. Depot mensual para adherencia.',
+    enfermeria:'Monitorear síndrome metabólico (olanzapina, clozapina), SPM (haloperidol), adherencia, prevenir recaídas (abandono = principal causa), incluir familia.'
+  },
+  {
+    id:'ges-consumo', sistema:'🧩 Salud Mental', nombre:'Consumo Perjudicial de Alcohol/Drogas',
+    ges:'Desde 2013 · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'GES garantiza tratamiento ambulatorio para consumo perjudicial y dependencia de alcohol y drogas en adolescentes y adultos.',
+    fisio:'Activación sistema de recompensa (núcleo accumbens, DA) → tolerancia → dependencia → síndrome abstinencia. Wernicke-Korsakoff: déficit tiamina por alcoholismo crónico.',
+    farmaco:'Alcohol: diazepam en abstinencia (CIWA), tiamina EV/IM, naltrexona o acamprosato en mantenimiento. Opioides: buprenorfina/naloxona (sustitutivo). Cocaína: no aprobado.',
+    enfermeria:'Escala CIWA para monitoreo abstinencia alcohólica, tiamina ANTES de glucosa en sospecha de Wernicke, apoyo motivacional, no juzgar, derivación a programa.'
+  },
+  // ── MATERNO-INFANTIL ─────────────────────────────────────────
+  {
+    id:'ges-prematuro', sistema:'👶 Materno-Infantil', nombre:'Prematuridad (<32 semanas)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Terciario (UCI Neonatal)',
+    descripcion:'Nacimiento antes de las 32 semanas de gestación. GES garantiza atención en UCI neonatal, corticoides antenatales y surfactante. Principal causa de mortalidad infantil.',
+    fisio:'Inmadurez pulmonar: déficit surfactante → síndrome distrés respiratorio neonatal (SDR). Hemorragia intraventricular, enterocolitis necrotizante, retinopatía del prematuro (ROP).',
+    farmaco:'Corticoides antenatales: betametasona IM 2 dosis (reducen SDR 40%). Surfactante exógeno (beractant, poractant) intratraqueal. Cafeína (apnea del prematuro). Indometacina (DAP).',
+    enfermeria:'UCIN: posición canguro, control temperatura, monitoreo SpO₂, nutrición parenteral, manejo incubadora, prevenir infecciones nosocomiales, apoyo a padres.'
+  },
+  {
+    id:'ges-rop', sistema:'👶 Materno-Infantil', nombre:'Retinopatía del Prematuro (ROP)',
+    ges:'Desde 2005 · Decreto 44/2022', nivel:'Terciario',
+    descripcion:'Proliferación anormal de vasos retinianos en prematuros <32 sem o <1500 g. GES garantiza cribado y tratamiento con láser o anti-VEGF antes de progresión a ceguera.',
+    fisio:'Hiperóxia → supresión VEGF → detención vascularización → hipoxia relativa → ↑VEGF → proliferación vascular anormal → posible desprendimiento retina.',
+    farmaco:'Anti-VEGF intravítreo: bevacizumab o ranibizumab (preferido actualmente). Fotocoagulación láser en estadios avanzados. Cirugía (vitrectomía) en desprendimiento.',
+    enfermeria:'Control estricto de saturación O₂ en prematuros (91-95%), coordinación cribado oftalmológico, posición correcta para fotocoagulación, apoyo familiar.'
+  },
+  {
+    id:'ges-embarazo', sistema:'👶 Materno-Infantil', nombre:'Embarazo, Parto y Puerperio',
+    ges:'Programa PADB + GES · Decreto 44/2022', nivel:'Primario / Secundario',
+    descripcion:'GES garantiza control prenatal desde primer trimestre, parto institucional, puerperio y planificación familiar. Chile tiene alta cobertura de parto hospitalario (>99%).',
+    fisio:'Adaptaciones fisiológicas: ↑GC 40%, ↓RVP, anemia dilucional, hipercoagulabilidad, ↓TFG (↑GFR). Complicaciones: preeclampsia, DPPNI, RPM, DPP, HPP.',
+    farmaco:'Ácido fólico periconcepcional (previene DTN), hierro en anemia, labetalol/nifedipino en HTA. Sulfato de Mg en preeclampsia grave (anticonvulsivante). Oxitocina en HPP.',
+    enfermeria:'PARTOGRAMA OMS, 3 demoras en emergencias obstétricas, manejo activo 3ª etapa del parto (oxitocina + tracción controlada del cordón), vigilancia HPP primeras 2h.'
+  },
+  // ── URGENCIA / CRÍTICO ───────────────────────────────────────
+  {
+    id:'ges-sepsis', sistema:'🚨 Crítico / Urgencia', nombre:'Sepsis y Shock Séptico',
+    ges:'No GES específico · Alta mortalidad', nivel:'UCI',
+    descripcion:'Sepsis: disfunción orgánica amenazante por infección. Shock séptico: sepsis + hipotensión refractaria. Mortalidad 30-50% en shock. Bundle "1 hora" de Surviving Sepsis.',
+    fisio:'Infección → respuesta inflamatoria sistémica → disfunción endotelial → coagulopatía → fallo multiorgánico. qSOFA ≥2: sospechar sepsis. SOFA >2: definición diagnóstica.',
+    farmaco:'ATB EV de amplio espectro dentro 1h (piperacilina-tazobactam + vancomicina empírico). Norepinefrina primera línea vasopresora. Corticoides si shock refractario. Vitamina C+Tiamina (experimental).',
+    enfermeria:'Bundle 1h: hemocultivos → lactato → ATB → 30 mL/kg SF EV. Control temperatura, monitoreo horario diuresis, PAM ≥65 mmHg, escala SOFA diaria.'
+  },
+  {
+    id:'ges-trauma', sistema:'🚨 Crítico / Urgencia', nombre:'Gran Quemado',
+    ges:'Desde 2007 · Decreto 44/2022', nivel:'Terciario (Unidad Quemados)',
+    descripcion:'GES garantiza atención especializada en quemados graves (>20% SCQ o quemaduras especiales). Chile tiene red de Centros de Quemados distribuidos regionalmente.',
+    fisio:'Destrucción barrera cutánea → pérdida fluidos masiva → hipovolemia → shock → respuesta inflamatoria sistémica. Regla de los 9 (Wallace) para SCQ. Profundidad: I, IIA, IIB, III.',
+    farmaco:'Fórmula de Parkland: 4 mL/kg/% SCQ en 24h (primer 50% en 8h post-quemadura). Morfina EV para dolor. ATB solo en infección documentada. Escarotomía si circunferencial.',
+    enfermeria:'Cálculo fórmula Parkland, control horario diuresis 0.5-1 mL/kg/h, cuidado herida húmeda, nutrición enteral precoz, prevención contracturas, apoyo psicológico.'
   }
-}
+];
 
-// Preset questions → rellenar input y enviar
-function aiPresetQuestion(q) {
-  const input = document.getElementById('ai-input');
-  if (!input) return;
-  input.value = q;
-  input.style.height = 'auto';
-  input.style.height = Math.min(input.scrollHeight, 96) + 'px';
-  sendAIMessage();
-}
+function renderGESAnexo(area) {
+  // Agrupar por sistema
+  const sistemas = {};
+  GES_DATA.forEach(p => {
+    if (!sistemas[p.sistema]) sistemas[p.sistema] = [];
+    sistemas[p.sistema].push(p);
+  });
 
-// Enviar mensaje al API
-async function sendAIMessage() {
-  if (_aiTyping) return;
-  const input   = document.getElementById('ai-input');
-  const sendBtn = document.getElementById('ai-send-btn');
-  const text    = (input.value || '').trim();
-  if (!text) return;
-  if (!_aiApiKey) {
-    _appendAIError('Ingresa tu API Key de Anthropic para usar el asistente.');
-    return;
-  }
+  let html = `
+    <div class="calc-card">
+      <h3>🇨🇱 Patologías GES — Garantías Explícitas de Salud</h3>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">
+        Decreto 44/2022 MINSAL · ${GES_DATA.length} patologías con relevancia para Fisiopatología ENF UDP · Haz clic en cualquier patología para ver descripción, fisiopatología, farmacología y rol de enfermería.
+      </p>
+      <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+        <input type="text" id="ges-search" placeholder="🔍  Buscar patología..." oninput="filterGES(this.value)"
+          style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit">
+        <span id="ges-count" style="font-size:11px;color:var(--text-muted);white-space:nowrap">${GES_DATA.length} patologías</span>
+      </div>
+      <div id="ges-list">`;
 
-  // Limpiar pantalla de bienvenida si existe
-  const emptyEl = document.querySelector('#chat-messages .chat-empty');
-  if (emptyEl) emptyEl.remove();
-
-  input.value = '';
-  input.style.height = '38px';
-  _aiMessages.push({ role: 'user', content: text });
-  _appendAIBubble('user', 'Tú', text);
-
-  _aiTyping = true;
-  sendBtn.disabled = true;
-  const thinkId = 'think-' + Date.now();
-  _appendAIBubble('assistant thinking', '🤖 Profe IA', 'Escribiendo...', thinkId);
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': _aiApiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system: `Eres Profe IA, asistente clínico-académico de Enfermería para estudiantes de 2° año de la Universidad Diego Portales (UDP), Chile.
-
-Especialidad: Farmacología ENF3013 y Fisiopatología ENF3014.
-
-Guías:
-- Respuestas claras, precisas, adaptadas a estudiantes de 2° año de Enfermería.
-- Usa terminología correcta pero explica el porqué de cada concepto.
-- Relaciona siempre farmacología con fisiopatología y cuidados de enfermería.
-- Cita el contexto clínico chileno cuando sea relevante (GES, AUGE, patologías prevalentes).
-- Sé conciso: máximo 5-6 puntos o 3-4 párrafos breves. Usa bullet points cuando ayude.
-- Termina con un punto clave para el rol del enfermero/a si aplica.
-- No reemplazas al docente ni al criterio clínico — invita a verificar con bibliografía oficial.
-
-Patologías prioritarias: IAM, ACV, sepsis, DM2, EPOC, ERC, DHC, HTA, IC, TEP.`,
-        messages: _aiMessages
-      })
+  Object.entries(sistemas).forEach(([sistema, patologias]) => {
+    html += `<div class="ges-sistema-group" data-sistema="${sistema}">
+      <div class="ges-sistema-header">${sistema}</div>`;
+    patologias.forEach(p => {
+      html += `
+        <div class="ges-card" id="${p.id}" onclick="toggleGES('${p.id}')">
+          <div class="ges-card-header">
+            <div>
+              <span class="ges-nombre">${p.nombre}</span>
+              <span class="ges-badge">${p.ges.split('·')[0].trim()}</span>
+            </div>
+            <span class="ges-nivel">${p.nivel}</span>
+            <span class="ges-chevron" id="chv-${p.id}">▶</span>
+          </div>
+          <div class="ges-card-body" id="body-${p.id}" style="display:none">
+            <div class="ges-section">
+              <span class="ges-section-label">📋 GES</span>
+              <span>${p.ges}</span>
+            </div>
+            <div class="ges-section">
+              <span class="ges-section-label">🔬 Descripción</span>
+              <span>${p.descripcion}</span>
+            </div>
+            <div class="ges-section">
+              <span class="ges-section-label">⚙️ Fisiopatología</span>
+              <span>${p.fisio}</span>
+            </div>
+            <div class="ges-section">
+              <span class="ges-section-label">💊 Farmacología</span>
+              <span>${p.farmaco}</span>
+            </div>
+            <div class="ges-section ges-enf">
+              <span class="ges-section-label">🩺 Rol Enfermería</span>
+              <span>${p.enfermeria}</span>
+            </div>
+          </div>
+        </div>`;
     });
-
-    const data = await res.json();
-    const el = document.getElementById(thinkId);
-    if (el) el.remove();
-
-    if (data.content && data.content[0] && data.content[0].text) {
-      const reply = data.content[0].text;
-      _aiMessages.push({ role: 'assistant', content: reply });
-      _appendAIBubble('assistant', '🤖 Profe IA', reply);
-    } else {
-      const errMsg = data.error ? data.error.message : 'Respuesta inesperada del servidor.';
-      _appendAIError(errMsg);
-    }
-  } catch (err) {
-    const el = document.getElementById(thinkId);
-    if (el) el.remove();
-    _appendAIError('Error de conexión: ' + err.message);
-  } finally {
-    _aiTyping = false;
-    sendBtn.disabled = false;
-    input.focus();
-  }
-}
-
-// ── helpers privados ─────────────────────────────────────────
-
-function _appendAIBubble(classes, roleLabel, text, id) {
-  const container = document.getElementById('chat-messages');
-  if (!container) return;
-  const div = document.createElement('div');
-  div.className = 'chat-msg ' + classes;
-  if (id) div.id = id;
-  // Formatear texto: saltos de línea y negritas simples
-  const formatted = _aiFormatText(text);
-  div.innerHTML = `<div class="chat-role">${roleLabel}</div>
-    <div class="chat-bubble">${formatted}</div>`;
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-}
-
-function _appendAIError(msg) {
-  _appendAIBubble('assistant error', '⚠️ Error', msg);
-}
-
-function _aiFormatText(text) {
-  // Escape HTML básico, luego formatear markdown simple
-  let s = text
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
-  return s;
-}
-
-function _renderAIWelcome() {
-  const container = document.getElementById('chat-messages');
-  if (!container) return;
-  container.innerHTML = '';
-  _appendAIBubble('assistant', '🤖 Profe IA',
-    '¡Hola! Soy tu **Asistente IA de Enfermería UDP**.\n\nPuedo ayudarte con dudas de **Farmacología (ENF3013)** y **Fisiopatología (ENF3014)**.\n\nIngresa tu API Key arriba y usa las preguntas sugeridas o escribe tu propia consulta clínica. 🩺');
-}
-
-let _aiInputSetup = false;
-function _setupAIInputListeners() {
-  if (_aiInputSetup) return;
-  const input = document.getElementById('ai-input');
-  if (!input) return;
-  // Auto-resize
-  input.addEventListener('input', function() {
-    this.style.height = '38px';
-    this.style.height = Math.min(this.scrollHeight, 96) + 'px';
+    html += `</div>`;
   });
-  // Enter para enviar (Shift+Enter = nueva línea)
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendAIMessage();
-    }
-  });
-  _aiInputSetup = true;
+
+  html += `
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:10px;padding:8px 12px;background:#f8fafc;border-radius:8px;border:1px solid var(--border)">
+      ⚠️ Información con fines académicos basada en Decreto GES 44/2022 MINSAL Chile. Verificar vigencia en <strong>minsal.cl</strong>. No reemplaza protocolos institucionales.
+    </div>`;
+
+  area.innerHTML = html;
 }
 
-// Limpiar chat
-function clearAIChat() {
-  _aiMessages = [];
-  const container = document.getElementById('chat-messages');
-  if (container) container.innerHTML = '';
-  _renderAIWelcome();
+function toggleGES(id) {
+  const body = document.getElementById('body-' + id);
+  const chv  = document.getElementById('chv-' + id);
+  const card = document.getElementById(id);
+  if (!body) return;
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  if (chv) chv.textContent = open ? '▶' : '▼';
+  if (card) card.classList.toggle('ges-card-open', !open);
 }
 
-// Exportar conversación al portapapeles
-function exportAIChat() {
-  if (_aiMessages.length === 0) { alert('El chat está vacío.'); return; }
-  const lines = _aiMessages.map(m => {
-    const who = m.role === 'user' ? 'Estudiante' : 'Profe IA';
-    return `[${who}]\n${m.content}`;
+function filterGES(q) {
+  const term = q.toLowerCase().trim();
+  let visible = 0;
+  GES_DATA.forEach(p => {
+    const card = document.getElementById(p.id);
+    const match = !term ||
+      p.nombre.toLowerCase().includes(term) ||
+      p.sistema.toLowerCase().includes(term) ||
+      p.descripcion.toLowerCase().includes(term) ||
+      p.fisio.toLowerCase().includes(term) ||
+      p.farmaco.toLowerCase().includes(term) ||
+      p.enfermeria.toLowerCase().includes(term);
+    if (card) card.style.display = match ? '' : 'none';
+    if (match) visible++;
   });
-  const text = '=== Conversación Profe IA — Consulta Rápida ENF UDP ===\n\n' + lines.join('\n\n---\n\n');
-  navigator.clipboard.writeText(text)
-    .then(() => alert('✓ Conversación copiada al portapapeles'))
-    .catch(() => alert('No se pudo copiar. Intenta manualmente.'));
+  // Ocultar encabezados de sistema si no tienen cartas visibles
+  document.querySelectorAll('.ges-sistema-group').forEach(grp => {
+    const cards = grp.querySelectorAll('.ges-card');
+    const anyVisible = Array.from(cards).some(c => c.style.display !== 'none');
+    grp.style.display = anyVisible ? '' : 'none';
+  });
+  const countEl = document.getElementById('ges-count');
+  if (countEl) countEl.textContent = visible + ' patología' + (visible !== 1 ? 's' : '');
 }

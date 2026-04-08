@@ -1,9 +1,9 @@
 // ============================================================
 // sw.js — Service Worker — Consulta Rápida ENF UDP
-// Actualizado: 2026-04-07 — v1.2 (añade 6 presentaciones unidades)
+// Actualizado: 2026-04-08 — v1.3 (añade 7 presentaciones Fisiopatología)
 // ============================================================
 
-const CACHE_NAME = 'consulta-rapida-enf-v1.2';
+const CACHE_NAME = 'consulta-rapida-enf-v1.3';
 
 const ASSETS = [
   './',
@@ -12,7 +12,7 @@ const ASSETS = [
   './cdss.js',
   './data.js',
   './extras.js',
-  // Presentaciones por unidad
+  // Presentaciones Farmacología
   './antibioticos-slides.html',
   './unidad1-bases-slides.html',
   './unidad2-antiinfecciosos-slides.html',
@@ -20,6 +20,14 @@ const ASSETS = [
   './unidad4-endocrina-slides.html',
   './unidad5-snc-slides.html',
   './unidad6-digestivo-slides.html',
+  // Presentaciones Fisiopatología
+  './fisio-u1-celular-slides.html',
+  './fisio-u2-respiratoria-slides.html',
+  './fisio-u3-cardiovascular-slides.html',
+  './fisio-u4-endocrina-slides.html',
+  './fisio-u5-renal-slides.html',
+  './fisio-u6-neuro-slides.html',
+  './fisio-u7-hematologia-slides.html',
   './manifest.json',
   // Íconos PWA
   './icon-72.png',

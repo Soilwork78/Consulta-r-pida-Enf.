@@ -263,14 +263,6 @@ a:hover{text-decoration:underline}
   /* Botón validar */
   .vignette-toggle{width:100%;text-align:center}
 
-  /* AI Assistant */
-  .chat-area{height:clamp(260px,42vh,380px)}
-  .preset-questions{gap:5px}
-  .preset-q{font-size:11px;padding:5px 10px}
-  .ai-config-row{flex-direction:column;align-items:stretch}
-  .ai-config-row input{font-size:16px}
-  .ai-action-btn{flex:1;text-align:center}
-
   /* Progress dots más compactos */
   .progress-sessions{grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:5px}
   .progress-dot{width:30px;height:30px;font-size:9px;border-radius:6px}
@@ -279,7 +271,6 @@ a:hover{text-decoration:underline}
 @media(max-width:400px){
   .home-hero h1{font-size:16px}
   .content-tab{padding:7px 9px;font-size:11px}
-  .preset-q{font-size:10px;padding:4px 8px}
 }
 
 /* SCROLLBAR */
@@ -287,44 +278,23 @@ a:hover{text-decoration:underline}
 ::-webkit-scrollbar-track{background:#f1f1f1}
 ::-webkit-scrollbar-thumb{background:#c5d0e0;border-radius:3px}
 
-/* AI ASSISTANT */
-#ai-view{display:none}
-.ai-header-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.ai-config{background:#fff;border-radius:10px;border:1px solid var(--border);padding:14px 18px;margin-bottom:14px}
-.ai-config-label{font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.ai-config-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.ai-key-input{flex:1;min-width:220px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:monospace;color:var(--text)}
-.ai-key-input:focus{outline:none;border-color:var(--udp-blue-light);box-shadow:0 0 0 2px rgba(34,85,164,.1)}
-.ai-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;white-space:nowrap}
-.ai-status.ok{background:#d1fae5;color:#065f46}
-.ai-status.idle{background:#f3f4f6;color:#6b7280}
-.ai-status.warn{background:#fef3c7;color:#92400e}
-.ai-note{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.5}
-.preset-questions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
-.preset-q{font-size:11px;padding:5px 12px;border-radius:16px;border:1px solid #93c5fd;color:#1e40af;background:#eff6ff;cursor:pointer;transition:.15s;font-weight:500}
-.preset-q:hover{background:var(--udp-blue);color:#fff;border-color:var(--udp-blue)}
-.chat-area{background:#fff;border-radius:10px;border:1px solid var(--border);display:flex;flex-direction:column;height:clamp(320px,50vh,560px)}
-.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
-.chat-empty{text-align:center;color:var(--text-muted);font-size:13px;padding:30px 16px}
-.chat-msg{display:flex;flex-direction:column;gap:3px;max-width:88%}
-.chat-msg.user{align-self:flex-end}
-.chat-msg.assistant{align-self:flex-start}
-.chat-role{font-size:10px;color:var(--text-muted);font-weight:600;padding:0 4px}
-.chat-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.65}
-.chat-msg.user .chat-bubble{background:var(--udp-blue);color:#fff;border-bottom-right-radius:3px}
-.chat-msg.assistant .chat-bubble{background:#f0f4f8;color:var(--text);border-bottom-left-radius:3px;border:1px solid var(--border)}
-.chat-msg.thinking .chat-bubble{color:var(--text-muted);font-style:italic;animation:pulse 1.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
-.chat-msg.error .chat-bubble{background:#fff5f5;border-color:#fca5a5;color:#991b1b}
-.chat-input-row{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--border);background:#fafbfc;border-radius:0 0 10px 10px}
-.chat-input{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;resize:none;height:38px;max-height:96px;overflow-y:auto;line-height:1.5}
-.chat-input:focus{outline:none;border-color:var(--udp-blue-light)}
-.chat-send-btn{padding:8px 18px;background:var(--udp-blue);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap;align-self:flex-end}
-.chat-send-btn:hover{background:var(--udp-blue-light)}
-.chat-send-btn:disabled{background:#94a3b8;cursor:not-allowed}
-.ai-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.ai-action-btn{font-size:11px;padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;transition:.15s}
-.ai-action-btn:hover{border-color:var(--udp-blue-light);color:var(--udp-blue)}
+/* GES ANEXO */
+.ges-sistema-group{margin-bottom:14px}
+.ges-sistema-header{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);padding:4px 2px 6px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.ges-card{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:6px;cursor:pointer;transition:.2s;overflow:hidden}
+.ges-card:hover{border-color:var(--udp-blue-light);box-shadow:0 2px 8px rgba(34,85,164,.08)}
+.ges-card.ges-card-open{border-color:var(--udp-blue);box-shadow:0 2px 10px rgba(34,85,164,.12)}
+.ges-card-header{display:flex;align-items:center;gap:8px;padding:10px 14px;flex-wrap:wrap}
+.ges-card-header > div:first-child{flex:1;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ges-nombre{font-size:13px;font-weight:700;color:var(--text)}
+.ges-badge{font-size:10px;padding:2px 8px;border-radius:10px;background:#e8f0fb;color:var(--udp-blue);font-weight:600;white-space:nowrap}
+.ges-nivel{font-size:10px;color:var(--text-muted);white-space:nowrap}
+.ges-chevron{color:var(--udp-blue);font-size:11px;margin-left:4px;transition:.2s}
+.ges-card-body{padding:12px 16px 14px;border-top:1px solid #e8edf5;background:#f8fafc;display:flex;flex-direction:column;gap:8px}
+.ges-section{display:flex;flex-direction:column;gap:3px;font-size:12.5px;line-height:1.6;color:var(--text)}
+.ges-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--udp-blue);margin-bottom:1px}
+.ges-enf{background:#e8f5e9;border-radius:8px;padding:8px 10px;border-left:3px solid #16a34a}
+.ges-enf .ges-section-label{color:#15803d}
 
 /* QUIZ */
 .quiz-container{display:flex;flex-direction:column;gap:14px}
@@ -452,8 +422,8 @@ a:hover{text-decoration:underline}
     <div class="sidebar-tab" onclick="switchSidebarTab('fisio',this)">🫀 Fisiopato</div>
     <div class="sidebar-tab" onclick="showCrossRef()">🔗 Nexos</div>
     <div class="sidebar-tab" onclick="showCalculator()">🏥 CDSS</div>
-    <div class="sidebar-tab" onclick="showAIAssistant()">🤖 IA</div>
     <div class="sidebar-tab" onclick="showProgress()">📊</div>
+    <div class="sidebar-tab" onclick="showBibliography()">📚</div>
   </div>
   <div id="sidebar-farm" class="sidebar-content active"></div>
   <div id="sidebar-fisio" class="sidebar-content"></div>
@@ -522,68 +492,10 @@ a:hover{text-decoration:underline}
       <div class="cdss-mode" onclick="switchCDSSMode('dosevalidator',this)">💊 Validar Dosis</div>
       <div class="cdss-mode" onclick="switchCDSSMode('glasgow',this)">🧠 Glasgow</div>
       <div class="cdss-mode" onclick="switchCDSSMode('calculos',this)">🧮 Cálculos</div>
+      <div class="cdss-mode" onclick="switchCDSSMode('ges',this)">🇨🇱 GES</div>
     </div>
     <div id="cdss-panel"></div>
     <div class="calc-warning" style="margin-top:16px">⚠️ <strong>Advertencia:</strong> Estas herramientas son de apoyo educativo. NO reemplazan el juicio clínico ni los protocolos institucionales. Las alertas de interacciones cubren los fármacos más frecuentes en enfermería — siempre consulte fuentes adicionales.</div>
-  </div>
-
-  <!-- AI ASSISTANT -->
-  <div id="ai-view" style="display:none">
-    <div class="cv-header">
-      <div class="cv-title">🤖 Asistente IA — Profe IA</div>
-      <div class="cv-meta">Asistente clínico-académico · Farmacología y Fisiopatología ENF · UDP 2026</div>
-    </div>
-
-    <!-- Configuración API Key -->
-    <div class="ai-config">
-      <div class="ai-config-label">Configuración API</div>
-      <div class="ai-config-row">
-        <input type="password" class="ai-key-input" id="ai-key-input"
-          placeholder="sk-ant-api03-..."
-          oninput="setAIKey(this.value)"
-          autocomplete="off">
-        <span class="ai-status idle" id="ai-key-status">Sin clave</span>
-      </div>
-      <div class="ai-note">
-        🔑 Obtén tu clave en <strong>console.anthropic.com</strong> · Solo se usa en esta sesión, no se guarda · Para uso demo/docente
-      </div>
-    </div>
-
-    <!-- Preguntas rápidas -->
-    <div class="preset-questions" id="preset-questions">
-      <button class="preset-q" onclick="aiPresetQuestion('¿Cuál es la diferencia entre un antibiótico bactericida y bacteriostático? Dame ejemplos clínicos.')">Bactericida vs bacteriostático</button>
-      <button class="preset-q" onclick="aiPresetQuestion('Explica el mecanismo de la insuficiencia cardíaca y cómo actúan los diuréticos en su tratamiento.')">IC y diuréticos</button>
-      <button class="preset-q" onclick="aiPresetQuestion('¿Qué debo vigilar en un paciente que recibe vancomicina? ¿Por qué es nefrotóxica?')">Vancomicina: monitoreo</button>
-      <button class="preset-q" onclick="aiPresetQuestion('¿Cómo reconozco una reacción alérgica a un antibiótico y qué hago como enfermero/a?')">Alergia a antibióticos</button>
-      <button class="preset-q" onclick="aiPresetQuestion('Explica la fisiopatología del shock séptico y el rol de la noradrenalina.')">Shock séptico</button>
-      <button class="preset-q" onclick="aiPresetQuestion('¿Cuál es la diferencia entre heparina no fraccionada y enoxaparina en términos clínicos y de enfermería?')">Heparina vs enoxaparina</button>
-    </div>
-
-    <!-- Chat -->
-    <div class="chat-area" id="chat-area">
-      <div class="chat-messages" id="chat-messages">
-        <div class="chat-empty">
-          <div style="font-size:32px;margin-bottom:8px;">🤖</div>
-          <strong>Profe IA listo</strong><br>
-          Ingresa tu API Key y haz una pregunta clínica o usa las sugerencias de arriba.
-        </div>
-      </div>
-      <div class="chat-input-row">
-        <textarea class="chat-input" id="ai-input"
-          placeholder="Pregunta sobre farmacología, fisiopatología, mecanismos de acción... (Enter para enviar)"
-          rows="1"></textarea>
-        <button class="chat-send-btn" id="ai-send-btn" onclick="sendAIMessage()">Enviar ↑</button>
-      </div>
-    </div>
-
-    <div class="ai-actions">
-      <button class="ai-action-btn" onclick="clearAIChat()">🗑 Limpiar chat</button>
-      <button class="ai-action-btn" onclick="exportAIChat()">📋 Copiar conversación</button>
-    </div>
-
-    <div class="calc-warning" style="margin-top:12px">
-      ⚠️ <strong>Advertencia:</strong> El Asistente IA es una herramienta de apoyo educativo. Las respuestas son orientativas y NO reemplazan el juicio clínico, los protocolos institucionales ni la bibliografía oficial de la asignatura.
-    </div>
   </div>
 
   <!-- PROGRESS -->
@@ -593,6 +505,15 @@ a:hover{text-decoration:underline}
       <div class="cv-meta">Registro de sesiones visitadas · Datos almacenados en tu dispositivo</div>
     </div>
     <div id="progress-content"></div>
+  </div>
+
+  <!-- BIBLIOGRAFÍA -->
+  <div id="biblio-view" style="display:none">
+    <div class="cv-header">
+      <div class="cv-title">📚 Bibliografía y Guías Clínicas 2024–2025</div>
+      <div class="cv-meta">Fuentes verificadas · 50+ referencias · Actualización: Abril 2026</div>
+    </div>
+    <div id="biblio-content"></div>
   </div>
 
   <!-- CROSS REFERENCES -->
