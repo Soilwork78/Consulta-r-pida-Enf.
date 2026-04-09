@@ -1,9 +1,9 @@
 // ============================================================
 // sw.js — Service Worker — Consulta Rápida ENF UDP
-// Actualizado: 2026-04-08 — v1.3 (añade 7 presentaciones Fisiopatología)
+// Actualizado: 2026-04-08 — v3.0 (dark home, Cincinnati/GSA directos, Cuidados 2 completo)
 // ============================================================
 
-const CACHE_NAME = 'consulta-rapida-enf-v1.3';
+const CACHE_NAME = 'consulta-rapida-enf-v3.0';
 
 const ASSETS = [
   './',
@@ -28,6 +28,20 @@ const ASSETS = [
   './fisio-u5-renal-slides.html',
   './fisio-u6-neuro-slides.html',
   './fisio-u7-hematologia-slides.html',
+  // Presentaciones Cuidados de Enfermería 2
+  './cuid2-u1-humanizado-slides.html',
+  './cuid2-u2-proceso-slides.html',
+  './cuid2-u3-iaas-slides.html',
+  './cuid2-u4-tmsv-slides.html',
+  './cuid2-u5-calculo-slides.html',
+  './cuid2-u6-hidratacion-slides.html',
+  './cuid2-u7-eliminacion-slides.html',
+  './cuid2-u8-nutricion-slides.html',
+  './cuid2-u9-balance-slides.html',
+  './cuid2-u10-inhalatoria-slides.html',
+  './cuid2-u11-rcp-slides.html',
+  './cuid2-u12-visita-slides.html',
+  './cuid2-u13-postmortem-slides.html',
   './manifest.json',
   // Íconos PWA
   './icon-72.png',

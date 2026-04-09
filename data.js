@@ -709,4 +709,327 @@ crossrefs: [
   {fisioId:'fisio-c05',fisioTitle:'SDRA/Edema pulmonar',farmId:'farm-s8',farmTitle:'Diuréticos',desc:'Furosemida en edema cardiogénico. Ventilación protectora en SDRA'}
 ]
 
+,
+
+// ============================================================
+// CUIDADOS DE ENFERMERÍA 2
+// ============================================================
+cuid: {
+  label: '💙 Cuidados de Enfermería',
+  units: [
+    {
+      id:'cuid2-bloque',
+      title:'💙 Clases · Cuidados de Enfermería 2',
+      sessions: [
+
+        // ── U1 HUMANIZADO ──────────────────────────────────
+        {
+          id:'cuid2-u1-humanizado', title:'U1 · Gestión del Cuidado Humanizado', icon:'🤝',
+          topics:[
+            {t:'Cuidado Transpersonal (Watson)', def:'Presencia plena en cada encuentro de cuidado. El cuidado honra la humanidad del otro y evita reducir al paciente a un objeto pasivo. Requiere autoconciencia, empatía y disposición genuina del profesional.'},
+            {t:'Modelo Humanitude (Gineste-Marescotti)', def:'Metodología de cuidado cotidiano desarrollada en 1979. Cuatro pilares: MIRADA (nivel de los ojos, tiempo sostenido) · PALABRA (hablar siempre, explicar antes de tocar) · TACTO (suave, progresivo) · VERTICALIDAD (preservar la posición erguida). Implementada en SSMSO.'},
+            {t:'Satisfacción vs. Fatiga por Compasión', def:'Satisfacción por compasión: gratificación que emerge de cuidar bien. Fatiga por compasión: agotamiento emocional progresivo por exposición repetida al sufrimiento. Ambas coexisten y deben monitorizarse. La primera protege contra la segunda.'},
+            {t:'Síndrome de Burnout en Enfermería', def:'Tríada: agotamiento emocional + despersonalización + falta de realización personal. Factores: sobrecarga de trabajo, falta de autonomía, conflictos de rol, ausencia de reconocimiento. Afecta directamente la calidad del cuidado y la seguridad del paciente.'},
+            {t:'Estrategias de autocuidado profesional', def:'Supervisión clínica entre pares, establecer límites terapéuticos claros, debriefing grupal post situaciones críticas, actividades recreativas, mindfulness, participación en mesas de política pública. La humanización se construye desde el profesional hacia el paciente.'},
+            {t:'Código de Ética CIE y Colegio Enfermeras Chile', def:'Cuatro áreas del CIE: cuidado centrado en la persona, ejercicio competente, responsabilidad social y respeto a los derechos. El Código nacional agrega: deber de actualización permanente y defensa de la dignidad del paciente ante el sistema.'}
+          ],
+          keywords:['cuidado transpersonal','Watson','humanitude','Gineste','mirada','palabra','tacto','verticalidad','burnout','fatiga por compasión','satisfacción por compasión','autocuidado profesional','empatía','presencia','ética enfermería','código CIE','desgaste profesional'],
+          alerts:[
+            {type:'warning',title:'Trauma Vicario',text:'Transformación negativa del profesional por exposición repetida al sufrimiento ajeno. Signos: pérdida de empatía, sueños perturbadores, hipervigilancia. Requiere intervención preventiva estructurada (debriefing, supervisión).'},
+            {type:'info',title:'Calidez Operacional',text:'"Capacidad de establecer y mantener una relación cercana de acogida que demuestre ternura, confianza y afecto." (Lagos Sánchez et al.). Medible y enseñable; no es un rasgo innato.'}
+          ],
+          connections:[
+            {toId:'fisio-c13',title:'Neurofisiopatología',desc:'Estrés crónico → activación eje HPA → cortisol elevado → impacto inmune y cognitivo. Base fisiopatológica del burnout.',type:'fisio'},
+            {toId:'fisio-c07',title:'Insuficiencia Cardíaca',desc:'Pacientes con IC avanzada demandan alta carga emocional al equipo cuidador. Contexto frecuente de fatiga por compasión.',type:'fisio'}
+          ]
+        },
+
+        // ── U2 PROCESO ENFERMERO ───────────────────────────
+        {
+          id:'cuid2-u2-proceso', title:'U2 · Proceso Enfermero (PAE · NANDA · NIC-NOC)', icon:'📋',
+          topics:[
+            {t:'Las 5 etapas del PAE', def:'1. VALORACIÓN: recolección sistemática de datos subjetivos (lo que refiere el paciente) y objetivos (medibles). 2. DIAGNÓSTICO: análisis e identificación de problemas reales/potenciales. 3. PLANIFICACIÓN: establecer NOC y seleccionar NIC. 4. EJECUCIÓN: implementar las intervenciones. 5. EVALUACIÓN: comparar estado actual vs. NOC esperado.'},
+            {t:'Diagnóstico NANDA — Fórmula PES', def:'"[Etiqueta diagnóstica] relacionado con [factor relacionado] manifestado por [características definitorias]." Ejemplo: "00025 Riesgo de desequilibrio del volumen de líquidos r/c pérdidas activas m/p taquicardia y mucosas secas." Tipos: real, riesgo, salud, síndrome.'},
+            {t:'NIC — Clasificación de Intervenciones', def:'Catálogo estandarizado de intervenciones de enfermería. Cada NIC tiene un código, etiqueta, definición y lista de actividades. Ejemplos claves: NIC 2080 (Manejo líquidos/electrólitos), NIC 4130 (Monitorización líquidos), NIC 6680 (Signos vitales).'},
+            {t:'NOC — Resultados Esperados', def:'Resultados medibles para evaluar la efectividad del cuidado. Escala 1-5 (nunca → siempre demostrado). Ejemplo: NOC "Equilibrio hídrico" con indicadores: turgencia piel, diuresis, mucosas, constantes vitales. El NOC guía cuándo ajustar el plan.'},
+            {t:'Modelo de Orem — Déficit de Autocuidado', def:'Déficit cuando la demanda supera la capacidad del individuo. Tres sistemas: totalmente compensatorio (enfermera hace todo), parcialmente compensatorio (compartido), apoyo-educación (paciente puede, necesita guía). Orienta el nivel de intervención requerida.'},
+            {t:'Patrones Funcionales de Gordon', def:'11 patrones para guiar la valoración: percepción/manejo de salud, nutricional/metabólico, eliminación, actividad/ejercicio, sueño/reposo, cognitivo/perceptual, autopercepción, rol/relaciones, sexualidad, afrontamiento, valores/creencias. Estructura la recolección de datos subjetivos.'}
+          ],
+          keywords:['PAE','NANDA','NIC','NOC','diagnóstico enfermero','valoración','planificación','evaluación','Orem','déficit autocuidado','Gordon','intervención enfermería','resultado esperado','plan de cuidados','datos subjetivos','datos objetivos'],
+          alerts:[
+            {type:'danger',title:'Error frecuente: Diagnóstico médico ≠ Diagnóstico enfermero',text:'El diagnóstico enfermero responde a la respuesta del paciente ante un problema de salud, no a la enfermedad en sí. "Hipertensión" es diagnóstico médico; "00168 Disposición para mejorar la gestión de la salud" es diagnóstico enfermero.'},
+            {type:'warning',title:'NOC sin línea de base = NOC inútil',text:'Registrar el valor inicial (1-5) antes de intervenir. Sin baseline no se puede demostrar el cambio logrado ni ajustar el plan.'}
+          ],
+          connections:[
+            {toId:'farm-s1',title:'Introducción Farmacología',desc:'El PAE guía la administración segura de fármacos: valorar (alergias, función renal), diagnosticar (riesgo RAM), planificar (vía, dosis, hora), ejecutar (5 correctos), evaluar (efecto terapéutico).',type:'farm'},
+            {toId:'fisio-c02pptx',title:'Lesión y Muerte Celular',desc:'Los diagnósticos NANDA de riesgo (ej. riesgo de integridad cutánea) nacen de comprender el mecanismo fisiopatológico que amenaza la célula.',type:'fisio'},
+            {toId:'fisio-s8',title:'Shock',desc:'El PAE aplicado al shock: valoración hemodinámica → 00029 Disminución gasto cardíaco → NIC 4040 Cuidados cardíacos → NOC "Estado circulatorio".',type:'fisio'}
+          ]
+        },
+
+        // ── U3 IAAS ────────────────────────────────────────
+        {
+          id:'cuid2-u3-iaas', title:'U3 · IAAS · PAPE · Antisépticos', icon:'🦠',
+          topics:[
+            {t:'IAAS — Definición y epidemiología', def:'Infección que no estaba presente ni en período de incubación al ingreso hospitalario. Aparece ≥48 horas post-ingreso o hasta 30 días post-alta (1 año en cirugías con implante). ~15% de pacientes hospitalizados. Principal causa de morbimortalidad evitable.'},
+            {t:'Cadena Epidemiológica de la Infección', def:'Eslabones: 1) Agente infeccioso 2) Reservorio (equipos, manos del personal) 3) Puerta de salida 4) Mecanismo de transmisión (contacto directo, gotas, aire) 5) Puerta de entrada 6) Huésped susceptible. Romper un eslabón interrumpe la cadena.'},
+            {t:'5 Momentos de Higiene de Manos OMS', def:'1. Antes de tocar al paciente. 2. Antes de procedimiento aséptico/limpio. 3. Después de exposición a fluidos corporales. 4. Después de tocar al paciente. 5. Después de tocar el entorno del paciente. La higiene de manos es la intervención individual más eficaz para prevenir IAAS.'},
+            {t:'Antisépticos: Alcohol 70%, Clorhexidina, Povidona', def:'Alcohol 70%: inicio inmediato, amplio espectro (incluye micobacterias), sin efecto residual, NO mucosas. Clorhexidina: inicio 3-5 min, efecto residual 6 hrs, acumulativo, puede usarse en mucosas. Povidona yodada: inicio 90 seg, amplio espectro, se inactiva con materia orgánica, NO neonatos.'},
+            {t:'PAPE — Protocolo de Atención Post Exposición', def:'Aplicar ante pinchazo, corte o salpicadura con material biológico. Pasos: 1) Lavar zona inmediatamente con agua y jabón (5 min). 2) Notificar al jefe dentro de 2 horas. 3) Evaluación del riesgo (tipo de exposición, estado serológico fuente). 4) Profilaxis post-exposición si indicada (VIH: 72 hrs). 5) Seguimiento serológico.'},
+            {t:'Niveles de descontaminación', def:'Esterilización (elimina todo incluyendo esporas) > Desinfección alto nivel (elimina todo excepto algunas esporas) > Desinfección nivel medio (elimina vegetativas, micobacterias, virus) > Desinfección bajo nivel (bacterias vegetativas comunes) > Limpieza (reduce carga microbiana mecánicamente).'}
+          ],
+          keywords:['IAAS','infección nosocomial','higiene de manos','5 momentos OMS','alcohol 70%','clorhexidina','povidona yodada','antiséptico','desinfectante','PAPE','exposición ocupacional','cadena epidemiológica','precauciones estándar','EPP','ITU catéter','NAV','bacteriemia CVC'],
+          alerts:[
+            {type:'danger',title:'PAPE — Ventana de 2 horas',text:'La profilaxis post-exposición a VIH debe iniciarse ANTES de 72 horas, idealmente en las primeras 2 horas. Notificar inmediatamente al jefe de turno y acceder a protocolo institucional.'},
+            {type:'warning',title:'Alcohol gel ≠ Manos sucias',text:'El alcohol gel se inactiva en manos visiblemente sucias o contaminadas con materia orgánica. En estos casos: lavado con agua y jabón es obligatorio.'},
+            {type:'info',title:'Diferencia antiséptico / desinfectante',text:'Antiséptico: tejido vivo (piel, mucosas). Desinfectante: superficie inerte (instrumentos, mobiliario). La misma molécula puede ser ambos según concentración.'}
+          ],
+          connections:[
+            {toId:'farm-s3',title:'Antibióticos',desc:'IAAS por gram(-) multirresistentes (BLEE, KPC) requieren carbapenemes. La selección del ATB parte de conocer el patrón de resistencia institucional y el sitio de infección.',type:'farm'},
+            {toId:'farm-s4',title:'Antifúngicos, Antivirales',desc:'Candida albicans es la IAAS fúngica más frecuente (ITU catéter, CVC). Fluconazol como primera línea; equinocandinas en sepsis fúngica grave.',type:'farm'},
+            {toId:'fisio-s8',title:'Shock',desc:'El shock séptico es la complicación sistémica de una IAAS no controlada. La infección desencadena la cascada inflamatoria → disfunción endotelial → falla multiorgánica.',type:'fisio'}
+          ]
+        },
+
+        // ── U4 TMSV ────────────────────────────────────────
+        {
+          id:'cuid2-u4-tmsv', title:'U4 · Toma de Muestra de Sangre Venosa (TMSV)', icon:'🩸',
+          topics:[
+            {t:'Punción Venosa Periférica', def:'Procedimiento de introducción de aguja en vena periférica para obtener sangre o administrar medicamentos. Sitios de elección: pliegue del codo (cefálica, basílica, mediana cubital) → antebrazo → dorso de mano → tobillo (último recurso). Ángulo de inserción: 0-25° según profundidad del vaso.'},
+            {t:'Dispositivos para TMSV', def:'1) Aguja hipodérmica + jeringa (más económica). 2) Mariposa/scalp + jeringa (venas pequeñas o frágiles). 3) Mariposa/scalp + vacutainer (sistema cerrado, menor exposición). 4) Aguja directa + vacutainer (mayor flujo, adultos). La elección depende del estado venoso del paciente y volumen de muestra requerida.'},
+            {t:'Sistema Vacutainer® — Ventajas', def:'Sistema de tubos al vacío que permite obtener múltiples muestras sin retirar la aguja. SEGURO: menor exposición a sangre. RÁPIDO: el vacío aspira automáticamente. ESTANDARIZADO: identifica tipo de muestra por color de tapa. FIDELIDAD: cada tubo contiene el anticoagulante correcto en cantidad exacta.'},
+            {t:'Orden de llenado de tubos', def:'Para minimizar contaminación cruzada de aditivos: 1) Hemocultivos 2) Citrato (azul — coagulación) 3) Suero/SST (rojo/amarillo) 4) Heparina (verde) 5) EDTA (morado — hemograma) 6) Fluoruro (gris — glicemia). Nemotecnia: "Hay Sangre Hermosa En Muchas Personas".'},
+            {t:'Etapa Preanalítica — Fuente principal de error', def:'El 70-80% de errores en laboratorio ocurren en la etapa preanalítica: preparación incorrecta del paciente (ayuno, medicamentos), identificación errónea, técnica de extracción deficiente, transporte inadecuado. La TMSV correcta es la base de un diagnóstico confiable.'},
+            {t:'Técnica y errores frecuentes', def:'Hemólisis (causa más frecuente de rechazo): agitar vigorosamente, agujas muy finas, jeringa húmeda, mezcla incorrecta. Hematoma: no comprimir suficiente tiempo, retirar torniquete tarde. Coagulación: tardanza en mezclar. Volumen insuficiente: torniquete >2 min (↑K+,Mg2+). Siempre invertir suavemente el tubo 5-8 veces para homogenizar.'}
+          ],
+          keywords:['venopunción','TMSV','vacutainer','orden de tubos','hemólisis','etapa preanalítica','muestra sanguínea','aguja','torniquete','cefálica','basílica','scalp','mariposa','EDTA','citrato','heparina','hemograma','coagulación'],
+          alerts:[
+            {type:'danger',title:'NUNCA puncionar el tapón del tubo con jeringa',text:'Retirar el tapón suavemente y verter sin aguja, con el tubo en posición vertical. Puncionar el tapón genera hemólisis por espuma y daña la muestra.'},
+            {type:'warning',title:'Torniquete máximo 2 minutos',text:'Más tiempo: hemoconcentración, ↑K+, ↑Mg2+, ↑proteínas, ↓glucosa. Liberar ANTES de extraer la muestra para valores de electrólitos. Bombear el puño ↑K+ hasta 1 mEq/L.'},
+            {type:'info',title:'Bombear el puño altera electrólitos',text:'Pedir al paciente que bombee el puño repetidamente aumenta el potasio y magnesio locales. Pedir solo una vez cerrar y relajar para dilatar la vena.'}
+          ],
+          connections:[
+            {toId:'farm-s1',title:'Farmacocinética — Vías de Administración',desc:'El acceso venoso usado para TMSV es el mismo que se utiliza para la administración IV. Comprender la biodisponibilidad IV (100%) justifica la precisión técnica requerida.',type:'farm'},
+            {toId:'fisio-s14',title:'Hematología y Hemostasia',desc:'La TMSV permite obtener muestras para hemograma, coagulación y bioquímica. Conocer la eritropoyesis y hemostasia ayuda a interpretar los resultados e identificar alteraciones que explican los hallazgos clínicos.',type:'fisio'}
+          ]
+        },
+
+        // ── U5 CÁLCULO ─────────────────────────────────────
+        {
+          id:'cuid2-u5-calculo', title:'U5 · Cálculo de Dosis y Goteo', icon:'🧮',
+          topics:[
+            {t:'Sistemas de Perfusión: Macrogoteo vs Microgoteo', def:'MACROGOTEO: 1 mL = 20 gotas (factor 20). Para volúmenes grandes y velocidades altas. MICROGOTEO: 1 mL = 60 microgotas (factor 60). Para volúmenes pequeños, medicamentos vasoactivos, pediatría. Regla de oro: microgotas/min = mL/hr (equivalentes).'},
+            {t:'Fórmula Gotas por Minuto', def:'Opción 1: G/min = Volumen total (mL) / (Tiempo en horas × 3). Opción 2: G/min = (Volumen total × 20) / Tiempo en minutos. Ejemplo: SF 500 mL en 4 horas → 500 / (4×3) = 41.6 ≈ 42 gotas/min. TRUCO: dividir por 3 da gotas, multiplicar por 3 pasa de gotas a mL/hr.'},
+            {t:'Fórmula Microgotas por Minuto', def:'µgotas/min = (Volumen total × 60) / Tiempo en minutos. O simplemente: µgotas/min = mL/hr. Ejemplo: 250 mL en 24 hrs → 250/24 = 10.4 ≈ 10 µgotas/min = 10 mL/hr.'},
+            {t:'Velocidad de Infusión mL/hr', def:'mL/hr = Volumen total (mL) / Tiempo (horas). Es la unidad preferida en bombas de infusión. Siempre programar BIC en mL/hr, nunca en gotas. Ejemplo: 1000 mL en 8 hrs → 125 mL/hr.'},
+            {t:'Cálculo de Dosis — Regla de 3', def:'Fórmula: X = (Dosis requerida × Volumen conocido) / Concentración disponible. A/B = C/X → X = (C×B)/A. Ejemplo: Ampicilina 1g en 4 mL, indicación 250 mg → X = (250×4)/1000 = 1 mL. Siempre identificar primero la unidad en que está expresada la presentación.'},
+            {t:'Reconstitución y dilución', def:'Reconstitución: pasar medicamento de estado sólido a líquido con diluyente adecuado (agua bidestilada, SF). La dilución final determina la concentración para el cálculo. Siempre verificar compatibilidad con el diluyente y estabilidad tras reconstitución. Registrar fecha/hora de reconstitución.'}
+          ],
+          keywords:['goteo','macrogoteo','microgoteo','factor goteo','mL/hr','gotas por minuto','velocidad infusión','regla de tres','dosis','reconstitución','dilución','BIC','bomba infusión','cálculo farmacológico'],
+          alerts:[
+            {type:'danger',title:'Error de cálculo = Error de medicación',text:'Los errores de cálculo son la segunda causa más frecuente de errores de medicación. Verificar: unidades, concentración disponible, velocidad programada en BIC. Recalcular siempre con un colega en dosis de alto riesgo (heparina, insulina, vasoactivos).'},
+            {type:'warning',title:'1 microgota/min = 1 mL/hr',text:'Esta equivalencia permite verificar rápidamente si la BIC está programada correctamente cuando se usa sistema de microgoteo. Si la BIC dice 10 mL/hr, el microgotero debería ir a 10 µgotas/min.'}
+          ],
+          connections:[
+            {toId:'farm-s1',title:'Farmacocinética — ADME',desc:'La velocidad de infusión afecta la Cmax (concentración máxima) y el tiempo para alcanzar concentración en estado estable. Infundir muy rápido → toxicidad; muy lento → nivel subterapéutico.',type:'farm'},
+            {toId:'farm-s2',title:'Ventana Terapéutica y RAM',desc:'El cálculo preciso de dosis es esencial para fármacos con ventana terapéutica estrecha (digoxina, vancomicina, heparina, aminoglucósidos). Un error de concentración puede llevar de infraterapéutico a tóxico.',type:'farm'}
+          ]
+        },
+
+        // ── U6 HIDRATACIÓN ─────────────────────────────────
+        {
+          id:'cuid2-u6-hidratacion', title:'U6 · Hidratación Parenteral y Hemoderivados', icon:'💧',
+          topics:[
+            {t:'Gestión del Capital Venoso', def:'"El sistema venoso es único, no tiene reemplazo, no es ilimitado. Cada punción agrede su integridad y deja huella." Principios: rotar sitios de punción, usar el calibre mínimo necesario, retirar el catéter periférico a las 72-96 hrs (o antes si hay signos de flebitis), preferir accesos centrales para soluciones hiperosmolares y vasoactivos.'},
+            {t:'Tipos de soluciones IV — Tonicidad', def:'ISOTÓNICAS (SF 0.9%, SG 5%, Ringer Lactato): no alteran el volumen celular, expanden el espacio extracelular. HIPOTÓNICAS (SF 0.45%, AG 2.5%): pasan al intracelular → rehidratación celular, riesgo edema cerebral. HIPERTÓNICAS (SG 10%-50%, NaCl 3%, KCl 10%): extraen agua del intracelular → solo en UCI con vigilancia estricta.'},
+            {t:'Complicaciones del acceso periférico', def:'Flebitis (enrojecimiento, calor, dolor, induración, cordón venoso palpable) — retirar catéter inmediatamente. Infiltración (edema alrededor, dolor, sin retorno sanguíneo). Extravasación (lesión tisular por vesicantes: VCR, dobutamina, KCl concentrado) — detener, elevar extremidad, antídoto específico. Oclusión — NO forzar con jeringa de <10 mL.'},
+            {t:'Hemoderivados — Tipos e indicaciones', def:'Concentrado eritrocitos: Hb <7 g/dL general (< 8 si cardiopatía isquémica). Plasma fresco congelado: coagulopatía activa, reversión anticoagulantes. Plaquetas: <10.000 profiláctico, <50.000 procedimiento invasivo. Crioprecipitados: fibrinógeno <1.5 g/L, hemofilia A. Verificar grupo/Rh y prueba cruzada antes de transfundir.'},
+            {t:'Reacciones Transfusionales Inmediatas', def:'Hemolítica aguda (la más grave): fiebre súbita, escalofríos, dolor lumbar/torácico, hemoglobinuria — detener INMEDIATAMENTE, conservar bolsa, avisar médico, extraer muestras. Febril no hemolítica (más frecuente): fiebre sin hemólisis, antecedente de múltiples transfusiones. Alérgica: urticaria, broncoespasmo → antihistamínico. TRALI: disnea aguda, infiltrados bilaterales, sin IC.'},
+            {t:'Protocolo de enfermería en transfusión', def:'1) Verificar orden médica y consentimiento. 2) Confirmar grupo/Rh y prueba cruzada con 2 personas. 3) Control de SV basal. 4) Iniciar lento: primeros 15 minutos presencia continua. 5) Máximo 4 horas por unidad (2 hrs plaquetas). 6) Filtro transfusional obligatorio. 7) Registrar inicio, volumen, fin y tolerancia.'}
+          ],
+          keywords:['acceso venoso','solución isotónica','hipotónica','hipertónica','flebitis','infiltración','extravasación','catéter periférico','CVC','hemoderivados','transfusión','concentrado eritrocitos','plasma','plaquetas','TRALI','reacción transfusional'],
+          alerts:[
+            {type:'danger',title:'Detener transfusión ante cualquier reacción',text:'Ante fiebre, escalofríos, dolor lumbar, hipotensión o disnea durante transfusión: DETENER inmediatamente. Mantener vía con SF. Conservar la bolsa y el set. Extraer muestras del paciente. Notificar al médico y al banco de sangre. NO reiniciar sin evaluación médica.'},
+            {type:'danger',title:'KCl nunca IV directo',text:'El cloruro de potasio concentrado administrado en bolo IV produce PCR. Solo en solución diluida (máx 40 mEq/L periférico, máx 60 mEq/hr con monitorización). Comprobar siempre la dilución antes de administrar.'},
+            {type:'warning',title:'Soluciones hipotónicas y edema cerebral',text:'SF 0.45% y glucosa 5% libre de electrólitos: contraindicadas en TCE, hiponatremia grave o riesgo de herniación. Pueden precipitar edema cerebral por desplazamiento osmótico de agua al intracelular.'}
+          ],
+          connections:[
+            {toId:'fisio-s8',title:'Shock',desc:'La reposición de volumen en shock requiere conocer qué solución usar según el tipo (isotónica en shock distributivo/hemorrágico; coloides/hemoderivados en hemorrágico masivo). La fisiopatología del shock guía la elección.',type:'fisio'},
+            {toId:'fisio-shidro',title:'Equilibrio Hidrosalino',desc:'La tonicidad de la solución IV altera directamente el equilibrio entre intracelular y extracelular. Comprender la osmolaridad sérica es esencial para elegir la solución correcta.',type:'fisio'},
+            {toId:'farm-s8',title:'Diuréticos',desc:'La furosemida IV es el diurético más usado en contexto hospitalario. Su administración requiere acceso venoso y monitorización del balance hídrico y electrólitos (↓K+ ↓Na+).',type:'farm'},
+            {toId:'fisio-s17',title:'AKI',desc:'La hidratación parenteral es la intervención inicial en AKI prerenal. La elección del volumen y tipo de solución impacta directamente en la recuperación de la función renal.',type:'fisio'}
+          ]
+        },
+
+        // ── U7 ELIMINACIÓN URINARIA ────────────────────────
+        {
+          id:'cuid2-u7-eliminacion', title:'U7 · Eliminación Urinaria y Dispositivos', icon:'🔬',
+          topics:[
+            {t:'Alteraciones de la Eliminación Urinaria', def:'Poliuria: >2500 mL/día (DM, diuréticos, DI). Oliguria: 100-400 mL/día (AKI, deshidratación). Anuria: <100 mL/día (obstrucción, AKI grave). Retención urinaria: imposibilidad de vaciar vejiga espontáneamente. Incontinencia: tipos estrés, urgencia, mixta, funcional. Alerta crítica: diuresis <0.5 mL/kg/hr.'},
+            {t:'Cateterismo Vesical — Indicaciones', def:'Retención urinaria aguda, control estricto de diuresis en paciente crítico, cirugías prolongadas, ulceración perineal grave en incontinentes, irrigación vesical, obstrucción uretral. No indicar de rutina. Cada día con sonda = 5% de riesgo de ITU adicional. EVALUAR necesidad diaria.'},
+            {t:'Técnica Aséptica de Cateterismo', def:'1) Higiene de manos + guantes estériles. 2) Campo estéril. 3) Limpiar meato: mujer (labios mayores→menores, arriba→abajo, 3 tórulas sin repetir). Hombre (retracción prepucio, círculos concéntricos). 4) Lubricar sonda con lidocaína gel. 5) Insertar con técnica no tocar. 6) Inflar balón 5-10 mL SF. 7) Conectar a sistema cerrado.'},
+            {t:'Cuidados de Sonda Foley', def:'Sistema cerrado siempre (nunca abrir la unión sonda-bolsa). Bolsa SIEMPRE bajo el nivel de la vejiga. No doblar ni comprimir el tubo. Higiene del meato uretral c/12 horas con agua y jabón neutro. Fijar sonda a muslo (evitar tracción). Registrar diuresis y características. Vaciar la bolsa cuando esté llena en 2/3.'},
+            {t:'ITU Asociada a Catéter (IAAS más frecuente)', def:'Segunda causa más frecuente de IAAS. Factores de riesgo: duración del cateterismo, técnica no estéril, sistema abierto, edad >65, DM, mujer. Prevención: indicación precisa + retiro precoz. Diagnóstico: síntomas sistémicos (fiebre) o locales (disuria, pujo) + orina turbia/maloliente + urocultivo >100.000 UFC/mL.'},
+            {t:'Irrigación Vesical', def:'Indicación: hematuria macroscópica post-prostatectomía, coágulos, obstrucción. Requiere sonda de 3 vías (irrigación + drenaje + inflado balón). Continua: suero fisiológico a velocidad ajustada para mantener orina rosada. Control: equilibrio ingresos irrigación vs. egresos bolsa. Vigilar sobredistensión.'}
+          ],
+          keywords:['poliuria','oliguria','anuria','retención urinaria','sonda Foley','cateterismo vesical','ITU catéter','sistema cerrado','incontinencia','diuresis','meato uretral','irrigación vesical','sonda 3 vías','balance hídrico urinario'],
+          alerts:[
+            {type:'danger',title:'Diuresis < 0.5 mL/kg/hr = alarma',text:'En adulto de 70 kg: diuresis < 35 mL/hr. Actuar: valorar hidratación, descartar obstrucción, avisar médico. No esperar 2 horas para intervenir.'},
+            {type:'warning',title:'No forzar catéter ante resistencia',text:'Si hay resistencia al pasar la sonda, NO forzar. Puede indicar estenosis uretral, hiperplasia prostática o espasmo. Solicitar evaluación médica.'},
+            {type:'info',title:'Retiro precoz = Mejor prevención de ITU',text:'Evaluar diariamente la necesidad de la sonda. El mayor factor de riesgo de ITU-CA es el número de días con sonda. Protocolos de retiro precoz reducen hasta 50% la incidencia.'}
+          ],
+          connections:[
+            {toId:'fisio-s17',title:'AKI — Insuficiencia Renal Aguda',desc:'El monitoreo de diuresis horaria es el marcador más práctico de función renal en AKI. Oliguria refractaria indica progresión a AKI estadio 3. El cateterismo permite cuantificar y distinguir AKI prerenal (responde a volumen) de intrarrenal.',type:'fisio'},
+            {toId:'fisio-serc',title:'ERC',desc:'En ERC, la eliminación urinaria cae progresivamente. El cateterismo puede ser necesario para monitorizar la función residual. La restricción hídrica y el control de electrólitos están relacionados directamente con la diuresis medida.',type:'fisio'},
+            {toId:'farm-s8',title:'Diuréticos',desc:'La furosemida y otros diuréticos aumentan la diuresis. El cateterismo permite medir el efecto exacto de la dosis. La monitorización de la diuresis guía el ajuste terapéutico.',type:'farm'},
+            {toId:'farm-s3',title:'Antibióticos',desc:'Las ITU asociadas a catéter frecuentemente requieren antibioticoterapia (ciprofloxacino oral o ceftriaxona IV). Considerar antibiograma antes de iniciar empírico por alta resistencia en IAAS.',type:'farm'}
+          ]
+        },
+
+        // ── U8 NUTRICIÓN ───────────────────────────────────
+        {
+          id:'cuid2-u8-nutricion', title:'U8 · Nutrición Enteral y Dispositivos', icon:'🍽️',
+          topics:[
+            {t:'Valoración Nutricional del Paciente Hospitalizado', def:'Cuatro dimensiones: Antropométrica (IMC, pliegue tricipital, circunferencia de brazo), Bioquímica (albúmina <3.5g/dL = desnutrición moderada, prealbúmina más sensible a corto plazo), Clínica (examen físico: pérdida masa muscular, edemas, cicatrización), Dietética (ingesta 24h, intolerancias). Tamizaje: NRS-2002 o MNA.'},
+            {t:'Nutrición Enteral vs Parenteral', def:'Si el tracto GI es FUNCIONAL → ENTERAL (más fisiológica, mantiene integridad intestinal, menos infecciones, más barata). Si no es funcional → PARENTERAL. Indicaciones enteral: disfagia neurológica, coma, quemados, politrauma. Iniciar enteral dentro de 24-48 hrs en pacientes críticos. "Si el intestino funciona, úsalo."'},
+            {t:'Sonda Nasogástrica (SNG) — Técnica y Verificación', def:'Medir longitud: nariz-oreja-apéndice xifoides. Posición sentado 45-90°. Introducir con cabeza en flexión leve (evita tráquea). Verificar posición: 1° aspirado gástrico + pH <5 (gold standard clínico), 2° RX (único método 100% confiable). NUNCA usar solo método del aire-agua (obsoleto y peligroso).'},
+            {t:'Modos de Administración Enteral', def:'CONTINUA (bomba, 24 hrs): menor riesgo aspiración, mejor tolerancia gástrica, para pacientes críticos. INTERMITENTE (bolos 4-6 veces/día): más fisiológico, permite movilidad, mejor para pacientes conscientes. CÍCLICA (nocturna): permite autonomía diurna, para NE domiciliaria o pacientes en rehabilitación.'},
+            {t:'Gastrostomía (PEG) y Nutrición a Largo Plazo', def:'Indicada cuando la NE será >4-6 semanas: ACV con disfagia, CA orofaríngeo, ELA, demencia avanzada. Técnica endoscópica percutánea. Cuidados estoma: limpiar con agua y jabón, rotar el dispositivo 360° diario, evitar presión. Verificar residuo gástrico antes de cada administración (>150-200 mL = retardar).'},
+            {t:'Ostomías Intestinales', def:'Colostomía (colon): heces pastosas/sólidas, bolsa drenable o cerrada. Ileostomía (íleon): heces líquidas y ácidas → alto riesgo dermatitis periestomal, mayor pérdida de líquidos. Cuidados: limpiar con agua y jabón neutro, bolsa ajustada al estoma (1-2 mm de margen), vigilar color del estoma (rosado/rojo = viable; oscuro/negro = necrosis → avisar urgente).'}
+          ],
+          keywords:['nutrición enteral','SNG','PEG','gastrostomía','valoración nutricional','albúmina','NRS-2002','ostomía','colostomía','ileostomía','bomba enteral','residuo gástrico','aspiración','disfagia','NPT'],
+          alerts:[
+            {type:'danger',title:'Nunca administrar enteral sin verificar posición de SNG',text:'Si la SNG está en tráquea o bronquio y se administra fórmula → broncoaspiración masiva con riesgo de muerte. Verificar siempre pH del aspirado o RX antes de iniciar y ante cualquier duda.'},
+            {type:'warning',title:'Residuo gástrico > 200 mL = pausar enteral',text:'Si aspirado >200 mL antes de administración: retardar la dosis, posición 45°, evaluar procinético (metoclopramida). Reiniciar en 2 horas. Residuos repetidamente altos → cambiar a NP o pospilórica.'},
+            {type:'info',title:'Estoma oscuro o necrótico = emergencia',text:'El color normal del estoma es rosado-rojo, húmedo, similar a mucosa oral. Color marrón oscuro, negro o con mal olor indica necrosis isquémica. Avisar INMEDIATAMENTE al equipo médico.'}
+          ],
+          connections:[
+            {toId:'fisio-c09pdf',title:'Obesidad Visceral',desc:'La obesidad modifica los requerimientos nutricionales y complica la valoración. En obesidad con desnutrición proteica (sarcopenia) la albúmina puede ser normal con deficiencia real.',type:'fisio'},
+            {toId:'fisio-c10pdf',title:'Diabetes Mellitus',desc:'La NE en pacientes diabéticos requiere fórmulas con bajo índice glucémico y monitorización estricta de glicemia. La insulina debe ajustarse al aporte de HC de la nutrición.',type:'fisio'},
+            {toId:'farm-sdiab',title:'Antidiabéticos e Insulinas',desc:'En nutrición enteral continua: insulina de acción lenta como base + corrección con rápida. Suspender metformina si función renal comprometida. Ajustar dosis con glicemias c/4-6 hrs.',type:'farm'}
+          ]
+        },
+
+        // ── U9 BALANCE HÍDRICO ─────────────────────────────
+        {
+          id:'cuid2-u9-balance', title:'U9 · Balance Hídrico', icon:'⚖️',
+          topics:[
+            {t:'Definición y Tipos de Balance Hídrico', def:'Estado de equilibrio donde ingresos = egresos. NEUTRO: ingresos = egresos. POSITIVO: ingresos > egresos (retención → edema, congestión). NEGATIVO: egresos > ingresos (pérdida → deshidratación, hipovolemia). Un balance positivo de +3 L/día en 3 días = 3 kg de peso ganado como agua.'},
+            {t:'Ingresos: Exógenos y Endógenos', def:'Exógenos: líquidos por VO (~1500 mL/día), alimentos (~700 mL), soluciones IV, medicamentos IV diluidos. Endógenos: agua metabólica = 300 mL/24 hrs (constante, producto del metabolismo celular). Total promedio ingresos: ~2500 mL/día.'},
+            {t:'Egresos: Sensibles e Insensibles', def:'Sensibles (medibles): diuresis (principal, ~1500 mL), deposiciones (~300 mL), vómitos, drenajes. Insensibles (no medibles): piel/sudor (75% por convección) y pulmones (25% por evaporación) → normalmente 800-1000 mL/día. Aumentan con fiebre, taquipnea y sudoración profusa.'},
+            {t:'Cálculo de Pérdidas Insensibles por Fiebre y Taquipnea', def:'FIEBRE: 6 mL/hr por cada grado >37°C (ó 0.6 mL por cada décima/hr). TAQUIPNEA: 1 mL/hr por cada resp >20x\'. SUDORACIÓN: abundante=20 mL/hr, profusa (moja sábanas)=40 mL/hr. AGUA METABÓLICA: 300 mL/24 hrs (restar de egresos). Fórmula PI total: peso × 0.5 × N° horas.'},
+            {t:'Cálculo e Interpretación del BH', def:'BH = Total ingresos - Total egresos (incluyendo PI). Se registra por turnos (8 hrs) y acumulado 24 hrs. BH positivo en ICC → terapia depletiva con furosemida. BH negativo en deshidratación → reposición. Complementar con: peso diario, signos clínicos y parámetros de laboratorio.'},
+            {t:'Signos Clínicos de Alteración del Volumen', def:'DEFICIT (deshidratación): taquicardia, hipotensión ortostática, mucosas secas, turgencia piel ↓, ojos hundidos, oliguria, orina oscura concentrada, ↑Hto. EXCESO (hipervolemia): edema dependiente (escala +/++++), ingurgitación yugular, crepitantes basales, disnea de esfuerzo/reposo, aumento de peso.'}
+          ],
+          keywords:['balance hídrico','BH','ingresos','egresos','pérdidas insensibles','fiebre','taquipnea','sudoración','agua metabólica','deshidratación','hipervolemia','edema','diuresis','peso diario','turgor piel'],
+          alerts:[
+            {type:'warning',title:'Agua Metabólica: Restar de egresos',text:'Los 300 mL de agua metabólica son producidos por el cuerpo como subproducto del metabolismo. Se suman a los ingresos, por lo que en el cálculo final del BH se considera como una entrada fija para todos los pacientes.'},
+            {type:'info',title:'1 kg de peso = 1 L de agua',text:'El peso diario es el método más sensible para detectar cambios en el balance hídrico. Un aumento de 1 kg en 24 hrs = retención de 1 litro. Pesar siempre en las mismas condiciones (misma hora, misma ropa, vejiga vacía).'}
+          ],
+          connections:[
+            {toId:'fisio-shidro',title:'Equilibrio Hidrosalino',desc:'La fisiopatología del desequilibrio hidrosalino explica cada tipo de alteración del BH: hiponatremia dilucional (exceso de agua libre), hipernatremia (déficit de agua libre), deshidratación isotónica (pérdida proporcional).',type:'fisio'},
+            {toId:'fisio-c07',title:'Insuficiencia Cardíaca',desc:'En IC, el BH positivo indica acumulación de agua → congestión pulmonar y edema periférico. La terapia depletiva con furosemida busca un BH negativo controlado. Monitorizar diuresis horaria y signos de hipoperfusión.',type:'fisio'},
+            {toId:'fisio-s17',title:'AKI',desc:'En AKI, el control del BH es crítico: el riñón no puede compensar. BH muy positivo → sobrecarga y edema pulmonar. BH muy negativo → empeora la isquemia renal. El balance eutrófico (neutro a levemente positivo) es el objetivo.',type:'fisio'},
+            {toId:'farm-s8',title:'Diuréticos',desc:'Furosemida IV en dosis altas induce BH negativo planificado. La respuesta diurética (mL/hr tras la dosis) es el parámetro de enfermería para evaluar el efecto. Vigilar: ↓K+, ↓Na+, hipotensión.',type:'farm'}
+          ]
+        },
+
+        // ── U10 INHALATORIA ────────────────────────────────
+        {
+          id:'cuid2-u10-inhalatoria', title:'U10 · Administración Inhalatoria y Aspiración', icon:'🫁',
+          topics:[
+            {t:'Ventajas de la vía inhalatoria', def:'Acción local directa sobre vías aéreas (menor dosis necesaria). Inicio rápido de acción (broncodilatadores: 3-5 min). Mínimos efectos sistémicos con dispositivos correctos. Alta biodisponibilidad pulmonar cuando la técnica es adecuada. Requiere: coordinación mano-inspiración (MDI), capacidad inspiratoria mínima (DPI).'},
+            {t:'MDI (Aerosol pressurizado) — Técnica correcta', def:'1) Agitar vigorosamente 5 veces. 2) Exhalar completamente (no en el dispositivo). 3) Sellar boquilla con labios. 4) Inspirar LENTO y PROFUNDO (~3-5 seg) mientras presiona. 5) Apnea 10 segundos. 6) Esperar 1 minuto entre puffs. USO CON ESPACIADOR: mejora depósito pulmonar 30-40%, reduce depósito orofaríngeo (← esencial en corticoides inhalados para prevenir candidiasis oral).'},
+            {t:'Nebulización — Indicaciones y técnica', def:'Indicada cuando no se puede coordinar MDI: crisis asmática, EPOC agudizado, pediatría, ancianos, nivel de conciencia alterado. Flujo O₂ 6-8 L/min, duración 10-15 min. El residuo en nebulizador = 20-30% de la dosis → verificar que el medicamento esté completamente nebulizado. Limpiar y secar nebulizador después de cada uso (riesgo infección).'},
+            {t:'Medicamentos inhalatorios frecuentes', def:'β2-agonistas (salbutamol/albuterol): broncodilatación en 3-5 min, 4-6 hrs. Efectos: taquicardia, temblor. Anticolinérgicos (ipratropio): 15-30 min, 6-8 hrs. β2-LABA (salmeterol, formoterol): mantenimiento, 12 hrs. Corticoides (budesonida, fluticasona): antiinflamatorio, no broncodilatador. Combinar siempre primero broncodilatador, luego corticoide.'},
+            {t:'Aspiración de Secreciones — Indicaciones', def:'Indicada cuando el paciente no puede limpiar sus vías aéreas: incapacidad de toser eficazmente, intubado/traqueostomizado, alteración del nivel de conciencia, SpO₂ descendente sin causa clara, ruidos aéreos (roncus, estertores). NO rutinaria: solo cuando haya signos clínicos de secreciones.'},
+            {t:'Técnica de Aspiración — Puntos críticos', def:'PREOXIGENAR: O₂ al 100% por 2 minutos antes. Sonda: Fr 10-14 en adulto (no más de la mitad del diámetro del tubo). Introducir SIN aspiración. Aspirar en movimiento rotatorio, máximo 10-15 segundos. Máximo 3 intentos consecutivos. Reoxigenar entre intentos. Vigilar: SpO₂, FC, ritmo cardíaco (las arritmias son la complicación más seria).'}
+          ],
+          keywords:['inhalatoria','MDI','aerosol','nebulización','DPI','salbutamol','ipratropio','budesonida','broncodilatador','corticoide inhalado','aspiración secreciones','traqueostomía','spacer','cámara espaciadora','preoxigenación','sonda aspiración'],
+          alerts:[
+            {type:'danger',title:'Aspiración máximo 10-15 seg por intento',text:'La hipoxia durante la aspiración puede provocar arritmias graves o PCR. Monitorizar SpO₂ y FC durante el procedimiento. Si SpO₂ cae por debajo de 90% o aparecen arritmias: detener y reoxigenar inmediatamente.'},
+            {type:'warning',title:'Corticoides inhalados → enjuagar boca',text:'Budesonida, fluticasona: la fracción depositada en orofaringe (30-40% sin espaciador) causa candidiasis oral. Instrucción al paciente: enjuagar boca con agua y escupir SIEMPRE tras usar corticoide inhalado.'},
+            {type:'info',title:'DPI requiere flujo inspiratorio mínimo',text:'Los inhaladores de polvo seco (Turbuhaler, Accuhaler) necesitan un flujo inspiratorio rápido y fuerte para dispersar el polvo. NO aptos para crisis aguda, niños <6 años ni adultos con capacidad inspiratoria muy limitada.'}
+          ],
+          connections:[
+            {toId:'fisio-c03',title:'Asma Bronquial',desc:'En crisis asmática: salbutamol en nebulización o MDI + espaciador como primera línea. En asma persistente: corticoide inhalado diario. El mecanismo de broncoconstricción (hiperreactividad, inflamación) justifica la combinación broncodilatador+antiinflamatorio.',type:'fisio'},
+            {toId:'fisio-c04',title:'EPOC',desc:'En EPOC: broncodilatadores de acción prolongada (LABA+LAMA) son base del tratamiento. Nebulización en exacerbaciones. La aspiración es frecuente por hipersecreción mucosa y tos ineficaz. Meta SpO₂ 88-92% (no 100%).',type:'fisio'},
+            {toId:'farm-s5',title:'Alergias, Vía Aérea y Antihistamínicos',desc:'El asma alérgica se maneja con corticoides inhalados + broncodilatadores. Los antihistamínicos NO tienen rol en broncoespasmo. La adrenalina SC/IM es el tratamiento del broncoespasmo severo-anafilaxia.',type:'farm'},
+            {toId:'farm-saines',title:'AINEs y Corticoides',desc:'Los corticoides sistémicos (prednisona, metilprednisolona) se usan en crisis moderada-grave. La transición a corticoide inhalado es parte del plan de egreso. AINEs pueden desencadenar broncoespasmo en pacientes con sensibilidad a aspirina.',type:'farm'}
+          ]
+        },
+
+        // ── U11 RCP ────────────────────────────────────────
+        {
+          id:'cuid2-u11-rcp', title:'U11 · RCP Intrahospitalaria', icon:'❤️',
+          topics:[
+            {t:'Cadena de Supervivencia Intrahospitalaria', def:'5 eslabones: 1) Vigilancia y prevención del paro (reconocer deterioro precoz → código de respuesta rápida). 2) Activar sistema de emergencia (clave azul/roja/numérica). 3) RCP precoz (compresiones de calidad). 4) Desfibrilación precoz (<3 min en zona cardioprotegida). 5) Soporte vital avanzado y cuidados post-PCR. La activación rápida del primer eslabón puede prevenir el paro.'},
+            {t:'Evaluación Inicial — En menos de 10 segundos', def:'1) SEGURIDAD DE ESCENA. 2) ¿RESPONDE? (estimulación verbal + táctil). 3) PEDIR AYUDA + ACTIVAR CLAVE. 4) Evaluar simultáneamente: RESPIRACIÓN (normal/anormal/ausente) + PULSO carotídeo. Si no respira normalmente o no hay pulso palpable en ≤10 seg → INICIAR RCP. Jadeo o boqueo = ausencia de respiración normal.'},
+            {t:'Compresiones Torácicas de Calidad — AHA 2020', def:'Frecuencia: 100-120 cpm (no menos, no más). Profundidad: 5-6 cm en adulto (no comprimir < 5 ni > 6 cm). Posición: talón de una mano sobre mitad inferior del esternón, otra mano entrelazada. Retroceso COMPLETO entre compresiones (no apoyarse). Minimizar interrupciones (<10 seg). Relación 30:2 si sin vía aérea avanzada.'},
+            {t:'Carro de Paro — Contenido por Cajones', def:'Estandarizado por institución. Típicamente: Cajón 1 (Medicamentos: adrenalina, amiodarona, atropina, bicarbonato, adenosina). Cajón 2 (Vía aérea: laringoscopio, TET, mascarillas, cánula Mayo, BVM). Cajón 3 (Circulación: catéteres, flebotomía, soluciones). Cajón 4 (Desfibrilador y cables). Cajón 5 (Material especial, tablas). Revisar semanalmente y tras cada uso.'},
+            {t:'Ventilación con BVM', def:'FiO₂ sin O₂: 21%. Con O₂: 40-60%. Con bolsa reservorio + O₂: 90-100% (lo ideal). Técnica correcta: sello C-E con una mano, bolsa con otra. O dos operadores: sello bimanual + compresión bolsa. Dar 1 ventilación/segundo hasta elevar tórax. NO hiperventilar (reduce retorno venoso y empeora pronóstico).'},
+            {t:'RCP de Alta Calidad — Qué SÍ y qué NO', def:'SÍ: 100-120 cpm, profundidad 5-6 cm, retroceso completo, minimizar pausas, turnar cada 2 min. NO: frecuencia <100 o >120 cpm, profundidad <5 o >6 cm, apoyarse en el tórax entre compresiones, pausas >10 seg, hiperventilar (1 ventilación cada 6 seg = 10/min con vía aérea avanzada).'}
+          ],
+          keywords:['RCP','PCR','paro cardiaco','compresiones torácicas','BVM','cadena supervivencia','clave azul','carro de paro','desfibrilación','AHA 2020','adrenalina','amiodarona','cánula Mayo','ventilación','30:2'],
+          alerts:[
+            {type:'danger',title:'7-10% menos de sobrevida por cada minuto sin RCP',text:'Las posibilidades de recuperación disminuyen 7-10% por cada minuto sin intervención. El inicio inmediato de compresiones de calidad es la intervención con mayor impacto en la sobrevida de PCR intrahospitalaria.'},
+            {type:'danger',title:'NO hiperventilar durante RCP',text:'La hiperventilación aumenta la presión intratorácica, reduce el retorno venoso y disminuye el gasto cardíaco durante las compresiones. En adulto con vía aérea avanzada: 1 ventilación cada 6 segundos (10/min), sin pausar compresiones.'},
+            {type:'warning',title:'Carro de Paro: revisar semanalmente',text:'Un carro de paro con medicamentos vencidos o material faltante puede costar una vida. Revisar check-list semanal + sellado de seguridad intacto. Tras cada uso: reponer y certificar antes de devolver.'}
+          ],
+          connections:[
+            {toId:'fisio-s8',title:'Shock',desc:'El shock cardiogénico descompensado es causa directa de PCR intrahospitalaria. La fisiopatología del shock (↓gasto cardíaco, hipoperfusión tisular, acidosis) explica la progresión hacia la asistolia o FV.',type:'fisio'},
+            {toId:'fisio-c07',title:'Insuficiencia Cardíaca',desc:'La IC descompensada aguda (EAP severo, bajo gasto) puede evolucionar a PCR. El equipo de enfermería que monitoriza al paciente cardiaco debe reconocer los signos de deterioro antes del paro.',type:'fisio'},
+            {toId:'fisio-c10pptx',title:'IAM',desc:'El IAM es la causa más frecuente de PCR intrahospitalaria por arritmias ventriculares (FV, TV sin pulso). El reconocimiento precoz del dolor torácico y el ECG de 12 derivaciones son claves preventivas.',type:'fisio'}
+          ]
+        },
+
+        // ── U12 VISITA ─────────────────────────────────────
+        {
+          id:'cuid2-u12-visita', title:'U12 · Visita de Enfermería', icon:'🏥',
+          topics:[
+            {t:'Definición y Propósito', def:'Proceso sistemático y periódico que permite al profesional evaluar el estado del paciente, verificar el cumplimiento del plan de cuidados y establecer comunicación terapéutica. No es una ronda informal: tiene estructura, objetivos medibles y debe quedar documentada en la ficha clínica.'},
+            {t:'Estructura de la Visita — Secuencia PREP-VAI-REG', def:'PREPARACIÓN: revisar historia clínica, resultados de exámenes, medicación vigente. PRESENTACIÓN: identificarse por nombre y cargo. VALORACIÓN: subjetiva (síntomas referidos) + objetiva (SV, examen físico). INTERVENCIÓN: ejecutar procedimientos indicados, educar. REGISTRO: SOAP en ficha clínica + comunicación al equipo.'},
+            {t:'Valoración Subjetiva — Lo que refiere el paciente', def:'Dolor (EVA 0-10, localización, irradiación, factores que aumentan/disminuyen), bienestar general, síntomas nuevos, preocupaciones, comprensión del tratamiento. La escucha activa sin interrumpir durante los primeros 2 minutos aumenta la información obtenida y la satisfacción del paciente.'},
+            {t:'Valoración Objetiva — Lo que mide la enfermera', def:'Signos vitales completos (T, FC, FR, PA, SpO₂, dolor). Nivel de conciencia (Glasgow, orientación en tiempo/espacio/persona). Estado de piel y mucosas. Heridas, drenajes, catéteres (aspecto, cantidad, características). Parámetros de laboratorio relevantes recientes. Medicación administrada y respuesta observada.'},
+            {t:'Comunicación Terapéutica', def:'Herramientas: escucha activa, contacto visual (nivel de los ojos), tono cálido, preguntas abiertas ("¿Cómo se ha sentido?"), validación emocional, silencio terapéutico (1-2 min tolerar sin llenar de palabras), evitar lenguaje técnico. Barreras: ambiente ruidoso, apuro visible, mirar el computador y no al paciente, lenguaje incomprensible.'},
+            {t:'Registro SOAP', def:'S (Subjetivo): "Paciente refiere dolor abdominal 7/10, constante, sin irradiación." O (Objetivo): PA 140/90, FC 96, T 37.8°C, abdomen distendido, RHA disminuidos. A (Análisis): posible íleo postoperatorio con signos de intolerancia oral. P (Plan): ayuno, SNG, avisar cirujano, control SV c/2 hrs. Cada entrada: fecha, hora, nombre y firma.'}
+          ],
+          keywords:['visita enfermería','SOAP','valoración subjetiva','valoración objetiva','comunicación terapéutica','escucha activa','EVA','signos vitales','registro clínico','plan de cuidados','entrevista clínica','silencio terapéutico','lenguaje técnico'],
+          alerts:[
+            {type:'info',title:'La visita es un acto clínico, no social',text:'Cada visita debe terminar con un registro en ficha y una comunicación al equipo (médico, kinesiólogo, nutricionista). Lo que no está registrado no existió. Lo que no se comunica puede comprometer la continuidad del cuidado.'},
+            {type:'warning',title:'Detectar deterioro temprano en la visita',text:'El equipo de enfermería es el primero en detectar deterioro clínico (score NEWS2 > 5, cambio de conciencia, taquicardia nueva). La visita estructurada con SV completos es la herramienta de alerta precoz más efectiva.'}
+          ],
+          connections:[
+            {toId:'farm-s2',title:'RAM y Farmacovigilancia',desc:'La visita de enfermería es el momento privilegiado para detectar reacciones adversas a medicamentos (RAM): evaluar respuesta al tratamiento, vigilar signos de toxicidad, reportar a farmacovigilancia. El profesional que administra y el que visita deben coordinar este monitoreo.',type:'farm'},
+            {toId:'fisio-c09pptx',title:'Hipertensión Arterial',desc:'La visita incluye control de PA. En HTA: verificar adherencia, efectos adversos (tos seca con IECA, edema con amlodipino, hipoK+ con tiazidas), y PA en ambos brazos si hay sospecha de diferencia significativa.',type:'fisio'}
+          ]
+        },
+
+        // ── U13 POST MORTEM ────────────────────────────────
+        {
+          id:'cuid2-u13-postmortem', title:'U13 · Cuidados Post Mortem', icon:'🕊️',
+          topics:[
+            {t:'Actuación de Enfermería ante la Muerte del Paciente', def:'Secuencia: 1) Constatar el fallecimiento (médico certifica). 2) Preservar la privacidad del paciente y del entorno. 3) Preparación del cuerpo (higiene, posición digna, identificación). 4) Retiro de dispositivos según protocolo. 5) Notificación y acompañamiento a la familia. 6) Documentación en ficha. 7) Comunicación al equipo.'},
+            {t:'Preparación del Cuerpo — Principios de Dignidad', def:'"Curar a veces, aliviar frecuentemente, consolar siempre." Higiene completa. Cerrar ojos (gasas húmedas si no cierran solos). Cerrar boca (rollo bajo el mentón). Colocar en posición supina, brazos a los costados. Retirar dispositivos si no es caso médico-legal. Etiqueta de identificación en la muñeca y sábana. Ambiente tranquilo, sin ruido.'},
+            {t:'Trauma Vicario — Riesgo del Profesional', def:'Transformación negativa del profesional por exposición repetida al sufrimiento y la muerte ajena. Señales: pérdida de empatía, sueños perturbadores, hipervigilancia, evitación del trabajo, irritabilidad, sensación de inutilidad. A diferencia del burnout (crónico), el TV puede ser agudo. Intervención: debriefing inmediato, supervisión clínica, apoyo entre pares.'},
+            {t:'Cuidados Paliativos y el Rol de Enfermería', def:'El cuidado paliativo comienza cuando la curación ya no es el objetivo central. Pilares: 1) Control de síntomas (dolor, disnea, náuseas). 2) Apoyo emocional y espiritual al paciente. 3) Acompañamiento a la familia. 4) Coordinación del equipo. 5) Toma de decisiones compartida. Enfermería es el vínculo más continuo con el paciente en esta etapa.'},
+            {t:'El Duelo en el Equipo de Salud', def:'El duelo no es una patología, es una respuesta adaptativa normal. En el equipo de enfermería puede manifestarse como: tristeza silenciosa, distanciamiento emocional o, paradójicamente, sobreinvolucramiento. El debriefing grupal post-muerte permite procesar la experiencia y mantener la cohesión del equipo. Reconocer la propia vulnerabilidad es un acto de profesionalismo.'},
+            {t:'¿Crisis o Problema?', def:'PROBLEMA: situación para la cual el profesional tiene herramientas y puede resolver. CRISIS: situación que desborda los recursos disponibles → sensación de descontrol. La experiencia repetida de muerte sin apoyo convierte los problemas en crisis. La intervención en crisis requiere contención emocional inmediata y redireccionamiento a recursos profesionales (psicólogo, equipo de salud mental).'}
+          ],
+          keywords:['cuidados post mortem','muerte','dignidad','preparación del cuerpo','trauma vicario','cuidados paliativos','duelo','debriefing','autocuidado','intervención en crisis','familia','acompañamiento','comunicación de malas noticias'],
+          alerts:[
+            {type:'warning',title:'Caso médico-legal: NO retirar dispositivos',text:'En muertes sospechosas, violentas, accidentales o en las primeras 24 hrs de hospitalización: conservar TODOS los dispositivos (tubos, catéteres, sondas) intactos. El médico forense requiere el cuerpo tal como estaba al fallecer.'},
+            {type:'info',title:'Pedir apoyo no es debilidad',text:'El profesional que reconoce que una muerte lo afectó emocionalmente y pide apoyo es más resiliente a largo plazo que quien suprime la emoción. Los programas de debriefing reducen el trauma vicario y el burnout.'}
+          ],
+          connections:[
+            {toId:'fisio-c07',title:'Insuficiencia Cardíaca Terminal',desc:'La IC avanzada (estadio D) es una de las causas más frecuentes de hospitalización al final de la vida. La transición de tratamiento activo a paliativo en IC requiere reconocer los criterios clínicos y comunicarlos con la familia.',type:'fisio'},
+            {toId:'fisio-c04',title:'EPOC Estadio IV',desc:'El EPOC muy severo con falla respiratoria es un escenario común de cuidados al final de la vida. La disnea refractaria es el síntoma más angustiante: el manejo con opioides en dosis paliativa (morfina SC/IV) es ético y efectivo.',type:'fisio'}
+          ]
+        }
+
+      ]
+    }
+  ]
+}
+
 }; // fin APP_DATA

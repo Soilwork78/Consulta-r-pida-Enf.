@@ -12,7 +12,9 @@ let quizState = {}; // {answered: Set, score: 0}
 document.addEventListener('DOMContentLoaded', () => {
   buildSidebar('farm');
   buildSidebar('fisio');
+  buildSidebar('cuid');
   showHome();
+  // Neural network canvas starts via showHome() → initHomeCanvas()
 });
 
 // ─── Sidebar ────────────────────────────────────────────────
@@ -63,6 +65,126 @@ function showHome() {
   document.getElementById('home').style.display = 'block';
   currentSessionId = null;
   clearNavActive();
+  setTimeout(initHomeCanvas, 60);
+}
+
+// ─── Neural Network Canvas Animation ────────────────────────
+let _homeCanvasRunning = false;
+function initHomeCanvas() {
+  const canvas = document.getElementById('home-canvas');
+  if (!canvas || _homeCanvasRunning) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    const hero = canvas.parentElement;
+    canvas.width  = hero.offsetWidth  || window.innerWidth;
+    canvas.height = hero.offsetHeight || window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); });
+
+  // ─ Colour palette (farm:blue, fisio:green, cuid:purple, neutral:white)
+  const PALETTE = [
+    {r:59,  g:130, b:246},  // blue
+    {r:16,  g:185, b:129},  // green
+    {r:139, g:92,  b:246},  // purple
+    {r:200, g:220, b:255},  // soft white
+  ];
+
+  const N = 70;
+  const nodes = Array.from({length: N}, (_, i) => {
+    const c = PALETTE[Math.floor(Math.random() * PALETTE.length)];
+    return {
+      x:  Math.random() * canvas.width,
+      y:  Math.random() * canvas.height,
+      vx: (Math.random() - .5) * .38,
+      vy: (Math.random() - .5) * .38,
+      r:  Math.random() * 1.8 + 1.2,
+      c,
+      ph: Math.random() * Math.PI * 2,  // pulse phase
+    };
+  });
+  // Make some "hub" nodes larger
+  [2, 8, 15, 25, 40, 55].forEach(i => { nodes[i].r = 3.8; });
+
+  const DIST = 155;
+  let animId;
+  _homeCanvasRunning = true;
+
+  function frame() {
+    if (!document.getElementById('home-canvas')) {
+      _homeCanvasRunning = false;
+      return;
+    }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Move
+    nodes.forEach(n => {
+      n.x  += n.vx;
+      n.y  += n.vy;
+      n.ph += .012;
+      if (n.x < 0 || n.x > canvas.width)  n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+      n.x = Math.max(0, Math.min(canvas.width,  n.x));
+      n.y = Math.max(0, Math.min(canvas.height, n.y));
+    });
+
+    // Draw edges
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < DIST) {
+          const a = (1 - d/DIST) * .28;
+          const c = nodes[i].c;
+          ctx.strokeStyle = `rgba(${c.r},${c.g},${c.b},${a})`;
+          ctx.lineWidth   = .65;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw nodes
+    nodes.forEach(n => {
+      const pulse = Math.sin(n.ph) * .25 + .75;
+      const {r,g,b} = n.c;
+      // Glow for hub nodes
+      if (n.r > 3) {
+        const grad = ctx.createRadialGradient(n.x,n.y,0, n.x,n.y, n.r*5);
+        grad.addColorStop(0, `rgba(${r},${g},${b},${.22*pulse})`);
+        grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r*5, 0, Math.PI*2);
+        ctx.fill();
+      }
+      // Node circle
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${r},${g},${b},${.82*pulse})`;
+      ctx.fill();
+    });
+
+    animId = requestAnimationFrame(frame);
+  }
+
+  frame();
+
+  // Stop animation when home is hidden
+  const observer = new MutationObserver(() => {
+    const home = document.getElementById('home');
+    if (home && home.style.display === 'none') {
+      cancelAnimationFrame(animId);
+      _homeCanvasRunning = false;
+      observer.disconnect();
+    }
+  });
+  const home = document.getElementById('home');
+  if (home) observer.observe(home, {attributes:true, attributeFilter:['style']});
 }
 
 function showSubject(subject) {
@@ -70,8 +192,9 @@ function showSubject(subject) {
   // activar tab lateral
   const tabs = document.querySelectorAll('.sidebar-tab');
   tabs.forEach(t => t.classList.remove('active'));
-  if (subject === 'farm') tabs[0].classList.add('active');
-  else tabs[1].classList.add('active');
+  if (subject === 'farm')      tabs[0].classList.add('active');
+  else if (subject === 'fisio') tabs[1].classList.add('active');
+  else if (subject === 'cuid')  tabs[2].classList.add('active');
   document.querySelectorAll('.sidebar-content').forEach(c => c.classList.remove('active'));
   document.getElementById('sidebar-' + subject).classList.add('active');
 
@@ -81,8 +204,12 @@ function showSubject(subject) {
   sv.style.display = 'block';
 
   const data = APP_DATA[subject];
-  const label = subject === 'farm' ? '💊 Farmacología en Enfermería' : '🫀 Fisiopatología en Enfermería';
-  const code  = subject === 'farm' ? 'ENF3013 · 3° semestre' : 'ENF3014 · 4° semestre';
+  const label = subject === 'farm' ? '💊 Farmacología en Enfermería'
+              : subject === 'fisio' ? '🫀 Fisiopatología en Enfermería'
+              : '💙 Cuidados de Enfermería';
+  const code  = subject === 'farm' ? 'ENF3013 · 3° semestre'
+              : subject === 'fisio' ? 'ENF3014 · 4° semestre'
+              : 'ENF2010–ENF2011 · 2°–3° semestre';
   let html = `
     <div class="cv-header">
       <div class="cv-title">${label}</div>
@@ -111,7 +238,7 @@ function openUnit(subject, unitId) {
 
 // ─── Carga de sesión/clase ───────────────────────────────────
 function findSession(id) {
-  for (const subj of ['farm','fisio']) {
+  for (const subj of ['farm','fisio','cuid']) {
     for (const unit of APP_DATA[subj].units) {
       const s = unit.sessions.find(s => s.id === id);
       if (s) return { session: s, subject: subj, unitTitle: unit.title };
@@ -164,8 +291,12 @@ function loadSession(id, subject) {
   if (hasExtras && EXTRAS[id].vignette) tabs.push({ id: 'caso', label: '🏥 Caso Clínico' });
 
   // Breadcrumb, título y meta
-  const subjectLabel = subject === 'farm' ? 'Farmacología' : 'Fisiopatología';
-  const code = subject === 'farm' ? 'ENF3013' : 'ENF3014';
+  const subjectLabel = subject === 'farm' ? 'Farmacología'
+                     : subject === 'fisio' ? 'Fisiopatología'
+                     : 'Cuidados de Enfermería';
+  const code = subject === 'farm' ? 'ENF3013'
+             : subject === 'fisio' ? 'ENF3014'
+             : 'ENF2010–ENF2011';
   document.getElementById('cv-breadcrumb').innerHTML =
     `<span onclick="showHome()">Inicio</span> / <span onclick="showSubject('${subject}')">${subjectLabel}</span> / ${unitTitle}`;
   document.getElementById('cv-title').textContent = session.title;
@@ -261,6 +392,20 @@ function renderContenido(session) {
     'fisio-c13':     { file: 'fisio-u6-neuro-slides.html',         label: 'Fisiopatología Neurológica',             desc: '12 diapositivas: AVE isquémico/hemorrágico, Alzheimer, Parkinson y epilepsia.' },
     // U7 — Hematología (1 sesión)
     'fisio-s14':     { file: 'fisio-u7-hematologia-slides.html',   label: 'Hematología y Hemostasia',               desc: '12 diapositivas: eritropoyesis, anemias, hemostasia, coagulación y hematooncología.' },
+    // ── Cuidados de Enfermería 2 ────────────────────────────────────────────
+    'cuid2-u1-humanizado':  { file: 'cuid2-u1-humanizado-slides.html',   label: 'Gestión del Cuidado Humanizado',          desc: '13 diapositivas: cuidado transpersonal, humanitude, burnout, autocuidado profesional.' },
+    'cuid2-u2-proceso':     { file: 'cuid2-u2-proceso-slides.html',      label: 'Proceso Enfermero PAE · NANDA · NIC-NOC', desc: '14 diapositivas: PAE 5 etapas, Orem, diagnósticos NANDA, NIC, NOC y plan de cuidados.' },
+    'cuid2-u3-iaas':        { file: 'cuid2-u3-iaas-slides.html',         label: 'IAAS · PAPE · Antisépticos',              desc: '15 diapositivas: definición IAAS, cadena epidemiológica, PAPE, antisépticos y desinfectantes.' },
+    'cuid2-u4-tmsv':        { file: 'cuid2-u4-tmsv-slides.html',         label: 'Toma de Muestra de Sangre Venosa',        desc: '14 diapositivas: venopunción periférica, dispositivos, vacutainer, sitios, complicaciones.' },
+    'cuid2-u5-calculo':     { file: 'cuid2-u5-calculo-slides.html',      label: 'Cálculo de Dosis y Goteo',                desc: '13 diapositivas: macrogoteo/microgoteo, fórmulas, velocidad de infusión, regla de 3.' },
+    'cuid2-u6-hidratacion': { file: 'cuid2-u6-hidratacion-slides.html',  label: 'Hidratación Parenteral y Hemoderivados',  desc: '14 diapositivas: accesos vasculares, soluciones IV, hemoderivados, reacciones transfusionales.' },
+    'cuid2-u7-eliminacion': { file: 'cuid2-u7-eliminacion-slides.html',  label: 'Eliminación Urinaria y Dispositivos',     desc: '12 diapositivas: fisiología, alteraciones, cateterismo vesical, cuidados de sonda Foley.' },
+    'cuid2-u8-nutricion':   { file: 'cuid2-u8-nutricion-slides.html',    label: 'Nutrición Enteral y Dispositivos',        desc: '13 diapositivas: nutrición enteral/parenteral, SNG, PEG, ostomías, cuidados digestivos.' },
+    'cuid2-u9-balance':     { file: 'cuid2-u9-balance-slides.html',      label: 'Balance Hídrico',                         desc: '14 diapositivas: ingresos y egresos, pérdidas insensibles, cálculo BH, registro y monitorización.' },
+    'cuid2-u10-inhalatoria':{ file: 'cuid2-u10-inhalatoria-slides.html', label: 'Inhalatoria y Aspiración de Secreciones', desc: '12 diapositivas: dispositivos inhalatorios, técnica MDI/nebulizador, aspiración orofaríngea.' },
+    'cuid2-u11-rcp':        { file: 'cuid2-u11-rcp-slides.html',         label: 'RCP Intrahospitalaria',                   desc: '14 diapositivas: cadena de supervivencia, SVB, compresiones, BVM, carro de paro, calidad.' },
+    'cuid2-u12-visita':     { file: 'cuid2-u12-visita-slides.html',      label: 'Visita de Enfermería',                    desc: '13 diapositivas: estructura visita, entrevista clínica, valoración, comunicación terapéutica.' },
+    'cuid2-u13-postmortem': { file: 'cuid2-u13-postmortem-slides.html',  label: 'Cuidados Post Mortem',                    desc: '12 diapositivas: actuación, protocolo, duelo, trauma vicario, autocuidado profesional.' },
   };
   const slideInfo = SLIDES_MAP[session.id];
   const resourceBanner = slideInfo
@@ -556,7 +701,7 @@ function showCrossRef() {
 // ─── Search ──────────────────────────────────────────────────
 function buildSearchIndex() {
   const index = [];
-  ['farm','fisio'].forEach(subj => {
+  ['farm','fisio','cuid'].forEach(subj => {
     APP_DATA[subj].units.forEach(unit => {
       unit.sessions.forEach(s => {
         // Título
@@ -627,8 +772,8 @@ function onSearch(query) {
   }
 
   resultsEl.innerHTML = final.slice(0, 10).map(h => {
-    const badge = h.subject === 'farm' ? 'farm' : 'fisio';
-    const badgeLabel = h.subject === 'farm' ? 'Farmaco' : 'Fisiopato';
+    const badge = h.subject === 'farm' ? 'farm' : h.subject === 'cuid' ? 'cuid' : 'fisio';
+    const badgeLabel = h.subject === 'farm' ? 'Farmaco' : h.subject === 'cuid' ? 'Cuidados' : 'Fisiopato';
     const icon = h.type === 'alert' ? '⚠️ ' : h.type === 'keyword' ? '🔑 ' : '';
     return `<div class="sr-item" onclick="loadSession('${h.id}','${h.subject}');closeSearch()">
       <div>
@@ -790,6 +935,14 @@ function switchCDSSMode(mode, el) {
   if (mode === 'interactions') renderInteractionChecker(area);
   else if (mode === 'dosevalidator') renderDoseValidator(area);
   else if (mode === 'glasgow') renderGlasgow(area);
+  else if (mode === 'cincinnati') {
+    area.innerHTML = `<div class="calc-card" id="cdss-direct-panel"></div>`;
+    renderBasicCalc(document.getElementById('cdss-direct-panel'), 'cincinnati');
+  }
+  else if (mode === 'gsa') {
+    area.innerHTML = `<div class="calc-card" id="cdss-direct-panel"></div>`;
+    renderBasicCalc(document.getElementById('cdss-direct-panel'), 'gsa');
+  }
   else if (mode === 'calculos') renderCalculosSection(area);
   else if (mode === 'ges') renderGESAnexo(area);
 }
